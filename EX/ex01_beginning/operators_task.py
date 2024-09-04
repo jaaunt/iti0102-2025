@@ -115,7 +115,7 @@ days = int(input("Enter the value for days:"))
 hours = int(input("Enter the value for hours:"))
 minutes = int(input("Enter the value for minutes:"))
 seconds = int(input("Enter the value for seconds:"))
-#1 paev on 24h * 60 min= 1440min
+#1 paev on 24h * 60 min = 1440min
 #1h on 60min
 #min on min :D
 #1sec on 1/60min
