@@ -5,7 +5,8 @@
 a = int(input("Enter the value for a:"))
 b = int(input("Enter the value for b:"))
 res_ab = a + b
-print(sumab)
+print(sum_ab)
+
 
 """ Subtract d from c. Print out the result."""
 c = int(input("Enter the value for c:"))
@@ -42,7 +43,7 @@ print(res_kl)
 """Calculate m raised to the power of n. Print out the result."""
 m = int(input("Enter the value for m:"))
 n = int(input("Enter the value for n:"))
-#astendamise jaoks **
+# astendamise jaoks **
 res_nm = n ** m
 print(res_nm)
 
@@ -78,7 +79,7 @@ else:
 """If t value is not the same as u value then print True. If not then print False."""
 t = int(input("Enter the value for t:"))
 u = int(input("Enter the value for u:"))
-#tahendab pole vordne/sama vaartusega == vastand pohimotteliselt
+# tahendab pole vordne/sama vaartusega == vastand pohimotteliselt
 if t != u:
     print(True)
 else:
@@ -115,9 +116,9 @@ days = int(input("Enter the value for days:"))
 hours = int(input("Enter the value for hours:"))
 minutes = int(input("Enter the value for minutes:"))
 seconds = int(input("Enter the value for seconds:"))
-#1 paev on 24h * 60 min = 1440min
-#1h on 60min
-#min on min :D
-#1sec on 1/60min
-result = (days * 1440) + (hours * 60) + minutes + (seconds/60)
+# 1 paev on 24h * 60 min = 1440min
+# 1h on 60min
+# min on min :D
+# 1sec on 1/60min
+result = (days * 1440) + (hours * 60) + minutes + (seconds/60))
 print(result)
