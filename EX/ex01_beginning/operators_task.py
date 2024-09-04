@@ -4,10 +4,8 @@
 """ Add a to b. Print out the result."""
 a = int(input("Enter the value for a:"))
 b = int(input("Enter the value for b:"))
-
 res_ab = a + b
 print(res_ab)
-
 
 """ Subtract d from c. Print out the result."""
 c = int(input("Enter the value for c:"))
@@ -30,7 +28,7 @@ print(res_gh)
 """Divide i by j. Print the remainder. Use an arithmetic operator."""
 i = int(input("Enter the value for i:"))
 j = int(input("Enter the value for j:"))
-#side note % annab jagatise jaagi
+# side note % annab jagatise jaagi
 res_ij = i % j
 print(res_ij)
 
