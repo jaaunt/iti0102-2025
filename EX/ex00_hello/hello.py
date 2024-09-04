@@ -1,2 +1,7 @@
-print("Hello World!")
-print("Hello")
+def hello():
+    print("Hello world!")
+
+
+while(True):
+    hello()
+    break
