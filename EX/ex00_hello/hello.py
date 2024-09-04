@@ -1,7 +1,3 @@
-def hello():
-    print("Hello world!")
-
-
 while(True):
-    hello()
+    print("Hello world!")
     break
