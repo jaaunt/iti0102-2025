@@ -1,4 +1,4 @@
-"""EX01 hello"""
+"""EX01 hello."""
 
 name = input("What is your name? ")
 num1 = int(input("Hello" + name + "! Enter a random number: "))
