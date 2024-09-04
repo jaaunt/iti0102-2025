@@ -81,7 +81,7 @@ u = int(input("Enter the value for u:"))
 #tahendab pole vordne/sama vaartusega == vastand pohimotteliselt
 if t != u:
     print(True)
-else
+else:
     print(False)
 
 """Print out the volume of the cuboid."""
