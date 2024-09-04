@@ -1,5 +1,5 @@
 """EX01 operations."""
-# res aka result
+# res aka tehte result
 
 """ Add a to b. Print out the result."""
 a = int(input("Enter the value for a:"))
