@@ -83,4 +83,3 @@ if neededh > availableh or weeks <= 0:
 else:
     weekly_amnt = neededh / weeks
     print(weekly_amnt)
-
