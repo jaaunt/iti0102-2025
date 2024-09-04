@@ -1,11 +1,12 @@
 """EX01 operations."""
-#jesus christ kui pikk
-#res aka result
+# res aka result
+
 """ Add a to b. Print out the result."""
 a = int(input("Enter the value for a:"))
 b = int(input("Enter the value for b:"))
+
 res_ab = a + b
-print(sum_ab)
+print(res_ab)
 
 
 """ Subtract d from c. Print out the result."""
@@ -120,5 +121,5 @@ seconds = int(input("Enter the value for seconds:"))
 # 1h on 60min
 # min on min :D
 # 1sec on 1/60min
-result = (days * 1440) + (hours * 60) + minutes + (seconds/60)
+result = (days * 1440) + (hours * 60) + minutes + (seconds / 60)
 print(result)
