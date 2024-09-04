@@ -20,6 +20,6 @@ for i in note_options:
     how_manyfit = amount // i # jagab suurima taisarvuni, jagab kogusumma hulga liikmega (i)
     banknotes += how_manyfit # lisab leitud koguse voi jatab samaks kui rahataht on liiga suur et seda anda
     # pikalt banknotes = how_manyfit + banknotes
-    amount -= how_manyfit*i # lahutab algsummast selle palju rahatahtedes valja annab
+    amount -= how_manyfit*i # lahutab algsummast selle palju rahatahtedes valja anti juba
 
 print(f"Amount of banknotes needed: {banknotes}")
