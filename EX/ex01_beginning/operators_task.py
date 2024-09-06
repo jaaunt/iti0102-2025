@@ -34,9 +34,9 @@ print(res_ij)
 
 """Divide k by l. Print out the floor value. Use an arithmetic operator."""
 k = int(input("Enter the value for k:"))
-l = int(input("Enter the value for l:"))
+ll = int(input("Enter the value for l:"))
 # // jagab ja umardab alla taisarvuni
-res_kl = l // k
+res_kl = ll // k
 print(res_kl)
 
 """Calculate m raised to the power of n. Print out the result."""
