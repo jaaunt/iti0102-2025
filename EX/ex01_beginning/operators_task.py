@@ -34,7 +34,7 @@ print(res_ij)
 
 """Divide k by l. Print out the floor value. Use an arithmetic operator."""
 k = int(input("Enter the value for k:"))
-l: int = int(input("Enter the value for l:"))
+l = int(input("Enter the value for l:"))
 # // jagab ja umardab alla taisarvuni
 res_kl = l // k
 print(res_kl)
