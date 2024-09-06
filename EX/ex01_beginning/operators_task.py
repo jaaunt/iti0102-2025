@@ -36,7 +36,7 @@ print(res_ij)
 k = int(input("Enter the value for k:"))
 ll = int(input("Enter the value for l:"))
 # // jagab ja umardab alla taisarvuni
-res_kl = ll // k
+res_kl = k // ll
 print(res_kl)
 
 """Calculate m raised to the power of n. Print out the result."""
