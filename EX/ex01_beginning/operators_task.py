@@ -119,5 +119,5 @@ seconds = int(input("Enter the value for seconds:"))
 # 1h on 60min
 # min on min :D
 # 1sec on 1/60min
-result = (days * 1440) + (hours * 60) + minutes + (seconds / 60)
+result = (days * 1440) + (hours * 60) + (minutes * 1) + (seconds / 60)
 print(result)
