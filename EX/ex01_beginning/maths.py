@@ -78,7 +78,7 @@ weeks = int(input("Enter the number of weeks: "))
 # eap 26 h
 neededh = ects * 26
 availableh = weeks * 168
-if neededh > availableh or weeks <= 0 or neededh < 0:
+if neededh > availableh or weeks <= 0 or ects < 0:
     print(-1)
 else:
     weekly_amnt = neededh / weeks
