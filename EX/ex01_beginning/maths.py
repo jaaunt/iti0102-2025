@@ -33,10 +33,10 @@ NB! the answer should be given as a string and should not contain any commas.
 
 
 """
-x = int(input("Enter the value of x: ")) # lug1
-y = int(input("Enter the value of y: ")) # nim1
-u = int(input("Enter the value of u: ")) # lug2
-t = int(input("Enter the value of t: ")) # nim2
+x = int(input("Enter the value of x: "))  # lug1
+y = int(input("Enter the value of y: "))  # nim1
+u = int(input("Enter the value of u: "))  # lug2
+t = int(input("Enter the value of t: "))  # nim2
 # et liita peab leidma uhise nimetaja
 lownr = y * t
 # korrutab lugejad uksteise nimetajatega nimetajatega kuna neil polnud sama nimetaja
