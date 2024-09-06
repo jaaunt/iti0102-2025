@@ -43,14 +43,14 @@ print(res_kl)
 m = int(input("Enter the value for m:"))
 n = int(input("Enter the value for n:"))
 # astendamise jaoks **
-res_nm = n ** m
+res_nm = m ** n
 print(res_nm)
 
 """If o is greater or equal than p then print True. If not then print False."""
 o = int(input("Enter the value for o:"))
 p = int(input("Enter the value for p:"))
 # >= on suurem vordne <= on vaiksm vordne
-if o >= p:
+if o > p pr o == p:
     print(True)
 else:
     print(False)
