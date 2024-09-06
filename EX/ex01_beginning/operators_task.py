@@ -50,7 +50,7 @@ print(res_nm)
 o = int(input("Enter the value for o:"))
 p = int(input("Enter the value for p:"))
 # >= on suurem vordne <= on vaiksm vordne
-if o > p or o == p:
+if o >= p:
     print(True)
 else:
     print(False)
