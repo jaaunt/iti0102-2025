@@ -31,7 +31,7 @@ def control_number(encrypted_string: str) -> bool:
     if encrypted_string[-2:].isdigit():
         last_2_digit = int(encrypted_string[-2:])
     else:
-        return false
+        return False
     last_2_ctr = int(ctrl_num[-2:])  # votab 2 viimast kontroll numbrist
     return last_2_ctr == last_2_digit
 
