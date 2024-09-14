@@ -18,18 +18,20 @@ def control_number(encrypted_string: str) -> bool:
     :param encrypted_string: encrypted string
     :return: validation
     """
-    ctrl_num = 0  #  kontroll number
-    symbols = "?!@#"   #  sumbolid mis lisavad vaartusi
+    ctrl_num = 0  # kontroll number
+    spc_symbols = "?!@#"   # sumbolid mis lisavad vaartusi
 
     for character in encrypted_string:
         if character.islower():
-            ctrl_num += 1  #  kui on lowercase lisab kontroll numbrile 1
+            ctrl_num += 1  # kui on lowercase lisab kontroll numbrile 1
         elif character.isupper():
-            ctrl_num += 2  #  kui on uppercase lisab 2
-        elif character in symbols:
-            ctrl_num += 5  #  kui on sumbolite sones siis lisab 5 numbrile
-    last_2_digit = int(encrypted_string[-2:])  #  votab 2 viimast numbrit
-    return ctrl_num == last_2_digit
+            ctrl_num += 2  # kui on uppercase lisab 2
+        elif character in spc_symbols:
+            ctrl_num += 5  # kui on sumbolite sones siis lisab 5 numbrile
+    last_2_digit = int(encrypted_string[-2:])  # votab 2 viimast numbrit
+    last_2_ctr = int(ctrl_num[-2:])  # votab 2 viimast kontroll numbrist
+    return last_2_ctr == last_2_digit
+
 
 if __name__ == '__main__':
     print(control_number("mE0W5"))  # True
