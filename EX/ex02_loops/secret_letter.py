@@ -17,7 +17,8 @@ def secret_letter(letter: str) -> bool:
     total_lowercase = 0
     total_number = 0
 
-    for character in letter:  #  kontrollib iga numbri/tahe labi
+    for character in letter:
+        #  kontrollib iga numbri/tahe labi
         if character.isupper():
             #  kontrollib kas on uppercase, kui on lisab 1 to total_uppercase kogusele
             total_uppercase += 1
@@ -26,7 +27,8 @@ def secret_letter(letter: str) -> bool:
             total_lowercase += 1
         elif character.isdigit():
             #  kui on nr lisab selle numbri to total_number
-            total_number += int(character)  #  makes sure see liidab numbrina
+            total_number += int(character)
+            #  makes sure see liidab numbrina
 
     #  reeglid mida kontrollitakse
     rule1 = total_uppercase > total_lowercase
@@ -34,8 +36,6 @@ def secret_letter(letter: str) -> bool:
     rule3 = total_number >= total_lowercase
 
     return rule1 and rule2 and rule3
-
-
 
 if __name__ == '__main__':
     print(secret_letter("sOMEteSTLETTer8"))  # True
