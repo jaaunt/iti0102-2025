@@ -29,19 +29,20 @@ def control_number(encrypted_string: str) -> bool:
         elif char in spc_symbols:
             ctrl_num += 5  # kui on sumbolite sones siis lisab 5 numbrile
         else:
-            ctrl_num += 0
+            ctrl_num += 0  # idk miks selle panin pole vaja lol
 
     # kontrollib kontroll numbri pikkust aka max number mida lopust votab
     ctrl_num_lenght = len(str(ctrl_num))
 
     last_digits_str = encrypted_string[-ctrl_num_lenght:]  # votab viimased numbrid vastavalt kui pikk ctrl number on
-    if not last_digits_str.isdigit():  # kui ei loppe numbriga
+    if not last_digits_str.isdigit():  # kui ei loppe numbriga, aga test jaoks pole vaja seda ikd why panin
         return False
 
-    # muudab viimased numbrid arvuks
+    # muudab viimased numbrid arvuks, string omad
     last_digits = int(last_digits_str)
 
-    return last_digits == ctrl_num % (10 ** ctrl_num_lenght)  # vastavalt mitme kohaline controll number on astendab et sada sama arv viimaseid numbreid
+    return last_digits == ctrl_num  # vastavalt mitme kohaline controll number on astendab et sada sama arv viimaseid numbreid
+    # ctrl_num % (10 ** ctrl_num_lenght) moodulo annab jaagi nt kui number on 25 ja selle pikkus on 2 ss 25 % 10*2 on 25%100 ehk jaak on sel juhul 25
 
 
 if __name__ == '__main__':
