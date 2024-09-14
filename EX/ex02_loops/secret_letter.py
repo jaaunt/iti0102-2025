@@ -2,6 +2,17 @@
 
 
 def secret_letter(letter: str) -> bool:
+    """
+    Check if the given secret letter follows all the necessary rules. Return True if it does, else False.
+
+    Rules:
+    1. The letter has more uppercase letters than lowercase letters.
+    2. The sum of digits in the letter has to be equal to or less than the amount of uppercase letters.
+    3. The sum of digits in the letter has to be equal to or more than the amount of lowercase letters.
+
+    :param letter: secret letter
+    :return: validation
+    """
     total_uppercase = 0
     total_lowercase = 0
     total_number = 0
@@ -23,17 +34,6 @@ def secret_letter(letter: str) -> bool:
     rule3 = total_number >= total_lowercase
 
     return rule1 and rule2 and rule3
-    """
-    Check if the given secret letter follows all the necessary rules. Return True if it does, else False.
-
-    Rules:
-    1. The letter has more uppercase letters than lowercase letters.
-    2. The sum of digits in the letter has to be equal to or less than the amount of uppercase letters.
-    3. The sum of digits in the letter has to be equal to or more than the amount of lowercase letters.
-
-    :param letter: secret letter
-    :return: validation
-    """
     pass
 
 
