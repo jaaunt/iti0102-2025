@@ -31,6 +31,11 @@ def control_number(encrypted_string: str) -> bool:
         else:
             ctrl_num += 0
 
+    # kontrollib kontroll numbri pikkust
+    ctrl_num_lenght = len(str(ctrl_num))
+    if len(encrypted_string) < ctrl_num_lenght:
+        return False
+
     if encrypted_string[-2:].isdigit():  # kontrollib loppeks 2 numbriga
         last_digit = int(encrypted_string[-2:])  # votab kaks viimast numbrit
         last_ctr = ctrl_num % 100  # votab 2 viimast kontroll numbrist
