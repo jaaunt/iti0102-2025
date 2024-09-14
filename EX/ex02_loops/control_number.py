@@ -28,7 +28,10 @@ def control_number(encrypted_string: str) -> bool:
             ctrl_num += 2  # kui on uppercase lisab 2
         elif character in spc_symbols:
             ctrl_num += 5  # kui on sumbolite sones siis lisab 5 numbrile
-    last_2_digit = int(encrypted_string[-2:])  # votab 2 viimast numbrit
+    if encrypted_string[-2:].isdigit():
+        last_2_digit = int(encrypted_string[-2:])
+    else:
+        return false
     last_2_ctr = int(ctrl_num[-2:])  # votab 2 viimast kontroll numbrist
     return last_2_ctr == last_2_digit
 
