@@ -44,7 +44,6 @@ def control_number(encrypted_string: str) -> bool:
     return last_digits == ctrl_num % (10 ** ctrl_num_lenght)  # vastavalt mitme kohaline controll number on astendab et sada sama arv viimaseid numbreid
 
 
-
 if __name__ == '__main__':
     print(control_number("mE0W5"))  # True
     print(control_number("SomeControlNR?20"))  # False
