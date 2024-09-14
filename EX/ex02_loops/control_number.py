@@ -34,13 +34,10 @@ def control_number(encrypted_string: str) -> bool:
     # kontrollib kontroll numbri pikkust
     ctrl_num_lenght = len(str(ctrl_num))
 
-    if len(encrypted_string) < ctrl_num_lenght:
-        return False
-
     if ctrl_num_lenght == 2 and encrypted_string[-2:].isdigit():  # kontrollib loppeks 2 numbriga
         last_digit = int(encrypted_string[-2:])  # votab kaks viimast numbrit
         last_ctr = ctrl_num % 100  # votab 2 viimast kontroll numbrist
-    elif ctrl_num_lenght == 1 and encrypted_string[-1:].isdigit():  # sama asi aga kui lopus on ainult 1 number
+    elif ctrl_num_lenght >= 1 and encrypted_string[-1:].isdigit():  # sama asi aga kui lopus on ainult 1 number
         last_digit = int(encrypted_string[-1:])
         last_ctr = ctrl_num % 10
     else:
