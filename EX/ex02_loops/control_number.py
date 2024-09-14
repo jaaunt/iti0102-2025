@@ -39,7 +39,7 @@ def control_number(encrypted_string: str) -> bool:
     if not last_digits_str.isdigit():  # kui ei loppe numbriga, aga test jaoks pole vaja seda ikd why panin
         return False
 
-    # muudab viimased numbrid arvuks, string omad
+    # muudab viimased numbrid arvuks, encrypted string omad
     last_digits = int(last_digits_str)
 
     return last_digits == ctrl_num  # konttrollib kas sama
