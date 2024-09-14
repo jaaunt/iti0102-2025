@@ -30,7 +30,7 @@ def secret_letter(letter: str) -> bool:
             total_number += int(character)
             #  makes sure see liidab numbrina
 
-    #  reeglid mida kontrollitakse
+    #  reeglid
     rule1 = total_uppercase > total_lowercase
     rule2 = total_number <= total_uppercase
     rule3 = total_number >= total_lowercase
