@@ -28,7 +28,7 @@ def secret_letter(letter: str) -> bool:
             #  kui on nr lisab selle numbri to total_number
             total_number += int(character)  #  makes sure see liidab numbrina
 
-    #  reeglid mis peab olema taidetud
+    #  reeglid mida kontrollitakse
     rule1 = total_uppercase > total_lowercase
     rule2 = total_number <= total_uppercase
     rule3 = total_number >= total_lowercase
