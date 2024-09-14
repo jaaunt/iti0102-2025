@@ -41,8 +41,7 @@ def control_number(encrypted_string: str) -> bool:
     # muudab viimased numbrid arvuks, string omad
     last_digits = int(last_digits_str)
 
-    return last_digits == ctrl_num  # vastavalt mitme kohaline controll number on astendab et sada sama arv viimaseid numbreid
-    # ctrl_num % (10 ** ctrl_num_lenght) moodulo annab jaagi nt kui number on 25 ja selle pikkus on 2 ss 25 % 10*2 on 25%100 ehk jaak on sel juhul 25
+    return last_digits == ctrl_num  # konttrollib kas sama
 
 
 if __name__ == '__main__':
