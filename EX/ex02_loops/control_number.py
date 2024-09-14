@@ -28,11 +28,11 @@ def control_number(encrypted_string: str) -> bool:
             ctrl_num += 2  # kui on uppercase lisab 2
         elif character in spc_symbols:
             ctrl_num += 5  # kui on sumbolite sones siis lisab 5 numbrile
-    if encrypted_string[-2:].isdigit():
+    if len(encrypted_string) >= 2 and encrypted_string[-2:].isdigit():  # kontrollib et oleks pikem kui kaks ning loppeks numbritega
         last_2_digit = int(encrypted_string[-2:])
     else:
         return False
-    last_2_ctr = int(ctrl_num[-2:])  # votab 2 viimast kontroll numbrist
+    last_2_ctr = ctrl_num % 100  # votab 2 viimast kontroll numbrist
     return last_2_ctr == last_2_digit
 
 
