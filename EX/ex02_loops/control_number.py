@@ -21,19 +21,24 @@ def control_number(encrypted_string: str) -> bool:
     ctrl_num = 0  # kontroll number
     spc_symbols = "?!@#"   # sumbolid mis lisavad vaartusi
 
-    for character in encrypted_string:
-        if character.islower():
+    for char in encrypted_string:
+        if char.islower():
             ctrl_num += 1  # kui on lowercase lisab kontroll numbrile 1
-        elif character.isupper():
+        elif char.isupper():
             ctrl_num += 2  # kui on uppercase lisab 2
-        elif character in spc_symbols:
+        elif char in spc_symbols:
             ctrl_num += 5  # kui on sumbolite sones siis lisab 5 numbrile
-    if len(encrypted_string) >= 2 and encrypted_string[-2:].isdigit():  # kontrollib et oleks pikem kui kaks ning loppeks numbritega
-        last_2_digit = int(encrypted_string[-2:])
+        else:
+            ctrl_num += 0
+    if encrypted_string[-2:].isdigit():  # kontrollib loppeks 2 numbriga
+        last_digit = int(encrypted_string[-2:])  # votab kaks viimast numbrit
+        last_ctr = ctrl_num % 100  # votab 2 viimast kontroll numbrist
+    elif encrypted_string[-1:].isdigit():  # sama asi aga kui lopus on ainult 1 number
+        last_digit = int(encrypted_string[-1:])
+        last_ctr = ctrl_num % 10
     else:
         return False
-    last_2_ctr = ctrl_num % 100  # votab 2 viimast kontroll numbrist
-    return last_2_ctr == last_2_digit
+    return last_ctr == last_digit
 
 
 if __name__ == '__main__':
