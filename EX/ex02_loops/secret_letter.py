@@ -7,11 +7,14 @@ def secret_letter(letter: str) -> bool:
     total_number = 0
 
     for digit in letter:
-        if digit.isupper():  #  kontrollib kas on uppercase, kui on lisab 1 to total_uppercase kogusele
+        if digit.isupper():
+            #  kontrollib kas on uppercase, kui on lisab 1 to total_uppercase kogusele
             total_uppercase += 1
-        elif digit.islower():  #  kui on lowercase lisab 1 to total_lowercase kogusele
+        elif digit.islower():
+            #  kui on lowercase lisab 1 to total_lowercase kogusele
             total_lowercase += 1
-        elif digit.isdigit():   #  kui on nr lisab selle numbri to total_number
+        elif digit.isdigit():
+            #  kui on nr lisab selle numbri to total_number
             total_number += int(digit)
 
     #  reeglid mis peab olema taidetud
