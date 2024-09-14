@@ -37,6 +37,7 @@ def secret_letter(letter: str) -> bool:
 
     return rule1 and rule2 and rule3
 
+
 if __name__ == '__main__':
     print(secret_letter("sOMEteSTLETTer8"))  # True
     print(secret_letter("thisisNOTvaliD4"))  # False
