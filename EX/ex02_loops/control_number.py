@@ -28,7 +28,7 @@ def control_number(encrypted_string: str) -> bool:
             ctrl_num += 2  #  kui on uppercase lisab 2
         elif character in symbols:
             ctrl_num += 5  #  kui on sumbolite sones siis lisab 5 numbrile
-    last_2_digit = int(encrypted_string[-2:])
+    last_2_digit = int(encrypted_string[-2:])  #  votab 2 viimast numbrit
     return ctrl_num == last_2_digit
 
 if __name__ == '__main__':
