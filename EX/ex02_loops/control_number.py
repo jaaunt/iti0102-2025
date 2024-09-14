@@ -35,6 +35,7 @@ def control_number(encrypted_string: str) -> bool:
     ctrl_num_lenght = len(str(ctrl_num))
 
     last_digits_str = encrypted_string[-ctrl_num_lenght:]  # votab viimased numbrid vastavalt kui pikk ctrl number on
+
     if not last_digits_str.isdigit():  # kui ei loppe numbriga, aga test jaoks pole vaja seda ikd why panin
         return False
 
