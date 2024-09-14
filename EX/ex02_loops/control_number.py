@@ -30,11 +30,10 @@ def control_number(encrypted_string: str) -> bool:
             ctrl_num += 5  # kui on sumbolite sones siis lisab 5 numbrile
         else:
             ctrl_num += 0
+
     if encrypted_string[-2:].isdigit():  # kontrollib loppeks 2 numbriga
         last_digit = int(encrypted_string[-2:])  # votab kaks viimast numbrit
         last_ctr = ctrl_num % 100  # votab 2 viimast kontroll numbrist
-        if last_ctr < 10:
-            return False
     elif encrypted_string[-1:].isdigit():  # sama asi aga kui lopus on ainult 1 number
         last_digit = int(encrypted_string[-1:])
         last_ctr = ctrl_num % 10
