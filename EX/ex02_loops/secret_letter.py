@@ -17,16 +17,16 @@ def secret_letter(letter: str) -> bool:
     total_lowercase = 0
     total_number = 0
 
-    for digit in letter:
-        if digit.isupper():
+    for character in letter:  #  kontrollib iga numbri/tahe labi
+        if character.isupper():
             #  kontrollib kas on uppercase, kui on lisab 1 to total_uppercase kogusele
             total_uppercase += 1
-        elif digit.islower():
+        elif character.islower():
             #  kui on lowercase lisab 1 to total_lowercase kogusele
             total_lowercase += 1
-        elif digit.isdigit():
+        elif character.isdigit():
             #  kui on nr lisab selle numbri to total_number
-            total_number += int(digit)
+            total_number += int(character)  #  makes sure see liidab numbrina
 
     #  reeglid mis peab olema taidetud
     rule1 = total_uppercase > total_lowercase
@@ -34,7 +34,7 @@ def secret_letter(letter: str) -> bool:
     rule3 = total_number >= total_lowercase
 
     return rule1 and rule2 and rule3
-    pass
+
 
 
 if __name__ == '__main__':
