@@ -24,7 +24,6 @@ def encode(message: str, shift: int) -> str:
     :param shift: shift for encoding
     :return: encoded message
     """
-
     encoded_message = []
 
     for char in message:
@@ -42,6 +41,7 @@ def encode(message: str, shift: int) -> str:
             encoded_message.append(char)
 
     return ''.join(encoded_message)
+
 
 if __name__ == '__main__':
     print(encode("i like turtles", 6))  # -> o roqk zaxzrky
