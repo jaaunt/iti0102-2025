@@ -20,12 +20,13 @@ def is_prime_number(number: int) -> bool:
     if number == 2 or number == 3:  # 2 ja 3 on
         return True
 
+
     for n in range(2, number):
         if number % n == 0:  # kontrollib kas jagub millegani nii et jaaki ei tekiks aka ei teki koma arvu
             return False
         else:  # kui ei jagunud nii millegiga ss on prime number
             return True
-        break
+
 
 
 if __name__ == '__main__':
