@@ -29,7 +29,7 @@ def encode(message: str, shift: int) -> str:
     for char in message:
         if char.isalpha():
             new_char = chr((ord(char) - ord('a') + shift) % 26 + ord('a'))
-            encoded_message.append(new_char)
+            encoded_message.append(new_char)  # lisab uue tahe hulka
         # ord annab tahele numbrilise vaartuse
         # -ord('a') paneb a 0- pohisesse susteemi kus a on 0 ning otsitakse tahe char kaugust a-st naiteks c puhul on see 2
         # + shift liidab nihke orginaal tahe kaugusele a-st nt char on c ss ord(c) - ord('a') = 2 kui shift on 3 ss kokku nihe a-st on 2+3=5
@@ -38,9 +38,9 @@ def encode(message: str, shift: int) -> str:
         # chr() muudab leitud numbri tagasi taheks
 
         else:
-            encoded_message.append(char)
+            encoded_message.append(char)  # kui nr voi tuhik jatab samaks ja lisab uue sona hulka
 
-    return ''.join(encoded_message)
+    return ''.join(encoded_message)  # ''.join paneb koik leitud tahed tuhikud ja nr kokku ilma ' markide ja komadeta
 
 
 if __name__ == '__main__':
