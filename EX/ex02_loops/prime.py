@@ -23,7 +23,7 @@ def is_prime_number(number: int) -> bool:
     for n in range(2, number):
         if number % n == 0:  # kontrollib kas jagub millegani nii et jaaki ei tekiks aka ei teki koma arvu
             return False
-        else:  # kui ei jagunud ss on prime number
+        else:  # kui ei jagunud nii millegiga ss on prime number
             return True
         break
 
