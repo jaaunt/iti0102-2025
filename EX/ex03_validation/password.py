@@ -181,7 +181,7 @@ def is_password_valid(new_password: str, old_password: str, name: str, birthdate
         includes_special(new_password) and
         is_different_from_old_password(old_password, new_password) and
         not is_name_in_password(new_password, name) and
-        not is_birthday_in_password(new_password, birthdate))
+        not is_birthday_in_password(new_password, birthdate))  # annab true ainult siis kui koik on vaartusega true
 
 if __name__ == '__main__':
     print("Password length validation:")
