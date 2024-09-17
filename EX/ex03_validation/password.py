@@ -112,7 +112,7 @@ def is_name_in_password(password: str, name: str) -> bool:
     password = password.lower()
     name = name.lower()
     parts = name.replace("-", " ").split(" ")
-    name1 = parts[0] if len(parts) > 0 else " "
+    name1 = parts[0] if len(parts) > 0 else " "  # kui on mingi mitte tuhi osa ss annab nimele vaartusele kui ei ole ss annab vaartuseks tuhiku
     name2 = parts[1] if len(parts) > 1 else " "
     name3 = parts[2] if len(parts) > 2 else " "
 
@@ -147,7 +147,15 @@ def is_birthday_in_password(password: str, birthdate: str) -> bool:
     :param birthdate: Birthday of the account owner, format is dd.mm.yyyy
     :return: True if the birthday is present in the password, False otherwise
     """
-    pass
+    parts = birthdate.split(".")
+    day = parts[0]
+    month = parts[1]
+    year = parts[2]
+    yr_end = year[-2:]
+    rev_yr = year[::-1]
+    if day in password or month in password or year in password or yr_end in password or rev_yr in password:
+        return True
+    return False
 
 
 def is_password_valid(new_password: str, old_password: str, name: str, birthdate: str) -> bool:
