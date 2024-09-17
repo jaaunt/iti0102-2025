@@ -79,6 +79,8 @@ def is_different_from_old_password(old_pass: str, new_pass: str) -> bool:
     :param new_pass: The new password
     :return: True if the new password is different enough, False otherwise
     """
+    if new_pass == old_pass:
+        return False
     old_pass = old_pass.lower()
     new_pass = new_pass.lower()  # teeb molemad vaiketahtedega et oleks lihtsam kontrollida
     overlap_count = 0
