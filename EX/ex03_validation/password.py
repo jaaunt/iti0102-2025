@@ -104,6 +104,7 @@ def is_different_from_old_password(old_pass: str, new_pass: str) -> bool:
 
     return max(overlap, overlap_reversed) < 0.5  # kuni suurim nendest on alle 0.5 ehk 50% returns true
 
+
 def is_name_in_password(password: str, name: str) -> bool:
     """
     Check if the password contains the name of the account owner.
