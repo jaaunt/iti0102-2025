@@ -179,7 +179,7 @@ def is_password_valid(new_password: str, old_password: str, name: str, birthdate
             includes_number(new_password) and
             includes_special(new_password) and
             is_different_from_old_password(old_password, new_password)):
-        if not (is_name_in_password(new_password, name) and is_birthday_in_password(new_password, birthdate)):
+        if not is_name_in_password(new_password, name) and not is_birthday_in_password(new_password, birthdate):
             return True
     return False
 
