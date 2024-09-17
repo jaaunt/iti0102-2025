@@ -94,10 +94,11 @@ def is_different_from_old_password(old_pass: str, new_pass: str) -> bool:
 
     overlap_count_reversed = 0
     rev_new_pass = new_pass[::-1]  # keerab passwordi ringi
+    old_pass_char_rev = list(old_pass)
     for char in rev_new_pass:
-        if char in old_pass_char:
+        if char in old_pass_char_rev:
             overlap_count_reversed += 1
-            old_pass_char.remove(char)
+            old_pass_char_rev.remove(char)
 
     highest_lenght_reversed = max(len(rev_new_pass), len(old_pass))  # kumb on pikem uue pass tagurpidi vs vana
     overlap_reversed = overlap_count_reversed / highest_lenght_reversed   # kui suur pprotsent kattub sama idee mis enne
