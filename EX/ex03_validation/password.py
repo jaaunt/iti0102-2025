@@ -81,6 +81,8 @@ def is_different_from_old_password(old_pass: str, new_pass: str) -> bool:
     """
     old_pass = old_pass.lower()
     new_pass = new_pass.lower()  # teeb molemad vaiketahtedega et oleks lihtsam kontrollida
+    if old_pass == new_pass:
+        return False
 
     overlap_count = 0
     old_pass_char = list(old_pass)
