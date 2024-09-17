@@ -82,9 +82,11 @@ def is_different_from_old_password(old_pass: str, new_pass: str) -> bool:
     old_pass = old_pass.lower()
     new_pass = new_pass.lower()  # teeb molemad vaiketahtedega et oleks lihtsam kontrollida
     overlap_count = 0
+    old_pass_char = list(old_pass)
     for char in new_pass:
-        if char in old_pass:
+        if char in old_pass_char:
             overlap_count += 1
+            old_pass_char.remove(char)
 
     # kui suur protsent kattub, murruna ie 50% = 0.5
     highest_lenght = max(len(old_pass), len(new_pass))  # leiab kumb password on pikem
@@ -93,8 +95,9 @@ def is_different_from_old_password(old_pass: str, new_pass: str) -> bool:
     overlap_count_reversed = 0
     rev_new_pass = new_pass[::-1]  # keerab passwordi ringi
     for char in rev_new_pass:
-        if char in old_pass:
+        if char in old_pass_char:
             overlap_count_reversed += 1
+            old_pass_char.remove(char)
 
     highest_lenght_reversed = max(len(rev_new_pass), len(old_pass))  # kumb on pikem uue pass tagurpidi vs vana
     overlap_reversed = overlap_count_reversed / highest_lenght_reversed   # kui suur pprotsent kattub sama idee mis enne
