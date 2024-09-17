@@ -1,5 +1,5 @@
 """Password validation."""
-from os.path import split
+
 
 
 def is_correct_length(password: str) -> bool:
@@ -123,7 +123,7 @@ def is_name_in_password(password: str, name: str) -> bool:
 
 
 def split_name(name):
-    """split the name into parts at spaces or -"""
+    """Split the name into parts at spaces or -."""
     name1, name2, name3 = " ", " ", " "
     if " " in name:
         parts = name.split(" ")
@@ -139,10 +139,6 @@ def split_name(name):
             name3 = part2[1].strip()
 
     return name1, name2, name3
-
-
-
-
 
 
 def is_birthday_in_password(password: str, birthdate: str) -> bool:
