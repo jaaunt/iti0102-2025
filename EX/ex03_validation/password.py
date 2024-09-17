@@ -173,8 +173,15 @@ def is_password_valid(new_password: str, old_password: str, name: str, birthdate
     :param birthdate: The user's birthdate
     :return: True if the password is valid, False otherwise.
     """
-    pass
-
+    if (is_correct_length(new_password) and
+        includes_uppercase(new_password) and
+        includes_lowercase(new_password) and
+        includes_number(new_password) and
+        includes_special(new_password) and
+        is_different_from_old_password(old_password, new_password) is True):
+        if (is_name_in_password(new_password, name) and is_birthday_in_password(new_password, birthdate)) is False:
+            return True
+    return False
 
 if __name__ == '__main__':
     print("Password length validation:")
