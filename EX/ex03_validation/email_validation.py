@@ -24,6 +24,7 @@ def find_domain(email: str) -> str:
     """Find the emails domain name."""
     if not has_at_symbol(email):
         return ""
+
     domain = email.rsplit("@", 1)[1]
     return domain
 
@@ -36,6 +37,7 @@ def is_valid_domain(email: str) -> bool:
     after_dot = domain.rsplit(".", 1)[1]
     if not domain or domain.count(".") != 1:
         return False
+
     if not (3 <= len(before_dot) <= 10 and before_dot.isalpha()):
         return False
     if not (2 <= len(after_dot) <= 5 and after_dot.isalpha()):
