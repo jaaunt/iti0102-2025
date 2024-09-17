@@ -29,6 +29,8 @@ def is_valid_domain(email: str) -> bool:
 
     before_dot = domain.rsplit(".", 1)[0]
     after_dot = domain.rsplit(".", 1)[1]
+    if domain.count(".") != 1:
+        return False
     if not (3 <= len(before_dot) <= 10 and before_dot.isalpha()):
         return False
     if not (2 <= len(after_dot) <= 5 and after_dot.isalpha()):
