@@ -66,7 +66,6 @@ def includes_number(password: str) -> bool:
             return True
     return False
 
-
 def is_different_from_old_password(old_pass: str, new_pass: str) -> bool:
     """
     Check if the new password is different enough from the old password.
