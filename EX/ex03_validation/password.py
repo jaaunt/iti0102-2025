@@ -83,12 +83,11 @@ def is_different_from_old_password(old_pass: str, new_pass: str) -> bool:
     new_pass = new_pass.lower()
     rev_new_pass = new_pass[::-1]
     check_length = len(new_pass) // 2
-    for char in range(len(new_pass) - check_length):
+
+    for char in range(len(new_pass) - check_length + 1):
         substring = new_pass[char:char + check_length]
         substring_reversed = rev_new_pass[char:char + check_length]
-        if substring in old_pass:
-            return False
-        if substring_reversed in old_pass:
+        if substring in old_pass or substring_reversed in old_pass:
             return False
     return True
 
