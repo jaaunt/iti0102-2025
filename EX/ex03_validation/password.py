@@ -92,7 +92,7 @@ def is_different_from_old_password(old_pass: str, new_pass: str) -> bool:
             overlap_count += 1
             old_pass_chars.remove(char)
 
-    overlap_protsent = overlap_count / max(len(new_pass), len(old_pass))  # protsent, palju kattub kahe passwordi vahel jagadatud password pikkusega
+    overlap_protsent = overlap_count / len(new_pass)  # protsent, palju kattub kahe passwordi vahel jagadatud password pikkusega
 
     overlap_count_reversed = 0
     rev_new_pass = new_pass[::-1]  # keerab passwordi ringi
@@ -102,7 +102,7 @@ def is_different_from_old_password(old_pass: str, new_pass: str) -> bool:
             overlap_count_reversed += 1
             old_pass_chars_rev.remove(char)
 
-    overlap_reversed_protsent = overlap_count_reversed / max(len(rev_new_pass), len(old_pass))   # kui suur pprotsent kattub sama idee mis enne
+    overlap_reversed_protsent = overlap_count_reversed / len(rev_new_pass)   # kui suur pprotsent kattub sama idee mis enne
 
     return max(overlap_protsent, overlap_reversed_protsent) <= 0.5  # kuni suurim nendest on alle 0.5 ehk 50% returns true
 
