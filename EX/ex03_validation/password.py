@@ -80,31 +80,18 @@ def is_different_from_old_password(old_pass: str, new_pass: str) -> bool:
     :return: True if the new password is different enough, False otherwise
     """
     old_pass = old_pass.lower()
-    new_pass = new_pass.lower()  # teeb molemad vaiketahtedega et oleks lihtsam kontrollida
-    # kui exactly sama
-    if old_pass == new_pass:
-        return False
+    new_pass = new_pass.lower()
+    rev_new_pass = new_pass[::-1]
+    check_length = max(len(new_pass), len(old_pass)) // 2
+    for char in range(len(new_pass) - check_length):
+        substring = new_pass[char:char + check_length]
+        substring_reversed = rev_new_pass[char:char + check_length]
+        if substring in old_pass:
+            return False
+        if substring_reversed in old_pass:
+            return False
 
-    overlap_count = 0
-    old_pass_chars = list(old_pass)
-    for char in new_pass:
-        if char in old_pass_chars:
-            overlap_count += 1
-            old_pass_chars.remove(char)
-
-    overlap_protsent = overlap_count / max(len(new_pass), len(old_pass))  # protsent, palju kattub kahe passwordi vahel jagadatud password pikkusega
-
-    overlap_count_reversed = 0
-    rev_new_pass = new_pass[::-1]  # keerab passwordi ringi
-    old_pass_chars_rev = list(old_pass)
-    for char in rev_new_pass:
-        if char in old_pass_chars_rev:
-            overlap_count_reversed += 1
-            old_pass_chars_rev.remove(char)
-
-    overlap_reversed_protsent = overlap_count_reversed / max(len(rev_new_pass), len(old_pass))   # kui suur pprotsent kattub sama idee mis enne
-
-    return max(overlap_protsent, overlap_reversed_protsent) <= 0.5  # kuni suurim nendest on alle 0.5 ehk 50% returns true
+    return True
 
 
 def is_name_in_password(password: str, name: str) -> bool:
