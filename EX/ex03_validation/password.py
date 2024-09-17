@@ -82,11 +82,14 @@ def is_different_from_old_password(old_pass: str, new_pass: str) -> bool:
     old_pass = old_pass.lower()
     new_pass = new_pass.lower()
     rev_new_pass = new_pass[::-1]
-    check_length = max(len(new_pass), len(old_pass)) // 2
+    check_length = len(new_pass) // 2  # kui pikk 50% passwordist peab olema
+    if len(new_pass) % 2 != 0:
+        check_length += 1
 
-    for char in range(len(new_pass) - check_length):
-        substring = new_pass[char:char + check_length]
-        substring_reversed = rev_new_pass[char:char + check_length]
+    for i in range(len(new_pass) - check_length + 1):  # vaatab et kontrolliks nii kaugele kui saab mitte ei vaata labi sona lopuni igat tahte
+        substring = new_pass[i:i + check_length]  # votab substringi tahest kuni 50% passwordist
+        substring_reversed = rev_new_pass[i:i + check_length]
+
         if substring in old_pass or substring_reversed in old_pass:
             return False
     return True
