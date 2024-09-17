@@ -10,6 +10,9 @@ def has_at_symbol(email: str) -> bool:
 
 def is_valid_username(email: str) -> bool:
     """Check if email has a valid username."""
+    if not has_at_symbol(email):
+        return False
+
     username = email.rsplit("@", 1)[0]  # compared to .split .rsplit splitib viimase @ juurest ("@", 1) makes sure see splitib ainult uhest kohast
     for char in username:
         if not (char.isalnum() or char == "."):
@@ -19,6 +22,8 @@ def is_valid_username(email: str) -> bool:
 
 def find_domain(email: str) -> str:
     """Find the emails domain name."""
+    if not has_at_symbol(email):
+        return ""
     domain = email.rsplit("@", 1)[1]
     return domain
 
@@ -29,7 +34,7 @@ def is_valid_domain(email: str) -> bool:
 
     before_dot = domain.rsplit(".", 1)[0]
     after_dot = domain.rsplit(".", 1)[1]
-    if domain.count(".") != 1:
+    if not domain or domain.count(".") != 1:
         return False
     if not (3 <= len(before_dot) <= 10 and before_dot.isalpha()):
         return False
