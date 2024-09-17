@@ -37,6 +37,7 @@ def is_valid_domain(email: str) -> bool:
 
 
 def is_valid_email_address(email: str) -> bool:
+    """Check if email has a valid email address."""
     return is_valid_username(email) and is_valid_domain(email) and has_at_symbol(email)
 
 
@@ -80,6 +81,4 @@ if __name__ == '__main__':
     print("\nCreate your own email address:")
     print(create_email_address("hot.ee", "vana.ema"))  # -> vana.ema@hot.ee
     print(create_email_address("jaani.org", "lennakuurma"))  # -> lennakuurma@jaani.org
-    print(create_email_address("koobas.com",
-                               "karu&pojad"))  # -> Cannot create a valid email address using the given parameters!
-
+    print(create_email_address("koobas.com", "karu&pojad"))  # -> Cannot create a valid email address using the given parameters!
