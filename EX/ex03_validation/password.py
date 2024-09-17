@@ -1,7 +1,5 @@
 """Password validation."""
 
-
-
 def is_correct_length(password: str) -> bool:
     """
     Check if the password's length is within the valid range.
