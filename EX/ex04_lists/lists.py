@@ -30,7 +30,7 @@ def phone_brands(all_phones: str) -> list:
         if " " in phone:
             brand, _ = phone.split(" ", 1)
             if brand not in brands:
-                brands.append(phone)
+                brands.append(brand)
 
     return brands
 
@@ -49,7 +49,7 @@ def phone_models(all_phones: str) -> list:
 
     for phone in phones:
         if " " in phone:
-            brand, model = phone.split(" ", 1)
+            _, model = phone.split(" ", 1)
             if model not in models:
                 models.append(model)
     return models
