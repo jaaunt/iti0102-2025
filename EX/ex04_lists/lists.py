@@ -27,8 +27,11 @@ def phone_brands(all_phones: str) -> list:
     brands = []
 
     for phone in phones:
-        if phone not in brands:
-            brands.append(phone)
+        if " " in phone:
+            brand, _ = phone.split(" ", 1)
+            if phone not in brands:
+                brands.append(phone)
+
     return brands
 
 
