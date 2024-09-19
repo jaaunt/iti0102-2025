@@ -1,4 +1,5 @@
 """Phone inventory."""
+from pip._internal import models
 
 
 def list_of_phones(all_phones: str) -> list:
@@ -10,7 +11,8 @@ def list_of_phones(all_phones: str) -> list:
     """
     if not all_phones:  # kui on tuhi ss annab tuhja hulga
         return []
-    return all_phones.split(",")
+
+    return all_phones.split(",")  # loikab sone komakohtadest eri osadeks
 
 
 def phone_brands(all_phones: str) -> list:
@@ -21,8 +23,10 @@ def phone_brands(all_phones: str) -> list:
     """
     if not all_phones:
         return []
+
     phones = all_phones.split(",")
     brands = []
+
     for phone in phones:
         if phone not in brands:
             brands.append(phone)
@@ -35,7 +39,18 @@ def phone_models(all_phones: str) -> list:
 
     The order of the elements should be the same as in the input string (first appearance).
     """
-    return []
+    if not all_phones:
+        return []
+
+    phones = all_phones.split(",")
+    models = []
+
+    for phone in phones:
+        if " " in phone:
+            brand, model = phone.split(" ", 1)
+            if model not in models:
+                models.append(model)
+    return models
 
 
 def search_by_brand(all_phones: str, brand: str) -> list:
@@ -44,7 +59,20 @@ def search_by_brand(all_phones: str, brand: str) -> list:
 
     The search is case-insensitive.
     """
-    return []
+    if not all_phones:
+        return []
+
+    phones = all_phones.split(",")
+    brand_lower = brand.lower()
+    matched_phones = []
+
+    for phone in phones:
+        if " " in phone:
+            phone_brand,_ = phone.split(" ", 1)
+            if phone_brand.lower() == brand_lower.lower():
+                matched_phones.append(phone)
+
+    return matched_phones
 
 
 def search_by_model(all_phones: str, model: str) -> list:
@@ -53,7 +81,21 @@ def search_by_model(all_phones: str, model: str) -> list:
 
     The search is case-insensitive.
     """
-    return []
+    if not all_phones:
+        return []
+
+    phones = all_phones.split(",")
+    search_model_lower = model.lower()
+    matched_phones = []
+    for phone in phones:
+        if " " in phone:
+            _, model = phone.split(" ", 1)
+            model_parts = model.split(" ")
+            model_parts_lower = [part.lower() for part in model_parts]
+            if search_model_lower in model_parts_lower:
+                matched_phones.append(phone)
+
+    return matched_phones
 
 
 if __name__ == '__main__':
