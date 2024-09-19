@@ -8,6 +8,8 @@ def list_of_phones(all_phones: str) -> list:
     The input string contains of phone brands and models, separated by comma.
     Both the brand and the model do not contain spaces (both are one word).
     """
+    if not all_phones:  # kui on tuhi ss annab tuhja hulga
+        return []
     return all_phones.split(",")
 
 
@@ -17,7 +19,14 @@ def phone_brands(all_phones: str) -> list:
 
     The order of the elements should be the same as in the input string (first appearance).
     """
-    return []
+    if not all_phones:
+        return []
+    phones = all_phones.split(",")
+    brands = []
+    for phone in phones:
+        if phone not in brands:
+            brands.append(phone)
+    return brands
 
 
 def phone_models(all_phones: str) -> list:
@@ -72,4 +81,3 @@ if __name__ == '__main__':
     # []
     print(search_by_model("IPhone proX,IPhone 12 Pro,IPhone 14 pro Max", "12 Pro"))
     # []
-
