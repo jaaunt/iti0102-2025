@@ -89,9 +89,9 @@ def search_by_model(all_phones: str, model: str) -> list:
     matched_phones = []
     for phone in phones:
         if " " in phone:
-            _, model = phone.split(" ", 1)
-            model_parts = model.split(" ")
-            model_parts_lower = [part.lower() for part in model_parts]
+            _, model = phone.split(" ", 1)  # telefoni brandist eraldamine
+            model_parts = model.split(" ")  # loikab lahti juhul kui nt on 12 pro saab 12, pro
+            model_parts_lower = [part.lower() for part in model_parts]  # teeb koik listis olevad vaartused vaikeste tahtedega
             if search_model_lower in model_parts_lower:
                 matched_phones.append(phone)
 
