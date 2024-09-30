@@ -65,13 +65,12 @@ def search_by_brand(all_phones: str, brand: str) -> list:
         return []
 
     phones = all_phones.split(",")
-    brand_lower = brand.lower()
     matched_phones = []
 
     for phone in phones:
         if " " in phone:
             phone_brand, _ = phone.split(" ", 1)
-            if phone_brand.lower() == brand_lower.lower():
+            if phone_brand.lower() == brand.lower():
                 matched_phones.append(phone)
 
     return matched_phones
