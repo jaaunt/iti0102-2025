@@ -1,5 +1,4 @@
 """Project 1."""
-from unittest import skipIf
 
 
 def add_country_code(number: str) -> str:
