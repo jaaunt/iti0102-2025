@@ -41,13 +41,16 @@ def remove_unnecessary_chars(number: str) -> str:
     else:  # muudel juhtudel lihtsalt liidab koik numbrid
         return code_part + nr_part
 
+
 def get_last_numbers(numbers: list[str], n: int) -> list[str]:
+    """Get last numbers of the list."""
     if n <= 0:
         return []
     elif n >= len(numbers):
         return numbers
     else:
         return numbers[-n:]
+
 
 if __name__ == '__main__':
     print(add_country_code("1234567"))  # "1234567" => "+372 1234567"
