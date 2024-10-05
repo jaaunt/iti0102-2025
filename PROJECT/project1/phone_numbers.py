@@ -1,4 +1,5 @@
 """Project 1."""
+from unittest import skipIf
 
 
 def add_country_code(number: str) -> str:
@@ -19,6 +20,29 @@ def is_valid(number: str) -> bool:
     return False
 
 
+def remove_unnecessary_chars(number: str) -> str:
+    """Remove unnecessary characters from number."""
+    has_code = number.startswith("+") and " " in number  # vaatab kas on voimalik koha kood
+    nr_part = ""
+    code_part = ""
+    for char in number:
+        if char.isdigit():
+            if has_code:
+                code_part += char
+            else:
+                nr_part += char
+        elif char == " ":
+            if has_code and code_part:  # kui on maakonna kood ja koodi osas on numbrid muudel juhtudel ei tee midagi
+                code_part += char  # lisab selle tuhiku
+                has_code = False  # lopetab koodi ossa nr lugemise
+            continue
+
+    if code_part and nr_part:  # kui molemad osad pole tuhi str ss paneb koha koodi ette pluss
+        return "+" + code_part + nr_part
+    else:  # muudel juhtudel lihtsalt liidab koik numbrid
+        return code_part + nr_part
+
+
 if __name__ == '__main__':
     print(add_country_code("1234567"))  # "1234567" => "+372 1234567"
     print(add_country_code("+372 1234567"))  # "+372 1234567" => "+372 1234567"
@@ -28,3 +52,10 @@ if __name__ == '__main__':
     print(is_valid("+3721234567"))  # "+3721234567" => False
     print(is_valid("+372 123456"))  # "+372 123456" => False
     print(is_valid("+372A12345*7"))  # "+372A12345*7" => False
+
+    print(remove_unnecessary_chars("+372 *1234567a"))  # "+372 *1234567a" => "+372 1234567"
+    print(remove_unnecessary_chars("+++37ooo2 1234+AAA567"))  # "+++37ooo2 1234+AAA567" => "+372 1234567"
+    print(remove_unnecessary_chars(" 123+h n456!7"))  # " 123+h n456!7" => "1234567"
+    print(remove_unnecessary_chars("+abc 55fd"))  # "+abc 55fd" => "55"
+    print(remove_unnecessary_chars("+abc   ++ "))  # "+abc   ++ " => ""
+    print(remove_unnecessary_chars("+372 adbbcc%$"))  # "+372 adbbcc%$" => "372"
