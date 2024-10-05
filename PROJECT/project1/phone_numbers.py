@@ -51,8 +51,9 @@ def get_last_numbers(numbers: list[str], n: int) -> list[str]:
     else:
         return numbers[-n:]
 
+
 def get_first_correct_number(names: list[str], numbers: list[str], name: str) -> str | None:
-    """Finds the first valid number, for the name, from the list."""
+    """Get the first valid number for a name from the list."""
     for i in range(0, len(numbers)):
         if names[i].lower() in name.lower():
             if is_valid(numbers[i]):
@@ -81,7 +82,7 @@ if __name__ == '__main__':
     print(get_last_numbers(["+372 1234567"], 3))  # ["+372 1234567"], 3 => ["+372 1234567"]
     print(get_last_numbers(["+372 1234567", "1234567", "+1 234567890"], 0))  # ["+372 1234567", "1234567", "+1 234567890"], 0 => []
 
-    print(get_first_correct_number(["Alice Smith", "Bob Brown", "Carol White"], ["+372 1234567", "555-1234", "+1 234567890"], "Alice Smith" ))
+    print(get_first_correct_number(["Alice Smith", "Bob Brown", "Carol White"], ["+372 1234567", "555-1234", "+1 234567890"], "Alice Smith"))
     # ["Alice Smith", "Bob Brown", "Carol White"], ["+372 1234567", "555-1234", "+1 234567890"], "Alice Smith" => "+372 1234567"
     print(get_first_correct_number(["alice Smith", "Alice Smith", "ALICE Smith", "Alice Smith"], ["555-1234", "+372 123456", "+1 234567890", "+44 1234567"], "Alice Smith"))
     # ["alice Smith", "Alice Smith", "ALICE Smith", "Alice Smith"], ["555-1234", "+372 123456", "+1 234567890", "+44 1234567"], "Alice Smith" => "+1 234567890"
