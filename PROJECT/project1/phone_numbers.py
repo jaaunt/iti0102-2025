@@ -5,6 +5,7 @@ def add_country_code(number: str) -> str:
         return "+372 " + number
     return number
 
+
 def is_valid(number: str) -> bool:
     """Check if number is valid."""
     if not number.startswith('+'):
@@ -14,6 +15,7 @@ def is_valid(number: str) -> bool:
         if (parts[0].isdigit or "+") and len(parts[1]) >= 7 and parts[1].isdigit():
             return True
     return False
+
 
 if __name__ == '__main__':
     print(add_country_code("1234567"))  # "1234567" => "+372 1234567"
