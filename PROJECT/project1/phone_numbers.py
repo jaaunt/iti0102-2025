@@ -1,10 +1,12 @@
-"""Project 1"""
+"""Project 1."""
 def add_country_code(number: str) -> str:
+    """Add country code to number."""
     if not number.startswith('+'):
         return "+372 " + number
     return number
 
 def is_valid(number: str) -> bool:
+    """Check if number is valid."""
     if not number.startswith('+'):
         return False
     if " " in number:
