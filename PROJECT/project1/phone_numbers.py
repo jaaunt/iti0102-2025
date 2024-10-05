@@ -1,4 +1,6 @@
 """Project 1."""
+
+
 def add_country_code(number: str) -> str:
     """Add country code to number."""
     if not number.startswith('+'):
