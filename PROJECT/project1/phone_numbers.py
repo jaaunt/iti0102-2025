@@ -81,7 +81,7 @@ def get_names_of_contacts_with_correct_numbers(names: list[str], numbers: list[s
     name_valid_nr = []
     for i in range(0, len(numbers)):
         if is_valid(numbers[i]):
-            formatted_name = names[i].strip().capitalize()
+            formatted_name = names[i].strip().title()
             name_valid_nr.append(formatted_name)
     return name_valid_nr
 
