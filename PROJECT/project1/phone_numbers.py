@@ -14,7 +14,7 @@ def is_valid(number: str) -> bool:
         return False
     if " " in number:
         parts = number.split(" ", 1)
-        if (parts[0].isdigit or "+") and len(parts[1]) >= 7 and parts[1].isdigit():
+        if (parts[0].isdigit() or "+") and len(parts[1]) >= 7 and parts[1].isdigit():
             return True
     return False
 
@@ -78,8 +78,7 @@ def get_names_of_contacts_with_correct_numbers(names: list[str], numbers: list[s
     name_valid_nr = []
     for i in range(0, len(numbers)):
         if is_valid(numbers[i]):
-            cap_name = names[i].capitalize()
-            name_valid_nr.append(cap_name)
+            name_valid_nr.append(names[i])
     return name_valid_nr
 
 
