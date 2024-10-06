@@ -14,8 +14,11 @@ def is_valid(number: str) -> bool:
         return False
     if " " in number:
         parts = number.split(" ", 1)
-        if (parts[0].isdigit() or "+") and len(parts[1]) >= 7 and parts[1].isdigit():
-            return True
+        if len(parts) == 2:
+            country = parts[0][1:]
+            nr = parts[1]
+            if country.isdigit() and nr.isdigit() and len(nr) >= 7:
+                return True
     return False
 
 
