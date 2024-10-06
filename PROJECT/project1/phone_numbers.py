@@ -62,13 +62,13 @@ def get_first_correct_number(names: list[str], numbers: list[str], name: str) ->
 
 
 def correct_numbers(numbers: list[str]) -> list[str]:
-    """Check if number is correct and try to fix it if it isnt"""
+    """Check if number is correct and try to fix it if it isnt."""
     fixed_numbers = []
     for number in numbers:
         clean_number = remove_unnecessary_chars(number)
         if clean_number and is_valid(clean_number):  # on puhastatud ja valid nr
             fixed_numbers.append(clean_number)
-        elif clean_number and len(clean_number) >= 7 and not " " in clean_number:  # ei sisalda uleliigseid asju on at least 7 pikk ja ei sisalda " "
+        elif clean_number and len(clean_number) >= 7 and " " not in clean_number:  # ei sisalda uleliigseid asju on at least 7 pikk ja ei sisalda " "
             fixed_numbers.append(add_country_code(clean_number))
     return fixed_numbers
 
