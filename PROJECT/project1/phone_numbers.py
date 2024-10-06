@@ -61,6 +61,18 @@ def get_first_correct_number(names: list[str], numbers: list[str], name: str) ->
     return None
 
 
+def correct_numbers(numbers: list[str]) -> list[str]:
+    """Check if number is correct and try to fix it if it isnt"""
+    fixed_numbers = []
+    for number in numbers:
+        clean_number = remove_unnecessary_chars(number)
+        if clean_number and is_valid(clean_number):  # on puhastatud ja valid nr
+            fixed_numbers.append(clean_number)
+        elif clean_number and len(clean_number) >= 7 and not " " in clean_number:  # ei sisalda uleliigseid asju on at least 7 pikk ja ei sisalda " "
+            fixed_numbers.append(add_country_code(clean_number))
+    return fixed_numbers
+
+
 if __name__ == '__main__':
     print(add_country_code("1234567"))  # "1234567" => "+372 1234567"
     print(add_country_code("+372 1234567"))  # "+372 1234567" => "+372 1234567"
@@ -88,3 +100,14 @@ if __name__ == '__main__':
     # ["alice Smith", "Alice Smith", "ALICE Smith", "Alice Smith"], ["555-1234", "+372 123456", "+1 234567890", "+44 1234567"], "Alice Smith" => "+1 234567890"
     print(get_first_correct_number(["Alice Smith", "Alice Smith", "Alice Smith", "Alice Smith"], ["555-1234", "+372 123456", "+1 234-567890", "+44 123AA567"], "Alice Smith"))
     # ["Alice Smith", "Alice Smith", "Alice Smith", "Alice Smith"], ["555-1234", "+372 123456", "+1 234-567890", "+44 123AA567"], "Alice Smith" => None
+
+    print(correct_numbers(["+372 12345", "1234567", "+111 23456789", "456"]))
+    # ["+372 12345", "1234567", "+111 23456789", "456"] => ["+372 1234567", "+111 23456789"]
+    print(correct_numbers(["1234567", "+1 234567890", "5551234", "+372 51234567", "+372 59876543"]))
+    # ["1234567", "+1 234567890", "5551234", "+372 51234567", "+372 59876543"] => ["+372 1234567", "+1 234567890", "+372 5551234", "+372 51234567", "+372 59876543"]
+    print(correct_numbers(["+372 123456", "+44 1234567AAA", "555-1234"]))
+    # ["+372 123456", "+44 1234567AAA", "555-1234"] => ["+44 1234567", "+372 5551234"]
+    print(correct_numbers(["555-1234", "123", "AAAAA"]))
+    # ["555-1234", "123", "AAAAA"] => ["+372 5551234"]
+    print(correct_numbers(["5234", "123", "A8AA", "+1 12345"]))
+    # ["5234", "123", "A8AA", "+1 12345"] => []
