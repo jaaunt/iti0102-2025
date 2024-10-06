@@ -73,6 +73,14 @@ def correct_numbers(numbers: list[str]) -> list[str]:
     return fixed_numbers
 
 
+def get_names_of_contacts_with_correct_numbers(names: list[str], numbers: list[str]) -> list[str]:
+    name_valid_nr = []
+    for i in range(0,len(numbers)):
+        if is_valid(numbers[i]):
+            name_valid_nr.append(namesvvv[i])
+    return name_valid_nr
+
+
 if __name__ == '__main__':
     print(add_country_code("1234567"))  # "1234567" => "+372 1234567"
     print(add_country_code("+372 1234567"))  # "+372 1234567" => "+372 1234567"
@@ -111,3 +119,10 @@ if __name__ == '__main__':
     # ["555-1234", "123", "AAAAA"] => ["+372 5551234"]
     print(correct_numbers(["5234", "123", "A8AA", "+1 12345"]))
     # ["5234", "123", "A8AA", "+1 12345"] => []
+
+    print(get_names_of_contacts_with_correct_numbers(["ALICE Smith", "Bob Brown", "Carol White"], ["+372 1234567", "555-1234", "+1 234567890"]))
+    # ["ALICE Smith", "Bob Brown", "Carol White"], ["+372 1234567", "555-1234", "+1 234567890"] => ["Alice Smith", "Carol White"]
+    print(get_names_of_contacts_with_correct_numbers(["Alice Smith", "Bob Brown", "Carol White"], ["+372 123456", "555-1234", "*1 234567890"]))
+    # ["Alice Smith", "Bob Brown", "Carol White"], ["+372 123456", "555-1234", "*1 234567890"] => []
+    print(get_names_of_contacts_with_correct_numbers(["ALICE Smith", "Bob Brown", "alice smith"], ["+372 1234567", "555-1234", "+1 234567890"]))
+    # ["ALICE Smith", "Bob Brown", "alice smith"], ["+372 1234567", "555-1234", "+1 234567890"] => ["Alice Smith", "Alice Smith"]
