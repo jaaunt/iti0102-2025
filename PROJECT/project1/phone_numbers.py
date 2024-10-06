@@ -79,6 +79,8 @@ def correct_numbers(numbers: list[str]) -> list[str]:
 def get_names_of_contacts_with_correct_numbers(names: list[str], numbers: list[str]) -> list[str]:
     """Get the names of contacts with correct numbers."""
     name_valid_nr = []
+    if len(names) != len(numbers):
+        raise ValueError("Names and numbers must have the same length.")
     for i in range(0, len(numbers)):
         if is_valid(numbers[i]):
             name_valid_nr.append(names[i])
