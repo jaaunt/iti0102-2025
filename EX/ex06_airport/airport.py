@@ -43,7 +43,13 @@ def sort_dict_values(dictionary: dict) -> dict:
     Return a dictionary where all the values are in ascending order.
     The order of the keys is not important.
     """
-    pass
+    sorted_dict = {}
+
+    for key, value in dictionary.items():
+        sorted_times = sorted(value)  # sorteerib vaartused aka ajad
+        sorted_dict[key] = sorted_times  # annab sorteeritud ajale destination key
+
+    return sorted_dict
 
 
 def flights_to_destination(flights: list, destination: str) -> list:
