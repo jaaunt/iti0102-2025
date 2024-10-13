@@ -134,8 +134,16 @@ def airlines_operating_today(schedule: dict, airline_names: dict) -> set:
     :param airline_names: Dictionary containing airline codes and corresponding names.
     :return: Set of unique airline names operating today.
     """
-    pass
+    operating_airlines = set()
 
+    for flight_info in schedule.values():  # ei vaata votmeid
+        flight_number = flight_info[1]  # teine element on lennu nr
+        airline_code = flight_number[:3]  # lennu numbrist 3 esimest tahte on airline code
+
+        if airline_code in airline_names:
+            operating_airlines.add(airline_names[airline_code])
+
+    return operating_airlines
 
 def destinations_by_airline(schedule: dict, airline_names: dict) -> dict:
     """
