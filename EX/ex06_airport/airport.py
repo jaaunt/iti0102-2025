@@ -93,7 +93,6 @@ def flights_schedule(flights: list) -> dict:
         if len(parts) >= 4:  # destination, departure time, duration, flight number
             destination = parts[0]
             departure_time = parts[1]
-            duration = parts[2]
             flight_number = parts[3]
 
             # departure aeg votmena ning destination ja lennu number tuplena(value)
