@@ -109,7 +109,15 @@ def destinations_list(schedule: dict) -> list:
     :param schedule: Dictionary containing the flight schedule (the result of flights_schedule function).
     :return: Alphabetically sorted list of unique destinations.
     """
-    pass
+    unique_destinations = set()
+
+    for flight_info in schedule.values():
+        destination = flight_info[0]  # Iga value on tuple mille essa on destination
+        unique_destinations.add(destination)  # Add automaatselt kontrollib et poleks kattuvaid
+
+    sorted_destinations = sorted(unique_destinations)  # sortreerib tahestiku jargi
+
+    return sorted_destinations
 
 
 def airlines_operating_today(schedule: dict, airline_names: dict) -> set:
