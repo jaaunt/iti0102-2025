@@ -145,6 +145,7 @@ def airlines_operating_today(schedule: dict, airline_names: dict) -> set:
 
     return operating_airlines
 
+
 def destinations_by_airline(schedule: dict, airline_names: dict) -> dict:
     """
     Return a dictionary of destinations by airline names.
