@@ -159,7 +159,22 @@ def destinations_by_airline(schedule: dict, airline_names: dict) -> dict:
     :param airline_names: Dictionary containing mapping of airline codes to airline names.
     :return: Dictionary of airline names to sets of destinations.
     """
-    pass
+    destinations_dict = {}
+
+    for flight_info in schedule.values():
+        destination = flight_info[0]  # Esimene on destination
+        flight_number = flight_info[1]  # teine on flight number
+        airline_code = flight_number[:3]  # lennu kolm esimest nr on airline code
+
+        if airline_code in airline_names:
+            airline_name = airline_names[airline_code]  # saab airline nime
+
+            if airline_name not in destinations_dict:
+                destinations_dict[airline_name] = set()
+
+            destinations_dict[airline_name].add(destination)
+
+    return destinations_dict
 
 
 if __name__ == '__main__':
