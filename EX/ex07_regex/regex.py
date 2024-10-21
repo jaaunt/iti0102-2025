@@ -16,7 +16,7 @@ def find_words(text: str) -> list:
      find words from
     :return: list of words found in given string
     """
-    pattern = r" [A-Z][a-zõäöü]+"
+    pattern = r"\b[A-Z][a-zõäöü]+\b"
 
     words = re.findall(pattern, text)
 
