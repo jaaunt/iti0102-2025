@@ -118,7 +118,14 @@ def find_years(text: str) -> list:
     :param text: given string to find years from
     :return: list of years (integers) found in given string
     """
-    pass
+    # ?<! negative lookbehind. \d digits 0-9. ?! negative lookahead
+    pattern = r"(?<!\d)\d{4}(?!\d)"  # (?<!\d) vaatab et enne poleks numbreid , matchib tapselt 4 nr , (?!\d) vaatab et parast poleks nr, pohimotteliselt otsib eraldi seisvat 4 nr jarjest
+    matches = re.findall(pattern, text)
+    years = []
+    for year in matches:
+        years.append(int(year))
+
+    return years
 
 
 def find_phone_numbers(text: str) -> dict:
