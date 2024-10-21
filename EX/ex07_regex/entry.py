@@ -21,9 +21,8 @@ def parse(row: str) -> tuple:
     """
     name_pattern = r"([A-Z][a-z]+)([A-Z][a-z]+)"  # first and last name
     id_pattern = r"(\d{11})"  # id kood 11 nr
-    phone_pattern = (r"(\+\d{3}"  # area kood
-                     r"\s*"  # tuhik nende vahel
-                     r"\d{7,8})")  #nr
+    phone_pattern = (r"(\+\d{3}\s*"
+                     r"\d{7,8})")
     date_pattern = r"\d{2}-\d{2}-\d{4}"
 
     # otsib koiki neid str-ist
