@@ -85,6 +85,7 @@ def find_words_from_sentence(sentence: str) -> list:
 
     return words
 
+
 def find_words_from_sentences_only(text: str) -> list:
     """
     Given string text, return all words in that string that are a part of a sentence in that string.
