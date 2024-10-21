@@ -40,16 +40,17 @@ def parse(row: str) -> tuple:
     phone_number = phone_match.group(0) if phone_match else None
     date = date_match.group(0) if date_match else None
 
-    if name_match:  # vaatab koik step by step labi liigutab start parast seda kui midagi neist on olemas
-        adress_start = name_match.end()
-    elif id_code_match:
-        adress_start = id_code_match.end()
-    elif phone_match:
-        adress_start = phone_match.end()
-    elif date_match:
-        adress_start = date_match.end()
+    address_start = 0
+    if name_match:  # kui midagi on olemas vaatab kaugust ja kas see oli kaugemal et enne et ei hakataks lugema liiga vara
+        address_start = name_match.end()
+    if id_code_match:
+        address_start = max(address_start, id_code_match.end())
+    if phone_match:
+        address_start = max(address_start, phone_match.end())
+    if date_match:
+        address_start = max(address_start, date_match.end())
 
-    adress = row[adress_start:]  # teeb substring rowst alates leitud adressi algus punktist
+    adress = row[address_start:]  # teeb substring rowst alates leitud adressi algus punktist
     if not adress:
         adress = None
 
