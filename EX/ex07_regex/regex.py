@@ -16,7 +16,7 @@ def find_words(text: str) -> list:
      find words from
     :return: list of words found in given string
     """
-    pattern = r"[A-ZÕÄÖÜ][a-zõäöü]+"
+    pattern = r"[A-ZÕÄÖÜ][a-zõäöü]+"  # vahemalt uks suur ja uks vaike loeb ainult tahti uus sona algab jarka suure tahega
 
     words = re.findall(pattern, text)
 
@@ -36,7 +36,7 @@ def find_words_with_vowels(text: str) -> list:
     :param text: given string to find words from
     :return: list of words that start with a vowel found in given string
     """
-    pattern = r"[AEIOUÕÄÖÜ][a-zõäöü]+"
+    pattern = r"[AEIOUÕÄÖÜ][a-zõäöü]+"  # sama mis enne except peab algama taishaalikuga
 
     words = re.findall(pattern, text)
 
@@ -56,7 +56,13 @@ def find_sentences(text: str) -> list:
     :param text: given string to find sentences from
     :return: list of sentences found in given string
     """
-    pass
+    pattern = r"[A-ZÕÄÖÜ][^.!?]*[.!?]+"  # [^.!?]* matchib koik sumbolid ja numbrid valja arvatud .!?    * 0 voi rohkem [.!?]+ nendega loppeb
+
+    words = re.findall(pattern, text)
+
+    return words
+
+
 
 
 def find_words_from_sentence(sentence: str) -> list:
@@ -73,8 +79,12 @@ def find_words_from_sentence(sentence: str) -> list:
     :param sentence: given sentence to find words from
     :return: list of words found in given sentence
     """
-    pass
+    pattern = r"\w+"
 
+    # Find all matches using regex
+    words = re.findall(pattern, sentence)
+
+    return words
 
 def find_words_from_sentences_only(text: str) -> list:
     """
