@@ -38,7 +38,7 @@ def parse(row: str) -> tuple:
     phone_number = phone_match.group(0) if phone_match else None
     date = date_match.group(0) if date_match else None
 
-    if phone_number is None:  # if theres no nr with area code maybe theres one without area code
+    if phone_number is None:  # if theres no nr with area code maybe theres one without area code selle uhe imeliku testi jaoks :D
         phone_row = row.replace(id_code, "")
         phone_pattern_no_code = r"\d{7,8}"
         phone_match_no_code = re.search(phone_pattern_no_code, phone_row)
