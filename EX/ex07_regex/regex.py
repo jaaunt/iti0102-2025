@@ -94,7 +94,13 @@ def find_words_from_sentences_only(text: str) -> list:
     :param text: given string to find words from
     :return: list of words found in sentences from given string
     """
-    pass
+    sentences = find_sentences(text)  # vaatab kas on pariselt lause
+    allwords = []
+    for sentence in sentences:  # iga lause araldi
+        words = find_words_from_sentence(sentence)  # vaadatavast lausest otsib sonad
+        allwords.extend(words)  # lisab sonad sellest lausest listi
+
+    return allwords
 
 
 def find_years(text: str) -> list:
