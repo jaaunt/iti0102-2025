@@ -79,7 +79,7 @@ def find_words_from_sentence(sentence: str) -> list:
     :param sentence: given sentence to find words from
     :return: list of words found in given sentence
     """
-    pattern = r"\w+"  # matchib koik mis voib sonas olla aka koik except tuhik peab olema at least 1 pikk
+    pattern = r"\w+"  # matchib koik mis voib sonas olla aka koik except tuhik peab olema at least 1 pikk \ et ei vaataks lic w tahena
 
     words = re.findall(pattern, sentence)
 
