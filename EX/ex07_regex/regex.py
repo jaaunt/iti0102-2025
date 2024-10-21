@@ -63,8 +63,6 @@ def find_sentences(text: str) -> list:
     return words
 
 
-
-
 def find_words_from_sentence(sentence: str) -> list:
     """
     Given a sentence, return all words in that sentence.
