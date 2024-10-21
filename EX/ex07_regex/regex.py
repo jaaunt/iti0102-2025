@@ -145,7 +145,27 @@ def find_phone_numbers(text: str) -> dict:
     :param text: given string to find phone numbers from
     :return: dict containing the numbers
     """
-    pass
+    phone_dict = {}
+    pattern = (r"(?P<country_code>\+\d{3})?"  # country code osa + ja 3 nr \+\d{3}
+               r"\s*"  # tuhik
+               r"(?P<number>\d{7,8})")  # nr osa 7 voi 8 nr
+    # ?P<country_code> ?P<number> nimega grupid
+    # eri ridadel kuna see pole muidu loetav ausalt
+    matches = re.finditer(pattern, text)  # leiab matchivad objektid
+    for match in matches:
+        if match.group("country_code"):  # kas uldse on country kood
+            country_code = match.group("country_code")
+        else:
+            country_code = ""
+
+        phone_number = match.group("number")  # votab ainult matchitud nr osa
+
+        if country_code not in phone_dict:  # kui country koodi pole listis alustab tuhjale listiga
+            phone_dict[country_code] = []
+
+        phone_dict[country_code].append(phone_number)  # nr vastavasse area koodi listi
+
+    return phone_dict
 
 
 if __name__ == '__main__':
