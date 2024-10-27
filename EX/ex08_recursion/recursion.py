@@ -23,7 +23,9 @@ def recursive_reverse(string: str) -> str:
     :param string: input string
     :return: reversed input string
     """
-    pass
+    if len(string) <= 1:
+        return string
+    return string[-1] + recursive_reverse(string[:-1])
 
 
 def loop_sum(num: int) -> int:
