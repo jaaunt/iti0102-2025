@@ -35,7 +35,10 @@ def loop_sum(num: int) -> int:
     :param num: the last number to add to the sum.
     :return: sum of integers from 0 up to given number.
     """
-    pass
+    total = 0
+    for i in range(num + 1):
+        total += i
+    return total
 
 
 def recursive_sum(num: int) -> int:
