@@ -62,7 +62,10 @@ def loop_factorial(num: int) -> int:
     :param num: integer from which the factorial should be calculated.
     :return: factorial of given number
     """
-    pass
+    result = 1
+    for i in range(1, num + 1):
+        result *= i
+    return result
 
 
 def recursive_factorial(num: int) -> int:
