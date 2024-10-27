@@ -77,7 +77,9 @@ def recursive_factorial(num: int) -> int:
     :param num: integer from which the factorial should be calculated.
     :return: factorial of given number
     """
-    pass
+    if num <= 1:
+        return 1
+    return num * recursive_factorial(num - 1)
 
 
 def check_palindrome(string: str) -> bool:
