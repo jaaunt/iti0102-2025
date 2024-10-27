@@ -50,7 +50,9 @@ def recursive_sum(num: int) -> int:
     :param num: the last number to add to the sum.
     :return: sum of integers from 0 up to given number.
     """
-    pass
+    if num == 0:
+        return 0
+    return num + recursive_sum(num - 1)
 
 
 def loop_factorial(num: int) -> int:
