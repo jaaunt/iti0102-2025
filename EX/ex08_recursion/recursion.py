@@ -218,7 +218,6 @@ def x_sum_recursion(nums: list, x: int) -> int:
     """
     if x == 0 or not nums:
         return 0
-
     if x > 0:
         return nums[x - 1] + x_sum_recursion(nums[x:], x)
     else:
