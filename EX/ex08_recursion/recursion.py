@@ -137,7 +137,14 @@ def replace(input_string: str, char_to_replace: str, new_string: str) -> str:
     :param new_string: string of characters that will replace all occurences of 'char_to_replace'
     :return: input string with all 'char_to_replace' characters replaced with 'new_string'-s
     """
-    pass
+    if len(char_to_replace) != 1:
+        return "Length of char_to_replace must be one character!"
+    if input_string == "":
+        return ""
+    if input_string[0] == char_to_replace:
+        return new_string + replace(input_string[1:], char_to_replace, new_string)
+    else:
+        return input_string[0] + replace(input_string[1:], char_to_replace, new_string)
 
 
 def fibonacci(num: int, fib_list=None) -> list | None:
