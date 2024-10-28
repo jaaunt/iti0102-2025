@@ -228,6 +228,7 @@ def x_sum_recursion(nums: list, x: int) -> int:
         return nums[index + x + len(nums) - 1] + x_sum_recursion(nums, x, index + x)
     return 0
 
+
 def sum_squares(nested_list: list | int) -> int:
     """
     Write a function that sums squares of numbers in 'nested_list' using recursion.
@@ -240,9 +241,11 @@ def sum_squares(nested_list: list | int) -> int:
     :param nested_list: list of lists of lists of lists of lists ... and ints
     :return: sum of squares
     """
-    if not isinstance(nested_list, list):
-        return 0
-    return nested_list[0] ** 2 + sum_squares(nested_list[1:])
+    if isinstance(nested_list, int):
+        return nested_list ** 2
+    elif isinstance(nested_list, list):
+        return sum(sum_squares(element) for element in nested_list)
+    return 0
 
 if __name__ == '__main__':
     print("\nloop reverse:")
