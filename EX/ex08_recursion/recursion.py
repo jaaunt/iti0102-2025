@@ -114,8 +114,8 @@ def check_for_prime(num: int, i=None) -> bool:
     if num <= 1:
         return False
     if i is None:
-        i = num - 1
-    if i == 1:
+        i = int(num ** 0.5)
+    if i < 2:
         return True
     if num % i == 0:
         return False
