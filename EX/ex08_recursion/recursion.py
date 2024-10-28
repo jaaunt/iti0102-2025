@@ -241,6 +241,7 @@ def sum_squares(nested_list: list | int) -> int:
     elif isinstance(nested_list, list):
         if not nested_list:  # Handle the case of an empty list
             return 0
+
         total = 0
         for thing in nested_list:
             total += sum_squares(thing)
