@@ -216,7 +216,6 @@ def x_sum_recursion(nums: list, x: int) -> int:
     :param x: number indicating every which num to add to sum
     :return: sum of every x'th number in the list
     """
-    index = 1
     if x == 0 or index >= len(nums) or index < -len(nums):
         return 0
     if x > 0 and index + x - 1 < len(nums):
