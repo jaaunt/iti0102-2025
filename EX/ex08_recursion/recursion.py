@@ -239,10 +239,7 @@ def sum_squares(nested_list: list | int) -> int:
     if isinstance(nested_list, int):
         return nested_list ** 2
     elif isinstance(nested_list, list):
-        total = 0
-        for thing in nested_list:
-            total += sum_squares(thing)
-        return total
+        return sum(map(sum_squares, nested_list))
     else:
         return 0
 
