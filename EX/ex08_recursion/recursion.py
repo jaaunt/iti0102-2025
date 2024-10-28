@@ -111,7 +111,15 @@ def check_for_prime(num: int, i=None) -> bool:
     :param i: used to check if 'num' is a multiple of some integer.
     :return: boolean. True if 'num' is prime, False otherwise
     """
-    pass
+    if num <= 1:
+        return False
+    if i is None:
+        i = num - 1
+    if i == 1:
+        return True
+    if num % i == 0:
+        return False
+    return check_for_prime(num, i - 1)
 
 
 def replace(input_string: str, char_to_replace: str, new_string: str) -> str:
