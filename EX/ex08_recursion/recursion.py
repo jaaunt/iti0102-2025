@@ -167,7 +167,14 @@ def fibonacci(num: int, fib_list=None) -> list | None:
     :param fib_list: used to pass the currently computed list on numbers
     :return: list of the first 'num' Fibonacci numbers
     """
-    pass
+    if num < 0:
+        return None
+    if fib_list is None:
+        fib_list = [0, 1] if num > 1 else ([0] if num == 1 else [])
+    if len(fib_list) < num:
+        fib_list.append(fib_list[-1] + fib_list[-2])
+        return fibonacci(num, fib_list)
+    return fib_list[:num]
 
 
 def x_sum_loop(nums: list, x: int) -> int:
@@ -182,7 +189,17 @@ def x_sum_loop(nums: list, x: int) -> int:
     :param x: number indicating every which num to add to sum
     :return: sum of every x'th number in the list
     """
-    pass
+    if x == 0:
+        return 0
+    total = 0
+    n = len(nums)
+    if x > 0:
+        for i in range(x - 1, n, x):
+            total += nums[i]
+    else:
+        for i in range(n + x, n, x):
+            total += nums[i]
+    return total
 
 
 def x_sum_recursion(nums: list, x: int) -> int:
@@ -199,7 +216,15 @@ def x_sum_recursion(nums: list, x: int) -> int:
     :param x: number indicating every which num to add to sum
     :return: sum of every x'th number in the list
     """
-    pass
+    if x == 0:
+        return 0
+    if abs(index) >= len(nums):
+        return 0
+    current_index = index - 1 if x > 0 else index + 1
+    if x > 0:
+        return (nums[index] if index % x == 0 else 0) + x_sum_recursion(nums, x, index + 1)
+    else:
+        return (nums[index] if (len(nums) + index) % abs(x) == 0 else 0) + x_sum_recursion(nums, x, index - 1)
 
 
 def sum_squares(nested_list: list | int) -> int:
@@ -214,7 +239,12 @@ def sum_squares(nested_list: list | int) -> int:
     :param nested_list: list of lists of lists of lists of lists ... and ints
     :return: sum of squares
     """
-    pass
+    if isinstance(nested_list, int):
+        return nested_list * nested_list
+    total = 0
+    for item in nested_list:
+        total += sum_squares(item)
+    return total
 
 
 if __name__ == '__main__':
