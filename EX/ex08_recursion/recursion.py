@@ -199,7 +199,7 @@ def x_sum_loop(nums: list, x: int) -> int:
             return 0
 
     else:
-        if abs(x) <= len(nums):  # Check bounds
+        if abs(x) <= len(nums):
             return nums[x] + x_sum_recursion(nums[:x], x)
         else:
             return 0
