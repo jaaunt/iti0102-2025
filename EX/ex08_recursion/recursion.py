@@ -197,10 +197,9 @@ def x_sum_loop(nums: list, x: int) -> int:
         for i in range(x - 1, n, x):
             total += nums[i]
     else:
-        for i in range(n + x, n, x):
+        for i in range(n + x, -1, x):
             total += nums[i]
     return total
-
 
 def x_sum_recursion(nums: list, x: int) -> int:
     """
