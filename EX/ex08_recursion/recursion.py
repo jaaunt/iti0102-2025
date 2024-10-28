@@ -189,17 +189,20 @@ def x_sum_loop(nums: list, x: int) -> int:
     :param x: number indicating every which num to add to sum
     :return: sum of every x'th number in the list
     """
-    if x == 0:
+    if x == 0 or not nums:
         return 0
-    total = 0
-    n = len(nums)
+
     if x > 0:
-        for i in range(x - 1, n, x):
-            total += nums[i]
+        if x <= len(nums):
+            return nums[x - 1] + x_sum_recursion(nums[x:], x)
+        else:
+            return 0
+
     else:
-        for i in range(n + x, -1, x):
-            total += nums[i]
-    return total
+        if abs(x) <= len(nums):  # Check bounds
+            return nums[x] + x_sum_recursion(nums[:x], x)
+        else:
+            return 0
 
 
 def x_sum_recursion(nums: list, x: int) -> int:
