@@ -247,6 +247,7 @@ def sum_squares(nested_list: list | int) -> int:
         return sum(sum_squares(element) for element in nested_list)
     return 0
 
+
 if __name__ == '__main__':
     print("\nloop reverse:")
     print(f"expected: \"yeh\", got: \"{loop_reverse('hey')}\"")
