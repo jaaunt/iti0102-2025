@@ -218,14 +218,16 @@ def x_sum_recursion(nums: list, x: int) -> int:
     """
     if x == 0 or not nums:
         return 0
+
     if x > 0:
         if len(nums) < x:
             return 0
         return nums[x - 1] + x_sum_recursion(nums[x:], x)
     else:
-        if len(nums) < -x:
+        index_from_end = len(nums) + x
+        if index_from_end < 0:
             return 0
-        return nums[-x] + x_sum_recursion(nums[-x:], x)
+        return nums[index_from_end] + x_sum_recursion(nums[:index_from_end], x)
 
 
 def sum_squares(nested_list: list | int) -> int:
