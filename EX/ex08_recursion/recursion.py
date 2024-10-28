@@ -242,8 +242,8 @@ def sum_squares(nested_list: list | int) -> int:
         if not nested_list:
             return 0
         return sum_squares(nested_list[0]) + sum_squares(nested_list[1:])
-    else:
-        return 0
+
+    return 0
 
 
 if __name__ == '__main__':
