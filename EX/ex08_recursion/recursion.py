@@ -192,18 +192,17 @@ def x_sum_loop(nums: list, x: int) -> int:
     if x == 0 or not nums:
         return 0
 
+    total_sum = 0
+    n = len(nums)
+
     if x > 0:
-        if x <= len(nums):
-            return nums[x - 1] + x_sum_recursion(nums[x:], x)
-        else:
-            return 0
-
+        for i in range(x - 1, n, x):
+            total_sum += nums[i]
     else:
-        if abs(x) <= len(nums):
-            return nums[x] + x_sum_recursion(nums[:x], x)
-        else:
-            return 0
+        for i in range(n + x, n, x):
+            total_sum += nums[i]
 
+    return total_sum
 
 def x_sum_recursion(nums: list, x: int) -> int:
     """
