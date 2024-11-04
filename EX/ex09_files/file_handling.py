@@ -11,7 +11,7 @@ def mesh_two_list_to_csv_file(list1: list, list2: list, filename: str):
     """
     with open(filename, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
-        for item1, item2 in zip(list1, list2):
+        for item1, item2 in zip(list1, list2):  # zip kombineerib kaks listi ja paneb paaridena uutele ridadele
             writer.writerow([item1, item2])
 
 
@@ -21,7 +21,14 @@ def replace_vowels_in_file(input_file: str, output_file: str):
 
     This function finds all vowels (AEIOUaeiou) in the input text and replaces them with an asterisk (*).
     """
-    pass
+    with open(input_file, 'r') as file:
+        text = file.read()
+
+    vowels = "AEIOUaeiou"  # taishaalikud
+    modified_text = ''.join(['*' if char in vowels else char for char in text])  # kui taishaalik ss * otherwise lic taht
+
+    with open(output_file, 'w') as file:
+        file.write(modified_text)
 
 
 def reverse_rows_in_csv_file(input_file: str, output_file: str):
@@ -31,7 +38,13 @@ def reverse_rows_in_csv_file(input_file: str, output_file: str):
     This function reads the content of an input CSV file and writes it to an
     output CSV file with the rows in reverse order.
     """
-    pass
+    with open(input_file, 'r') as file:
+        reader = csv.reader(file)
+        rows = list(reader)  # loeb koik read listiks
+
+    with open(output_file, 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerows(reversed(rows))  # read tagurpidi
 
 
 def swap_header_and_row_in_csv_file(header: list, row: list):
@@ -42,8 +55,10 @@ def swap_header_and_row_in_csv_file(header: list, row: list):
     and writes them to a CSV file. If the data row is longer, it pads the header
     row with empty strings to match the length. The name of the output file should be "swapped_file.csv".
     """
-    pass
-
+    with open('swapped_file.csv', 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(row)  # kirjutab row esimesena
+        writer.writerow(header)  # kirjutab headeri parast seda
 
 if __name__ == '__main__':
     mesh_two_list_to_csv_file(['data1', 'data2'], ['data3', 'data4'], 'mesh_two_list_to_csv_file.csv')
