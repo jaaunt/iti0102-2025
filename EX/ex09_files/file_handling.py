@@ -55,10 +55,17 @@ def swap_header_and_row_in_csv_file(header: list, row: list):
     and writes them to a CSV file. If the data row is longer, it pads the header
     row with empty strings to match the length. The name of the output file should be "swapped_file.csv".
     """
+    max_length = max(len(header), len(row))  # mis on max pikkus
+    # luhemale juurde nii mitu tuhikut
+    padded_header = header + [''] * (max_length - len(header))
+    padded_row = row + [''] * (max_length - len(row))
+
     with open('swapped_file.csv', 'w', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(row)  # data row enne
-        writer.writerow(header)  # header parast
+        writer.writerow(padded_row)  # row first
+        writer.writerow(padded_header)  # header second
+
+
 if __name__ == '__main__':
     mesh_two_list_to_csv_file(['data1', 'data2'], ['data3', 'data4'], 'mesh_two_list_to_csv_file.csv')
 
