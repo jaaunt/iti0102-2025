@@ -57,9 +57,8 @@ def swap_header_and_row_in_csv_file(header: list, row: list):
     """
     with open('swapped_file.csv', 'w', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(row)  # kirjutab row esimesena
-        writer.writerow(header)  # kirjutab headeri parast seda
-
+        writer.writerow(row)  # data row enne
+        writer.writerow(header)  # header parast
 if __name__ == '__main__':
     mesh_two_list_to_csv_file(['data1', 'data2'], ['data3', 'data4'], 'mesh_two_list_to_csv_file.csv')
 
