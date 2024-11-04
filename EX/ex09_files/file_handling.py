@@ -55,15 +55,17 @@ def swap_header_and_row_in_csv_file(header: list, row: list):
     and writes them to a CSV file. If the data row is longer, it pads the header
     row with empty strings to match the length. The name of the output file should be "swapped_file.csv".
     """
-    max_length = max(len(header), len(row))  # mis on max pikkus
-    # luhemale juurde nii mitu tuhikut
-    padded_header = header + [''] * (max_length - len(header))
-    padded_row = row + [''] * (max_length - len(row))
+    header_length = len(header)
+    row_length = len(row)
 
-    with open('swapped_file.csv', 'w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(padded_row)  # row first
-        writer.writerow(padded_header)  # header second
+    # Kui header on lühem lisab tühjad elemendid
+    if header_length < row_length:
+        header.extend([''] * (row_length - header_length))
+
+    with open('swapped_file.csv', mode='w', newline='') as swapped_file:
+        writer = csv.writer(swapped_file)
+        writer.writerow(row)  # row esimesena
+        writer.writerow(header)  # header teisena
 
 
 if __name__ == '__main__':
