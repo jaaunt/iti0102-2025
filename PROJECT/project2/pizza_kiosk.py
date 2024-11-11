@@ -24,7 +24,25 @@ def fix_names(ingredients: list) -> list:
     :param ingredients:
     :return:
     """
-    pass
+    fixed_ingredients = []  # parandatud nimede list
+
+    for ingredient in ingredients:
+        # kui on juba korrektne pane kohe listi
+        if is_correct_name(ingredient):
+            fixed_ingredients.append(ingredient)
+        else:
+            ingredient_lower = ingredient.lower()  # paneb lowercase
+            ingredient_chars = []  # kogub aint tahed listi
+            for char in ingredient_lower:
+                if char.isalpha():
+                    ingredient_chars.append(char)
+            # paneb koik leitud tahed uhte sonasse
+            clean_ingredient = ''.join(ingredient_chars)
+            # kui on clean ingridient olemas aka pole tuhi ss paned fixed listi
+            if clean_ingredient:
+                fixed_ingredients.append(clean_ingredient)
+
+    return fixed_ingredients
 
 
 def pizza_at_index(pizzas: list, pizza: str) -> str:
@@ -122,3 +140,6 @@ if __name__ == '__main__':
     print(is_correct_name("sugar1"))  # False
     print(is_correct_name("sug@r"))  # False
     print(is_correct_name(""))  # False
+
+    print(fix_names(["Sugar", "Flour?", "Salt2", "", "Eggs&", "tomato"]))
+    # result: ["sugar", "flour", "salt", "eggs", "tomato"]
