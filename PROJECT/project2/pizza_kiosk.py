@@ -4,6 +4,7 @@
 def is_correct_name(ingredient: str) -> bool:
     """
     Funktsioon kontrollib, kas koostisosa nimetus on õigesti kirjutatud, ning tagastab vastavalt True või False.
+
     Nimetus ei tohi sisaldada erisümboleid, numbreid ega suurtähti.
     Samuti ei tohi nimetus olla tühi sõne.
     :param ingredient:
@@ -16,6 +17,7 @@ def is_correct_name(ingredient: str) -> bool:
 def fix_names(ingredients: list) -> list:
     """
     Funktsioon peab iga järjendis oleva sõne ära parandama.
+
     Tagastada tuleb järjend õigesti kirjutatud sõnedest.
     Sõned peavad olema kirjutatud läbivalt väikese tähega (suured tähed peab väikesteks tegema) ning ei tohi sisaldada erisümboleid ega numbreid.
     Samuti ei või sõne olla tühi.
@@ -28,6 +30,7 @@ def fix_names(ingredients: list) -> list:
 def pizza_at_index(pizzas: list, pizza: str) -> str:
     """
     Funktsioon peab leidma järjendist pitsa, mille indeksiks on antud pitsa esinemiste arv selles järjendis, ning tagastama selle.
+
     Kui antud indeksiga elementi ei eksisteeri, tagasta tühi sõne.
     Näide: pizza_at_index(["pepperoni", "kanapitsa", "juustupitsa"], "juustupitsa") -> "kanapitsa" (järjendis on 1 juustupitsa, seega indeksiks on 1)
     :param pizzas:
@@ -40,6 +43,7 @@ def pizza_at_index(pizzas: list, pizza: str) -> str:
 def format_orders(nr_order: list) -> dict:
     """
     Ette on antud järjend sõnedest. Üks sõne on kujul “tellimuse_number&tellimus”, näiteks “5&kanapitsa”.
+
     Funktsioon peab koostama sõnastiku kõikidest tellimustest, kus võtmeks on tellimuse number täisarvuna ning väärtuseks on tellimus väikeste tähtedega.
     Sõnastik peab jääma samasse järjekorda kui etteantud järjend.
     Näide: format_orders(["5&kanapitsa", "1&pepperoni", "20&MeXican"]) -> {5: "kanapitsa", 1: "pepperoni", 20: "mexican"}
@@ -52,6 +56,7 @@ def format_orders(nr_order: list) -> dict:
 def calculate_income(prices: str) -> float:
     """
     Aita kioskil päevatulu välja arvutada.
+
     Ette on antud sõne, mis sisaldab päeva jooksul müüdud tellimuste hindasid, mis on üksteisest eraldatud suvalise koguse erisümbolitega.
     Hinnad koosnevad alati neljast numbrist, kus punkt eraldab täis- ja murdarvu osa.
     Kui punkt on kusagil mujal erisümbolite keskel, siis see ei ole seotud hinnaga.
@@ -68,6 +73,7 @@ def calculate_income(prices: str) -> float:
 def switch_keys_and_values(pizza_orders: dict) -> dict:
     """
     Ülesandeks on vahetada ära sõnastiku võtmed ja väärtused.
+
     Ette antud sõnastikus on võtmeks pitsa nimi ning väärtuseks järjend kõikidest tellimuste numbritest, mis sisaldavad seda pitsat.
     Sõnastik tuleb teha selliseks, et võtmeks oleks tellimuse number ning väärtuseks järjend pitsadest, mis on selles tellimuses.
     Näide: {"kanapitsa": [1, 5, 3, 4], "juustupitsa": [1, 2], "pepperoni": [1, 5, 3]}
@@ -81,6 +87,7 @@ def switch_keys_and_values(pizza_orders: dict) -> dict:
 def count_ingredients(menu: dict, order: list) -> dict | None:
     """
     Funktsioon saab sisendiks sõnastiku, milles võtmeks on pitsa nimetus ja väärtuseks koostisosade järjend, ning järjendi tellimuste nimetustest.
+
     Funktsioon loeb kokku, kui palju iga koostisosa tellimuse jaoks vaja läheb ja tagastab tulemuse sõnastikuna.
     Kui tellimuses on mõni pitsa, mida sõnastikus pole, tagasta tühi sõnastik.
     Näide: count_ingredients({"margarita": ["juust", "tomat", "kaste"], "pepperoni": ["juust", "kaste", "pepperoni"]}, ["margarita", "margarita", "pepperoni"])
@@ -95,6 +102,7 @@ def count_ingredients(menu: dict, order: list) -> dict | None:
 def match_pizzas_with_prices(pizzas: list, prices: list) -> list:
     """
     Funktsioon eemaldab pitsade järjendist valesti kirjutatud või korduvad pitsade nimetused.
+
     Valesti kirjutatud nimetused sisaldavad suurtähti, numbreid või erisümboleid.
     Kui peale seda on pitsade ja hindade järjendid sama pikad, tagastada järjend ennikutest, kus esimene element on pitsa nimetus, teine hind.
     Kui järjendid on erineva pikkusega, tagasta tühi järjend.
@@ -113,5 +121,3 @@ if __name__ == '__main__':
     print(is_correct_name("sugar1"))  # False
     print(is_correct_name("sug@r"))  # False
     print(is_correct_name(""))  # False
-
-
