@@ -158,7 +158,21 @@ def count_ingredients(menu: dict, order: list) -> dict | None:
     :param order:
     :return:
     """
-    pass
+    ingredient_dict = {}  # tuhi dict kuhu saab koostisosad ja nende kogused koguda kujul 'juust': 3
+
+    for pizza in order:
+        if pizza not in menu:
+            return {}  # kui tellimuses on pizza mida pole menuus annab tuhja dict
+
+        ingredients = menu[pizza]  # votab koostisosade listi menuust vastavalt praegu vaadatavale pizzale
+
+        for ingredient in ingredients:  # vaatab koik koostisosad ukshaaval listis labi
+            if ingredient in ingredient_dict:
+                ingredient_dict[ingredient] += 1  # kui seda koostisosa oli juba varem dictis ss liidab ingridientile kuuluvale valuele 1
+            else:
+                ingredient_dict[ingredient] = 1  # kui polnud lisab ingridienti dicti ja annab value aka koguse 1
+
+    return ingredient_dict
 
 
 def match_pizzas_with_prices(pizzas: list, prices: list) -> list:
@@ -212,3 +226,11 @@ if __name__ == '__main__':
     #    4: ["kanapitsa"],
     #    2: ["juustupitsa"]
     # }
+
+    menu = {
+        "margarita": ["juust", "tomat", "kaste"],
+        "pepperoni": ["juust", "kaste", "pepperoni"]
+    }
+    order = ["margarita", "margarita", "pepperoni"]
+    print(count_ingredients(menu, order))
+    # output: {'juust': 3, 'tomat': 2, 'kaste': 3, 'pepperoni': 1}
