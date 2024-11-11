@@ -75,7 +75,18 @@ def format_orders(nr_order: list) -> dict:
     :param nr_order:
     :return:
     """
-    pass
+    orders_dict = {}
+
+    for order in nr_order:
+        order_nr, order_item = order.split('&')  # jagab ara nriks ja sisuks selle margi kohapeal
+
+        order_nr = int(order_nr)  # teeb strist numbriks
+        order_item = order_item.lower()
+
+        orders_dict[order_nr] = order_item  # paneb dictionarisse order_nr on key item value
+        # kui key pole veel dictionaris teeb uue entry selle key jaoks
+
+    return orders_dict
 
 
 def calculate_income(prices: str) -> float:
@@ -149,9 +160,12 @@ if __name__ == '__main__':
     print(is_correct_name(""))  # False
 
     print(fix_names(["Sugar", "Flour?", "Salt2", "", "Eggs&", "tomato"]))
-    # result: ["sugar", "flour", "salt", "eggs", "tomato"]
+    # Output: ["sugar", "flour", "salt", "eggs", "tomato"]
 
     print(pizza_at_index(["pepperoni", "kanapitsa", "juustupitsa"], "juustupitsa"))
     # Output: "kanapitsa" (kuna "juustupitsa" ilmuub korra, so index on 1 ehk teine listis kuna index algab 0-ist)
     print(pizza_at_index(["pepperoni", "kanapitsa", "juustupitsa", "juustupitsa"], "juustupitsa"))
     # Output: "juustupitsa"
+
+    print(format_orders(["5&kanapitsa", "1&pepperoni", "20&MeXican"]))
+    # Output: {5: "kanapitsa", 1: "pepperoni", 20: "mexican"}
