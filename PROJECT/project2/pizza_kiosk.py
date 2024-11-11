@@ -132,7 +132,18 @@ def switch_keys_and_values(pizza_orders: dict) -> dict:
     :param pizza_orders:
     :return:
     """
-    pass
+    switched_dict = {}  # uus dict switchitud versioon
+    # pizza, orders jagab pizza_orders kahte muutujasse pizza pitsade nimed, orders nr list
+    for pizza, orders in pizza_orders.items():  # .items() annab sel juhul tagasi paaridena nii: "kanapitsa": [1, 5, 3, 4] -> ("kanapitsa", [1, 5, 3, 4])
+        # votab pizzade kaupa
+        for order in orders:  # vaatab koik orderite nr labi
+            # listis olevad nr ukshaaval
+            if order not in switched_dict:  # kui seda nr veel dictionaris pole
+                switched_dict[order] = []  # teeb numbri jaoks tuhja listi kuhu pizza lisada
+            switched_dict[order].append(pizza)  # lisab pizza praegu vaadatava order nr juurde, kuna vaadatakse algul pizzade haaval ss kuni list lopuni on sama pizza
+        # nr listi loppedes laheb jargmise pizzaga edasi ja lisab need jne jne
+
+    return switched_dict
 
 
 def count_ingredients(menu: dict, order: list) -> dict | None:
@@ -187,3 +198,17 @@ if __name__ == '__main__':
 
     print(calculate_income("15.03*05.99|)=01.20&.$50.37"))
     # Output: 72.59
+
+    pizza_orders = {
+        "kanapitsa": [1, 5, 3, 4],
+        "juustupitsa": [1, 2],
+        "pepperoni": [1, 5, 3]
+    }
+    print(switch_keys_and_values(pizza_orders))
+    # output {
+    #    1: ["kanapitsa", "juustupitsa", "pepperoni"],
+    #    5: ["kanapitsa", "pepperoni"],
+    #    3: ["kanapitsa", "pepperoni"],
+    #    4: ["kanapitsa"],
+    #    2: ["juustupitsa"]
+    #}
