@@ -115,6 +115,7 @@ def match_pizzas_with_prices(pizzas: list, prices: list) -> list:
     """
     pass
 
+
 if __name__ == '__main__':
     print(is_correct_name("sugar"))  # True
     print(is_correct_name("Sugar"))  # False
