@@ -189,7 +189,15 @@ def match_pizzas_with_prices(pizzas: list, prices: list) -> list:
     :param prices:
     :return:
     """
-    pass
+    valid_pizzas = []
+    for pizza in pizzas:
+        if pizza.isalpha() and pizza.islower() and pizza not in valid_pizzas:  # on aint tahed, on aint vaiketahed, ja pole varem listis juba et ei tekiks korduvaid elemente
+            valid_pizzas.append(pizza)
+
+    if len(valid_pizzas) != len(prices):  # kui korrektne pitsade list pole hinna listiga sama pikk annab tuhja list
+        return []
+
+    return list(zip(valid_pizzas, prices))  # paneb pizza paari priceiga lic jarjest nt selle naite puhul (pepperoni, 3.49) tupllesse
 
 
 if __name__ == '__main__':
@@ -234,3 +242,6 @@ if __name__ == '__main__':
     order = ["margarita", "margarita", "pepperoni"]
     print(count_ingredients(menu, order))
     # output: {'juust': 3, 'tomat': 2, 'kaste': 3, 'pepperoni': 1}
+
+    print(match_pizzas_with_prices(pizzas=["pepperoni", "margarita", "ch7eese", "cheese", "margarita"], prices=[3.99, 4.99, 3.99]))
+    # output: [("pepperoni", 3.99), ("margarita", 4.99), ("cheese", 3.99)]
