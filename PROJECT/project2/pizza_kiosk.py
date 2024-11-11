@@ -1,5 +1,4 @@
 """Project 2."""
-from operator import index
 
 
 def is_correct_name(ingredient: str) -> bool:
@@ -56,11 +55,11 @@ def pizza_at_index(pizzas: list, pizza: str) -> str:
     :param pizza:
     :return:
     """
-    index = pizzas.count(pizza)  # count loeb mitu sulgudes oleva vaartusega liiget on
+    indeks = pizzas.count(pizza)  # count loeb mitu sulgudes oleva vaartusega liiget on
 
     # index ei saa olla negatiivne ning suurem kui listi pikkus
-    if 0 <= index < len(pizzas):
-        return pizzas[index]
+    if 0 <= indeks < len(pizzas):
+        return pizzas[indeks]
     # any other case annab tagasi tuhja sone
     else:
         return ""
