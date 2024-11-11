@@ -143,7 +143,7 @@ def switch_keys_and_values(pizza_orders: dict) -> dict:
             switched_dict[order].append(pizza)  # lisab pizza praegu vaadatava order nr juurde, kuna vaadatakse algul pizzade haaval ss kuni list lopuni on sama pizza
         # nr listi loppedes laheb jargmise pizzaga edasi ja lisab need jne jne
 
-    return switched_dict
+    return switched_dict  # selles dict on keyks nr pizza asemel
 
 
 def count_ingredients(menu: dict, order: list) -> dict | None:
