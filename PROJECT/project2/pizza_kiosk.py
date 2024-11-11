@@ -1,4 +1,5 @@
 """Project 2."""
+from operator import index
 
 
 def is_correct_name(ingredient: str) -> bool:
@@ -55,7 +56,14 @@ def pizza_at_index(pizzas: list, pizza: str) -> str:
     :param pizza:
     :return:
     """
-    pass
+    index = pizzas.count(pizza)  # count loeb mitu sulgudes oleva vaartusega liiget on
+
+    # index ei saa olla negatiivne ning suurem kui listi pikkus
+    if 0 <= index < len(pizzas):
+        return pizzas[index]
+    # any other case annab tagasi tuhja sone
+    else:
+        return ""
 
 
 def format_orders(nr_order: list) -> dict:
@@ -143,3 +151,8 @@ if __name__ == '__main__':
 
     print(fix_names(["Sugar", "Flour?", "Salt2", "", "Eggs&", "tomato"]))
     # result: ["sugar", "flour", "salt", "eggs", "tomato"]
+
+    print(pizza_at_index(["pepperoni", "kanapitsa", "juustupitsa"], "juustupitsa"))
+    # Output: "kanapitsa" (kuna "juustupitsa" ilmuub korra, so index on 1 ehk teine listis kuna index algab 0-ist)
+    print(pizza_at_index(["pepperoni", "kanapitsa", "juustupitsa", "juustupitsa"], "juustupitsa"))
+    # Output: "juustupitsa"
