@@ -1,4 +1,5 @@
 """Project 2."""
+import re
 
 
 def is_correct_name(ingredient: str) -> bool:
@@ -87,6 +88,7 @@ def format_orders(nr_order: list) -> dict:
         # kui key pole veel dictionaris teeb uue entry selle key jaoks
 
     return orders_dict
+# NB see tootab oigesti ainult juhtudel kui keyd ei kordu muidu updateib ara uue ja kustutab vana
 
 
 def calculate_income(prices: str) -> float:
@@ -103,7 +105,20 @@ def calculate_income(prices: str) -> float:
     :param prices:
     :return:
     """
-    pass
+    # peab otsima koik numbrid kujul xx.xx ja need kokku liitma
+    if not prices:
+        return 0.0  # kui tuhi hulk annab 0
+
+    nr_pattern = r"(\d{2}\.\d{2})"  # \d otsib digiteid sel juhul kaks jarjest \. otsib literally punkti
+    match = re.match(nr_pattern, prices)  # leiab matchiva rn
+
+    if match:
+        price = float(match.group())  # teeb leitud nr ujukoma arvuks
+        return price + calculate_income(prices[match.end():])  # [match.end():] loikab leitud matchi jupi price stringist valja
+    # liidab juba leitud hinnale jargmise leitud hinnale kuni lopp
+
+    else:
+        return calculate_income(prices[1:])  # prices[1:] loikab price string essa tahe ara, ning laheb tagasi kontrollima ilma selleta (loikab ara koik mis pole num pohimotteliselt)
 
 
 def switch_keys_and_values(pizza_orders: dict) -> dict:
@@ -169,3 +184,6 @@ if __name__ == '__main__':
 
     print(format_orders(["5&kanapitsa", "1&pepperoni", "20&MeXican"]))
     # Output: {5: "kanapitsa", 1: "pepperoni", 20: "mexican"}
+
+    print(calculate_income("15.03*05.99|)=01.20&.$50.37"))
+    # Output: 72.59
