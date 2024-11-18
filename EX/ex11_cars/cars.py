@@ -190,7 +190,19 @@ def read_cars_from_file(file_name: str) -> list[Car]:
     :param file_name: The name of the file to read the cars from.
     :return: The list of cars read from the file.
     """
-    pass
+    with open(file_name, 'r') as f:  # opens in read more (r)
+        cars_dict = json.load(f)  # reads the json data and covnert it to list of dict
+
+    cars = []
+    for car in cars_dict:  # for every car get the attributes
+        make = car['make']
+        model = car['model']
+        fuel_consumption = car['fuel_consumption']
+        features = car['features']
+
+        car_object = Car(make, model, fuel_consumption, features)  # make a car object w alll the attributes
+        cars.append(car_object)
+    return cars
 
 
 if __name__ == '__main__':
