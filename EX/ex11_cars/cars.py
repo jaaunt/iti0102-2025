@@ -88,7 +88,7 @@ def find_cars_by_feature(cars: list[Car], feature: str) -> list[Car]:
         if feature.lower() in lower_features:
             result.append(car)  # if the features match (NOT CASE SENSITIVE) add to the result list
 
-    return sort_cars_by_make(result)
+    return sort_cars_by_make(result)  # to avoid repetition, sort the list by make, if same sort by model
 
 
 def fuel_needed(car: Car, distance: int) -> float:
