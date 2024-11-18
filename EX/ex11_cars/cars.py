@@ -112,7 +112,7 @@ def calculate_average_fuel_consumption(cars: list[Car]) -> float:
     :return: The average fuel consumption of the given cars.
     """
     total_fuel = 0
-    if not in cars:
+    if not cars:
         return 0.0  # if the car list is empty
 
     for car in cars:
