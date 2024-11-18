@@ -1,5 +1,4 @@
 """Cars."""
-from xml.sax.handler import all_features
 
 
 class Car:
@@ -132,16 +131,16 @@ def most_popular_feature(cars: list[Car]) -> str:
     :param cars: The list of cars to search through.
     :return: The most popular feature among the given cars.
     """
-    all_features = []
+    all_features_list = []
 
     for car in cars:  # for every car
         for feature in car.features:  # check every feature for that car
-            all_features.append(feature)  # add it to the list
+            all_features_list.append(feature)  # add it to the list
 
-    if not all_features:  # if no features got added to the list
+    if not all_features_list:  # if no features got added to the list
         return None  # just incase
 
-    feature_counts = Counter(all_features)  # count how many times every feature occurs
+    feature_counts = Counter(all_features_list)  # count how many times every feature occurs
     most_frequent_feature = feature_counts.most_common(1)  # counts.most_common(1) returnib listi koige rohkem esinenud featureitest tuplena kujul (feature, count) kui on more than 1 pannakse listi
     if most_frequent_feature:
         return most_frequent_feature[0][0]  # returns the first one from the list (starts counting form 0) aka the most common
