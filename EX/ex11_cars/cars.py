@@ -1,5 +1,6 @@
 """Cars."""
 from collections import Counter
+import json
 
 
 class Car:
@@ -161,7 +162,21 @@ def write_cars_to_file(cars: list[Car], file_name: str):
     :param cars: The list of cars to write to the file.
     :param file_name: The name of the file to write the cars to.
     """
-    pass
+    # convert Car objects to dictionery
+    cars_dict = [{
+        'make': car.make,
+        'model': car.model,
+        'fuel_consumption': car.fuel_consumption,
+        'features': car.features
+    } for car in cars]  # for every car so every car will have a dictionary formated like that and they are all collected into a list
+
+    with open(file_name, 'w') as f:
+        json.dump(cars_dict, f, indent=2)
+    # opens in write mode (w), with so closed after use,
+    # json.dump writes the list of dictionaries in the file indent makes the stair part fore readibility likes
+    # [
+    #   {
+    #      make
 
 
 def read_cars_from_file(file_name: str) -> list[Car]:
