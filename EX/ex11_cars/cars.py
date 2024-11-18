@@ -1,4 +1,5 @@
 """Cars."""
+from collections import Counter
 
 
 class Car:
