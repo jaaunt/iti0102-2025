@@ -1,4 +1,5 @@
 """Cars."""
+from xml.sax.handler import all_features
 
 
 class Car:
@@ -45,7 +46,7 @@ def sort_cars_by_make(cars: list[Car]) -> list[Car]:
     :param cars: The list of cars to sort.
     :return: The sorted list of cars.
     """
-    return sorted(cars, key=lambda car: (car.make.lower(), car.model.lower())) # sorted tagastab uue sorteeritud loendi,
+    return sorted(cars, key=lambda car: (car.make.lower(), car.model.lower()))  # sorted tagastab uue sorteeritud loendi,
     # key lambda anonuumne aka ilma nimeta vaike funktsioon mis sel juhul teeb molemad loweriks et ei oleks case sensitive,
     # key naitab mille jargi toimub sorteerimine, antud juhul auto mark ja mudel
 
@@ -64,6 +65,7 @@ def find_cars_by_make_and_model(cars: list[Car], make: str, model: str) -> list[
         if car.make.lower() == make.lower() and car.model.lower() == model.lower():  # case insensitive
             result.append(car)
     return result
+
 
 def find_cars_by_feature(cars: list[Car], feature: str) -> list[Car]:
     """
@@ -109,7 +111,15 @@ def calculate_average_fuel_consumption(cars: list[Car]) -> float:
     :param cars: The list of cars to calculate the average fuel consumption for.
     :return: The average fuel consumption of the given cars.
     """
-    pass
+    total_fuel = 0
+    if not in cars:
+        return 0.0  # if the car list is empty
+
+    for car in cars:
+        total_fuel += car.fuel_consumption  # add every cars fuel consumtion together
+
+    average_fuel = total_fuel / len(cars)  # all the cars fuel cost divided by how many cars were on the list#
+    return average_fuel
 
 
 def most_popular_feature(cars: list[Car]) -> str:
@@ -122,7 +132,21 @@ def most_popular_feature(cars: list[Car]) -> str:
     :param cars: The list of cars to search through.
     :return: The most popular feature among the given cars.
     """
-    pass
+    all_features = []
+
+    for car in cars:  # for every car
+        for feature in car.features:  # check every feature for that car
+            all_features.append(feature)  # add it to the list
+
+    if not all_features:  # if no features got added to the list
+        return None  # just incase
+
+    feature_counts = Counter(all_features)  # count how many times every feature occurs
+    most_frequent_feature = feature_counts.most_common(1)  # counts.most_common(1) returnib listi koige rohkem esinenud featureitest tuplena kujul (feature, count) kui on more than 1 pannakse listi
+    if most_frequent_feature:
+        return most_frequent_feature[0][0]  # returns the first one from the list (starts counting form 0) aka the most common
+    else:
+        return None  # if there is no most common feature
 
 
 def write_cars_to_file(cars: list[Car], file_name: str):
