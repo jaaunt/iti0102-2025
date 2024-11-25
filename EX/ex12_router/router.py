@@ -83,7 +83,7 @@ class Router:
     def __validate_ipv4(self, ip_address: str) -> bool:
         """Validate IPv4."""
         parts = ip_address.split(".")
-        if len(parts) != 4:
+        if len(parts) != 4 or not ip_address.endswith(".1"):
             return False
         for part in parts:
             if not part.isdigit() or not (0 <= int(part) <= 255):
@@ -126,19 +126,13 @@ class Router:
         subnet = ".".join(self.ip_address.split(".")[:-1])
         used_ips = {
             int(device.get_ip_address().split(".")[-1])
-            for device in self.devices
-            if device.get_ip_address()
+            for device in self.devices if device.get_ip_address()
         }
-        valid_ip_range = range(2, 254)
-        available_ips = [ip_end for ip_end in valid_ip_range if ip_end not in used_ips]
+        for ip_end in range(2, 255):
+            if ip_end not in used_ips:
+                return f"{subnet}.{ip_end}"
 
-        if not available_ips:
-            raise IPv4AddressSpaceExhaustedException()
-
-        new_ip_end = random.choice(available_ips)
-
-        new_ip_address = f"{subnet}.{new_ip_end}"
-        return new_ip_address
+        raise IPv4AddressSpaceExhaustedException()
 
     def add_device(self, device: EndDevice) -> bool:
         """
