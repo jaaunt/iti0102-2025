@@ -196,7 +196,7 @@ class Router:
         If there is a device with the destination IP in this subnet then forward this packet to this device.
         Otherwise drop this packet. (don't do anything with it)
         """
-        device = self.get_device_by_ip(packet.source_ip)
+        device = self.get_device_by_ip(packet.destination_ip)
         if device:
             device.add_packet(packet)
 
