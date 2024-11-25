@@ -145,8 +145,8 @@ class Router:
         if device in self.devices:
             return False
 
-        device.ip = self.generate_ip_address()
-        device.set_ip_address(device.ip_address)
+        ip_address = self.generate_ip_address()
+        device.set_ip_address(ip_address)
         self.devices.append(device)
         return True
 
