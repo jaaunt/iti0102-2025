@@ -1,5 +1,4 @@
 """Route all the packets."""
-import random
 
 
 class Packet:
