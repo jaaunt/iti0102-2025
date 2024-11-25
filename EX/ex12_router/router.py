@@ -87,6 +87,8 @@ class Router:
         for part in parts:
             if not part.isdigit() or not (0 <= int(part) <= 255):
                 return False
+            if not part == "0" and part.startswith("0"):
+                return False
         return True
 
     def __init__(self, ip_address: str):
