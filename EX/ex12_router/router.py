@@ -12,7 +12,6 @@ class Packet:
         self.id = id
         self.sequence_number = sequence_number
 
-
     def __repr__(self) -> str:
         """
         Represent packet.
@@ -36,11 +35,9 @@ class EndDevice:
         self.ip_address = ""
         self.packet_history = []
 
-
     def get_ip_address(self) -> str:
         """Return the current IP address of the device."""
         return self.ip_address
-
 
     def set_ip_address(self, ip_address: str) -> None:
         """
@@ -50,21 +47,17 @@ class EndDevice:
         """
         self.ip_address = ip_address
 
-
     def add_packet(self, packet: Packet) -> None:
         """Add a packet to end device."""
         self.packet_history.append(packet)
-
 
     def clear_packet_history(self) -> None:
         """Clear all packets from history."""
         self.packet_history.clear()
 
-
     def get_all_packets(self) -> list[Packet]:
         """Get a list of all packets in the order they were added."""
         return self.packet_history
-
 
     def get_all_packets_by_id(self, given_id: int) -> list[Packet]:
         """Get a list of all packets that have the given ID."""
@@ -73,7 +66,6 @@ class EndDevice:
             if packet.id == given_id:
                 result.append(packet)
         return result
-
 
     def get_all_packets_by_source_ip(self, given_ip: str) -> list[Packet]:
         """Get a list of all packets that have given source IP."""
