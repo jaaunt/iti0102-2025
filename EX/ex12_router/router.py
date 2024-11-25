@@ -101,7 +101,7 @@ class Router:
 
         The first 3 sections ("192.168.0" in this example) form a subnet. You will need this later!
         """
-        if not self.__validate_ipv4(ip_address):
+        if not self.__validate_ipv4(ip_address) or not ip_address.endswith(".1"):
             ip_address = "192.168.0.1"
         self.ip_address = ip_address
         self.devices = []  # holds connceted devices
@@ -130,11 +130,7 @@ class Router:
             if device.get_ip_address()
         }
         valid_ip_range = range(2, 254)
-        available_ips = []
-
-        for ip_end in valid_ip_range:
-            if ip_end not in used_ips:
-                available_ips.append(ip_end)
+        available_ips = [ip_end for ip_end in valid_ip_range if ip_end not in used_ips]
 
         if not available_ips:
             raise IPv4AddressSpaceExhaustedException()
