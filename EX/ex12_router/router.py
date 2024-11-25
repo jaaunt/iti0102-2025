@@ -1,4 +1,5 @@
 """Route all the packets."""
+import random
 
 
 class Packet:
@@ -81,8 +82,13 @@ class Router:
 
     def __validate_ipv4(self, ip_address: str) -> bool:
         """Validate IPv4."""
-        # Write your code here
-        pass
+        parts = ip_address.split(".")
+        if len(parts) != 4:
+            return False
+        for part in parts:
+            if not part.isdigit() or not (0 <= int(part) <= 255):
+                return False
+        return True
 
     def __init__(self, ip_address: str):
         """
@@ -95,13 +101,14 @@ class Router:
 
         The first 3 sections ("192.168.0" in this example) form a subnet. You will need this later!
         """
-        # Write your code here
-        pass
+        if not self.__validate_ipv4(ip_address):
+            ip_address = "192.168.0.1"
+        self.ip_address = ip_address
+        self.devices = []  # holds connceted devices
 
     def get_ip_address(self) -> str:
         """Return the current IP address of the router."""
-        # Write your code here
-        pass
+        return self.ip_address
 
     def generate_ip_address(self) -> str:
         """
@@ -116,8 +123,26 @@ class Router:
 
         If there are no possible IP addresses to generate, raise an IPv4AddressSpaceExhaustedException().
         """
-        # Write your code here
-        pass
+        subnet = ".".join(self.ip_address.split(".")[:-1])
+        used_ips = {
+            int(device.get_ip_address().split(".")[-1])
+            for device in self.devices
+            if device.get_ip_address()
+        }
+        valid_ip_range = range(2, 254)
+        available_ips = []
+
+        for ip_end in valid_ip_range:
+            if ip_end not in used_ips:
+                available_ips.append(ip_end)
+
+        if not available_ips:
+            raise IPv4AddressSpaceExhaustedException()
+
+        new_ip_end = random.choice(available_ips)
+
+        new_ip_address = f"{subnet}.{new_ip_end}"
+        return new_ip_address
 
     def add_device(self, device: EndDevice) -> bool:
         """
@@ -128,8 +153,13 @@ class Router:
 
         The method should return True if device was added, else False.
         """
-        # Write your code here
-        pass
+        if device in self.devices:
+            return False
+
+        device.ip = self.generate_ip_address()
+        device.set_ip_address(device.ip_address)
+        self.devices.append(device)
+        return True
 
     def remove_device(self, device: EndDevice) -> bool:
         """
@@ -140,13 +170,16 @@ class Router:
 
         The method should return True if device was removed, else False.
         """
-        # Write your code here
-        pass
+        if device in self.devices:
+            device.set_ip_address("")
+            self.devices.remove(device)
+            return True
+        return False
 
     def get_devices(self) -> list[EndDevice]:
         """Get all devices that are connected to the router in the order they were connected."""
         # Write your code here
-        pass
+        return self.devices
 
     def get_device_by_ip(self, ip: str) -> EndDevice | None:
         """
@@ -155,8 +188,10 @@ class Router:
         If there is no device with given IP, then return None.
         Otherwise return the found device.
         """
-        # Write your code here
-        pass
+        for device in self.devices:
+            if device.get_ip_address() == ip:
+                return device
+        return None
 
     def receive_packet(self, packet: Packet) -> None:
         """
@@ -165,8 +200,9 @@ class Router:
         If there is a device with the destination IP in this subnet then forward this packet to this device.
         Otherwise drop this packet. (don't do anything with it)
         """
-        # Write your code here
-        pass
+        device = self.get_device_by_ip(packet.source_ip)
+        if device:
+            device.add_packet(packet)
 
 
 class IPv4AddressSpaceExhaustedException(Exception):
