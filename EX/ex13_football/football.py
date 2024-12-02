@@ -267,7 +267,7 @@ class Match:
         :return: The player with the most scored goals.
         """
         top_scorer = None
-        top_score = 0
+        top_score = -1  # kui 0 score koigil ss annab ikka kellegi
 
         for team in [self.team1, self.team2]:
             for player in team.players:
