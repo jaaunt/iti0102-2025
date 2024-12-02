@@ -258,7 +258,12 @@ class Match:
 
         :return: The player with the most scored goals.
         """
-        top_scorer = max(self.score_team1.get_players() + self.score_team2.get_players(), key=self.get_goals_scored())
+        top_scorer = None
+        top_score = 0
+        for player in self.team1.players + self.team2.players:
+            if player.get_goals_scored() > top_score:
+                top_score = player.get_goals_scored()
+                top_scorer = player
         return top_scorer
 
     def has_red_card(self, player: Player) -> bool:
