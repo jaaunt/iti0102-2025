@@ -161,7 +161,7 @@ class Team:
 
         :return: Team players as a sorted list.
         """
-        return sorted(self.players, key=lambda player: (player.goals_scored, player.red_cards))
+        return sorted(self.players, key=lambda player: (player.goals_scored, player.red_cards, player.player_number))
 
 
 class Match:
@@ -261,7 +261,7 @@ class Match:
         top_scorer = None
         top_score = 0
         for player in self.team1.players + self.team2.players:
-            if player.get_goals_scored() > top_score and player.get_goals_scored() != 0:
+            if player.get_goals_scored() > top_score:
                 top_score = player.get_goals_scored()
                 top_scorer = player
         return top_scorer
