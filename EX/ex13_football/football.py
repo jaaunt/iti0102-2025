@@ -261,10 +261,13 @@ class Match:
         """
         top_scorer = None
         top_score = 0
-        for player in self.team1.players + self.team2.players:
-            if player.get_goals_scored() > top_score:
-                top_score = player.get_goals_scored()
-                top_scorer = player
+
+        for team in [self.team1, self.team2]:
+            for player in team.players:
+                if player.get_goals_scored() > top_score:
+                    top_score = player.get_goals_scored()
+                    top_scorer = player
+
         return top_scorer
 
     def has_red_card(self, player: Player) -> bool:
