@@ -1,4 +1,5 @@
 """Football."""
+import random
 
 
 class Player:
@@ -162,7 +163,13 @@ class Team:
 
         :return: Team players as a sorted list.
         """
-        return sorted(self.players, key=lambda player: (-player.goals_scored, player.red_cards))
+        return sorted(
+            self.players, key=lambda player: (
+                -player.goals_scored,  # esimesena score jargi
+                player.red_cards,  # punaste kaartide jargi
+                random.random()  # if both are equal sort randomly
+            )
+        )
 
 
 class Match:
