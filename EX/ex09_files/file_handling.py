@@ -9,10 +9,16 @@ def mesh_two_list_to_csv_file(list1: list, list2: list, filename: str):
 
     Both lists have the same number of rows. Make two lists into one without disarranging any row or column.
     """
-    with open(filename, 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        for item1, item2 in zip(list1, list2):  # zip kombineerib kaks listi ja paneb paaridena uutele ridadele
-            writer.writerow([item1, item2])
+    # with avab ja hiljem sulgeb faili
+    # open () avab faili ja tagastab faili
+    # filename mida avab
+    # "w" writer modeis avab , teeb fail kui seda pole void overwritib kui on
+    # newline et ei teeks tuhje ridu vahele
+    # as csvfile annab avatud failile nime with sees
+    with open(filename, "w", newline="") as csvfile:
+        writer = csv.writer(csvfile) # kirjutab csv faili CSV formaadina
+        for item1, item2 in zip(list1, list2):  # zip teeb listidest paarid itemid on molemas listis olevad vaartused lic votab molemast uhe rea kohta
+            writer.writerow([item1, item2]) # kirjutab iga paari eraldi reale .writerows paneks iga tahe vahele komad see ei pane
 
 
 def replace_vowels_in_file(input_file: str, output_file: str):
