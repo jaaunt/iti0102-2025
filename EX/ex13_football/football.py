@@ -1,5 +1,4 @@
 """Football."""
-import random
 
 
 class Player:
