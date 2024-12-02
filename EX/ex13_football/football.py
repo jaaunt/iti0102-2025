@@ -201,16 +201,12 @@ class Match:
         if player not in self.red_carded_players:
             if team == self.team1 and player in self.team1.players:
                 self.score_team1 += 1
-                return True
-            if team == self.team1 and player in self.team2.players:
-                self.score_team2 += 1
+                player.goals_scored += 1
                 return True
             if team == self.team2 and player in self.team2.players:
                 self.score_team2 += 1
-                return False
-            if team == self.team2 and player in self.team1.players:
-                self.score_team1 += 1
-                return False
+                player.goals_scored += 1
+                return True
         return False
 
     def give_red_card(self, player: Player) -> bool:
