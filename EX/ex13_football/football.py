@@ -83,7 +83,7 @@ class Team:
 
         :return: The string representation of the team.
         """
-        return f'[{self.name}]'
+        return f'{self.name}'
 
     def is_full(self) -> bool:
         """
