@@ -271,7 +271,7 @@ class Match:
 
         for team in [self.team1, self.team2]:
             for player in team.players:
-                if player.get_goals_scored() >= top_score:
+                if player.get_goals_scored() > top_score:
                     top_score = player.get_goals_scored()
                     top_scorer = player
 
