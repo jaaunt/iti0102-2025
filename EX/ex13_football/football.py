@@ -60,7 +60,6 @@ class Player:
         return self.red_cards
 
 
-
 class Team:
     """Team class."""
 
@@ -105,7 +104,7 @@ class Team:
         :param player: The player to add.
         :return: True if the player was added, else False.
         """
-        if len(self.players) < 11:
+        if len(self.players) < 11 and player not in self.players:  # extra case duplicate not allowed
             self.players.append(player)
             return True
         return False
@@ -119,7 +118,9 @@ class Team:
         :param player: The player to remove.
         :return: True if the player was removed, else False.
         """
-        pass
+        if player in self.players:
+            self.players.remove(player)
+            return True
 
     def get_team_name(self) -> str:
         """
@@ -127,7 +128,7 @@ class Team:
 
         :return: The team name.
         """
-        pass
+        return self.name
 
     def get_player_by_number(self, player_number: int) -> Player | None:
         """
@@ -136,7 +137,10 @@ class Team:
         :param player_number: The player number to check for.
         :return: Player object if found, None if not found.
         """
-        pass
+        for player in self.players:
+            if player.player_number == player_number:
+                return player
+        return None
 
     def get_players(self) -> list[Player]:
         """
@@ -144,7 +148,7 @@ class Team:
 
         :return: Team players as a list.
         """
-        pass
+        return self.players
 
     def get_players_sorted(self) -> list[Player]:
         """
@@ -157,7 +161,7 @@ class Team:
 
         :return: Team players as a sorted list.
         """
-        pass
+        return sorted(self.players, key=lambda player: (player.goals_scored, player.red_cards))
 
 
 class Match:
@@ -172,7 +176,11 @@ class Match:
         :param team1: The first team.
         :param team2: The second team.
         """
-        pass
+        self.team1 = team1
+        self.team2 = team2
+        self.score_team1 = 0
+        self.score_team2 = 0
+        self.red_carded_players = []
 
     def player_scored(self, team: Team, player: Player) -> bool:
         """
@@ -184,7 +192,13 @@ class Match:
         :param player: The player who scored.
         :return: True if the score was set, else False.
         """
-        pass
+        if player not in self.red_carded_players:
+            if team == self.team1:
+                self.score_team1 += 1
+            if team == self.team2:
+                self.score_team2 += 1
+            return True
+        return False
 
     def give_red_card(self, player: Player) -> bool:
         """
@@ -196,7 +210,10 @@ class Match:
         :param player: The player to give the red card to.
         :return: True if the red card was given, else False.
         """
-        pass
+        if player not in self.red_carded_players:
+            self.red_carded_players.append(player)
+            return True
+        return False
 
     def get_score(self, team: Team) -> int:
         """
@@ -205,7 +222,11 @@ class Match:
         :param team: The team whose score to return.
         :return: The score of the given team.
         """
-        pass
+        if team == self.team1:
+            return self.score_team1
+        elif team == self.team2:
+            return self.score_team2
+        return 0
 
     def get_winner(self) -> Team | None:
         """
@@ -216,7 +237,11 @@ class Match:
 
         :return: The team with the higher score, or None if tied.
         """
-        pass
+        if self.score_team1 > self.score_team2:
+            return self.team1
+        elif self.score_team1 < self.score_team2:
+            return self.team2
+        return None
 
     def get_top_goalscorer(self) -> Player:
         """
@@ -234,7 +259,7 @@ class Match:
         :param player: The player to check.
         :return: True if the player has a red card, False otherwise.
         """
-        pass
+        return player in self.red_carded_players
 
     def get_red_carded_players(self) -> list[Player]:
         """
@@ -242,7 +267,7 @@ class Match:
 
         :return: List of players with red cards.
         """
-        pass
+        return self.red_carded_players
 
 
 if __name__ == "__main__":
