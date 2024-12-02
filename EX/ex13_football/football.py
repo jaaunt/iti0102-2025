@@ -162,7 +162,7 @@ class Team:
 
         :return: Team players as a sorted list.
         """
-        return sorted(self.players, key=lambda player: (-player.get_goals_scored, player.get_red_cards))
+        return sorted(self.players, key=lambda player: (-player.goals_scored, player.red_cards))
 
 
 class Match:
