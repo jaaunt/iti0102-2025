@@ -165,9 +165,8 @@ class Team:
         """
         return sorted(
             self.players, key=lambda player: (
-                -player.goals_scored,  # esimesena score jargi
-                player.red_cards,  # punaste kaartide jargi
-                random.random()  # if both are equal sort randomly
+                -player.goals_scored,  # suurem enne
+                player.red_cards,  # vaiksem enne
             )
         )
 
