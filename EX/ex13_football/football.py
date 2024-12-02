@@ -121,6 +121,7 @@ class Team:
         if player in self.players:
             self.players.remove(player)
             return True
+        return False
 
     def get_team_name(self) -> str:
         """
