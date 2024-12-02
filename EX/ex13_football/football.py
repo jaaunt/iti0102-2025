@@ -14,6 +14,8 @@ class Player:
         """
         self.name = name
         self.player_number = player_number
+        self.goals_scored = 0
+        self.red_cards = 0
 
     def __repr__(self) -> str:
         """
@@ -161,6 +163,13 @@ class Team:
 
         :return: Team players as a sorted list.
         """
+        return sorted(
+            self.players, key=lambda player: (
+                -player.goals_scored,  # esimesena score jargi
+                player.red_cards,  # punaste kaartide jargi
+                random.random()  # if both are equal sort randomly
+            )
+        )
 
 
 class Match:
@@ -179,7 +188,7 @@ class Match:
         self.team2 = team2
         self.score_team1 = 0
         self.score_team2 = 0
-        self.red_carded_players = []
+        self.red_carded_players = set()
 
     def player_scored(self, team: Team, player: Player) -> bool:
         """
