@@ -188,7 +188,7 @@ class Match:
         self.team2 = team2
         self.score_team1 = 0
         self.score_team2 = 0
-        self.red_carded_players = set()
+        self.red_carded_players = []
 
     def player_scored(self, team: Team, player: Player) -> bool:
         """
