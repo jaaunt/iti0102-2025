@@ -267,7 +267,7 @@ class Match:
         :return: The player with the most scored goals.
         """
         top_scorer = None
-        top_score = 0
+        top_score = -1
 
         for team in [self.team1, self.team2]:
             for player in team.players:
