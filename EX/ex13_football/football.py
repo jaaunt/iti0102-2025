@@ -13,7 +13,7 @@ class Player:
         """
         self.name = name
         self.player_number = player_number
-        self.goals_scored = 0
+        self.goals_scored = 0  # alusta 0
         self.red_cards = 0
 
     def __repr__(self) -> str:
@@ -104,8 +104,8 @@ class Team:
         :param player: The player to add.
         :return: True if the player was added, else False.
         """
-        if len(self.players) < 11 and player not in self.players:  # extra case duplicate not allowed
-            self.players.append(player)
+        if len(self.players) < 11 and player not in self.players:  # extra case duplicate not allowed ja only check if not full
+            self.players.append(player)  # lisab listi
             return True
         return False
 
@@ -118,7 +118,7 @@ class Team:
         :param player: The player to remove.
         :return: True if the player was removed, else False.
         """
-        if player in self.players:
+        if player in self.players:  # aint ss kui on listis
             self.players.remove(player)
             return True
         return False
@@ -138,8 +138,8 @@ class Team:
         :param player_number: The player number to check for.
         :return: Player object if found, None if not found.
         """
-        for player in self.players:
-            if player.player_number == player_number:
+        for player in self.players:  # vaatab labi koik teami players
+            if player.player_number == player_number:  # kui nr matchib return see player
                 return player
         return None
 
@@ -162,8 +162,8 @@ class Team:
 
         :return: Team players as a sorted list.
         """
-        return sorted(
-            self.players, key=lambda player: (
+        return sorted(  # sortreerib playerid mingi reegli jargi
+            self.players, key=lambda player: (  # key lambda anonuumne aka ilma nimeta vaike funktsioon
                 -player.goals_scored,  # suurem enne
                 player.red_cards,  # vaiksem enne
             )
@@ -184,9 +184,9 @@ class Match:
         """
         self.team1 = team1
         self.team2 = team2
-        self.score_team1 = 0
+        self.score_team1 = 0  # keep track of points algab 0
         self.score_team2 = 0
-        self.red_carded_players = []
+        self.red_carded_players = []  # tuhi list kuhu red card vennad lahevad
 
     def player_scored(self, team: Team, player: Player) -> bool:
         """
@@ -198,8 +198,8 @@ class Match:
         :param player: The player who scored.
         :return: True if the score was set, else False.
         """
-        if player not in self.red_carded_players:
-            if team == self.team1 and player in self.team1.players:
+        if player not in self.red_carded_players:  # ei tohi olla punase kaardiga vend
+            if team == self.team1 and player in self.team1.players:  # kui on team 1 score ja mangija on team 1 lisab see teamile score ja player goals scored up
                 self.score_team1 += 1
                 player.goals_scored += 1
                 return True
@@ -219,8 +219,8 @@ class Match:
         :param player: The player to give the red card to.
         :return: True if the red card was given, else False.
         """
-        if player not in self.red_carded_players:
-            self.red_carded_players.append(player)
+        if player not in self.red_carded_players:  # no duplicates
+            self.red_carded_players.append(player)  # lisab red card lisi
             return True
         return False
 
@@ -260,12 +260,12 @@ class Match:
 
         :return: The player with the most scored goals.
         """
-        top_scorer = None
-        top_score = -1  # kui 0 score koigil ss annab ikka kellegi
+        top_scorer = None  # kui ei leita kedagi
+        top_score = -1  # kui 0 score koigil ss annab ikka kellegi kuna koik alustavad 0iga
 
-        for team in [self.team1, self.team2]:
-            for player in team.players:
-                if player.get_goals_scored() > top_score:
+        for team in [self.team1, self.team2]:  # check both teams
+            for player in team.players:  # koik mangijad teamis
+                if player.get_goals_scored() > top_score:  # kui korgem score update variables
                     top_score = player.get_goals_scored()
                     top_scorer = player
 

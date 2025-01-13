@@ -49,3 +49,20 @@ if __name__ == '__main__':
     print(encode("example", 1))  # -> fybnqmf
     print(encode("don't change", 0))  # -> don't change
     print(encode('the quick brown fox jumps over the lazy dog.', 7))  # -> aol xbpjr iyvdu mve qbtwz vcly aol shgf kvn.
+
+
+"""
+alph = 'abcdefghijklmnopqrstuvwxyz'
+encoded_message = []
+
+for char in message:
+    if char.isalpha():
+        og_index = alph.index(char)
+        new_index = (og_index + shift) % 26
+        encoded_message.append(alph[new_index])
+    else:
+
+        encoded_message.append(char)
+
+return ''.join(encoded_message)
+"""  # normal person lahend apparently

@@ -12,7 +12,7 @@ def is_correct_name(ingredient: str) -> bool:
     :return:
     """
     return ingredient.isalpha() and ingredient.islower() and len(ingredient) > 0
-# on aint tahed aint vaiketahed ja pole tuhi peavad koik true olema
+# on aint tahed aint vaiketahed ja pole tuhi peavad koik true olemav
 
 
 def fix_names(ingredients: list) -> list:
@@ -119,6 +119,7 @@ def calculate_income(prices: str) -> float:
 
     else:
         return calculate_income(prices[1:])  # prices[1:] loikab price string essa tahe ara, ning laheb tagasi kontrollima ilma selleta (loikab ara koik mis pole num pohimotteliselt)
+    # lahendab rekursiivselt kuni lopuni
 
 
 def switch_keys_and_values(pizza_orders: dict) -> dict:

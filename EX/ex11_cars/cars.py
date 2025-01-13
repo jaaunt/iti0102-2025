@@ -19,6 +19,7 @@ class Car:
         self.model = model
         self.fuel_consumption = fuel_consumption
         self.features = features
+        # store the values as attributes of the car objekt
 
     def __eq__(self, other):
         """Check if two cars are equal. Don't change this method."""

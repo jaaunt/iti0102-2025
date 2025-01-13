@@ -85,11 +85,12 @@ class Router:
         if len(parts) != 4 or not ip_address.endswith(".1"):
             return False
         for part in parts:
-            if not part.isdigit() or not (0 <= int(part) <= 255):
+            if not part.isdigit() or not (0 <= int(part) <= 255):  # no letter no neg number or bigger num
                 return False
-            if not part == "0" and part.startswith("0"):
+            if not part == "0" and part.startswith("0"):   # no .001. bs
                 return False
         return True
+    # making sure it doesnt initialize router w a non valid ip
 
     def __init__(self, ip_address: str):
         """
@@ -102,8 +103,8 @@ class Router:
 
         The first 3 sections ("192.168.0" in this example) form a subnet. You will need this later!
         """
-        if not self.__validate_ipv4(ip_address) or not ip_address.endswith(".1"):
-            ip_address = "192.168.0.1"
+        if not self.__validate_ipv4(ip_address) or not ip_address.endswith(".1"):  # idk kas seda lopu osa on veel vaja kuna see kontrollib juba aga if it aint broke dont fix it
+            ip_address = "192.168.0.1"  # kui pole valid annab default address
         self.ip_address = ip_address
         self.devices = []  # holds connceted devices
 
@@ -124,16 +125,16 @@ class Router:
 
         If there are no possible IP addresses to generate, raise an IPv4AddressSpaceExhaustedException().
         """
-        subnet = ".".join(self.ip_address.split(".")[:-1])
-        used_ips = {
+        subnet = ".".join(self.ip_address.split(".")[:-1])  # first 3 parts remove last kuna essa osa peab match
+        used_ips = {  # set kasutatud ip-dest vaatab lopu juppi, so aint 1 2 jne selles
             int(device.get_ip_address().split(".")[-1])
-            for device in self.devices if device.get_ip_address()
+            for device in self.devices if device.get_ip_address()  # vaatab llabi koik device listis if osa selleks et aint valid ip address
         }
-        for ip_end in range(2, 255):
-            if ip_end not in used_ips:
-                return f"{subnet}.{ip_end}"
+        for ip_end in range(2, 255):  # 0 cant ja 1 on router oma
+            if ip_end not in used_ips:  # kui pole kasutusel
+                return f"{subnet}.{ip_end}"  # paneb router essa jupi otsa leitud lopu
 
-        raise IPv4AddressSpaceExhaustedException()
+        raise IPv4AddressSpaceExhaustedException()  # kui rohkem ruumi pole enam aka after 255
 
     def add_device(self, device: EndDevice) -> bool:
         """
@@ -144,12 +145,12 @@ class Router:
 
         The method should return True if device was added, else False.
         """
-        if device in self.devices:
+        if device in self.devices:  # kui juba on olemas
             return False
 
-        ip_address = self.generate_ip_address()
-        device.set_ip_address(ip_address)
-        self.devices.append(device)
+        ip_address = self.generate_ip_address()  # teeb talle ip address
+        device.set_ip_address(ip_address)  # set ip address function lic assignib ip addressi deviceile
+        self.devices.append(device)  # paneb listi kirja
         return True
 
     def remove_device(self, device: EndDevice) -> bool:
@@ -161,9 +162,9 @@ class Router:
 
         The method should return True if device was removed, else False.
         """
-        if device in self.devices:
-            device.set_ip_address("")
-            self.devices.remove(device)
+        if device in self.devices:  # tootab aint ss kui uldse on listis
+            device.set_ip_address("")  # votab selle ip addressi ara
+            self.devices.remove(device)  # votab listist valja
             return True
         return False
 
@@ -180,7 +181,7 @@ class Router:
         Otherwise return the found device.
         """
         for device in self.devices:
-            if device.get_ip_address() == ip:
+            if device.get_ip_address() == ip:  # annab device kui ip match
                 return device
         return None
 
@@ -191,9 +192,9 @@ class Router:
         If there is a device with the destination IP in this subnet then forward this packet to this device.
         Otherwise drop this packet. (don't do anything with it)
         """
-        device = self.get_device_by_ip(packet.destination_ip)
+        device = self.get_device_by_ip(packet.destination_ip)  # otsib device mis on ruuteriga uhendatud packeti destination ipga
         if device:
-            device.add_packet(packet)
+            device.add_packet(packet)  # kui see leitakse ss lisab packeti historisse
 
 
 class IPv4AddressSpaceExhaustedException(Exception):
