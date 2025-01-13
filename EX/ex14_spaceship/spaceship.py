@@ -34,7 +34,7 @@ class Spaceship:
         self.impostors = []
         self.dead_players = []
 
-    def add_crewmate(self, colour: str, role: "Crewmate", tasks: int = 10):
+    def add_crewmate(self, colour: str, role, tasks: int = 10):
         """Lisa crewmate."""
         self.crewmates.append(Crewmate(colour, role, tasks))
 
