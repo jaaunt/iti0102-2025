@@ -96,8 +96,8 @@ class Spaceship:
 
     def protect_crewmate(self, protector, protected_colour):
         """Protect a crewmate ainult uks saab olla korraga."""
-        if isinstance(protector, Crewmate) and isinstance(protected_colour, Crewmate):
-            if protector.role == "Guardian Angel" and protector.colour.lower() in self.dead_players:  # protector peab olema surnud ja guardian angel et kaitsta
+        if isinstance(protector, Crewmate) and isinstance(protected_colour, Crewmate):  # molemad crew
+            if protector.role == "Guardian Angel" and protector in self.dead_players and protected_colour in self.crewmates:  # protector peab olema surnud ja guardian angel et kaitsta
                 for crewmate in self.crewmates:  # otsib kas keegi juba on protected
                     if crewmate.protected is True:
                         return
