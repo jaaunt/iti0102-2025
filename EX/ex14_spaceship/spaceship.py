@@ -4,24 +4,35 @@
 class Crewmate:
     """Crewmate class."""
 
-    def __init__(self, colour: str, role: str, tasks: int = 10):
+    def __init__(self, colour: str, role: str, tasks: int = 10, protected: bool = False):
         """Initialize crewmate object."""
-        self.colour = colour
-        self.role = role
+        self.colour = colour.title()
+        self.role = self._add_role(role)
         self.tasks = tasks
+        self.protected = protected
+
+    def _add_role(self, role):
+        """Add a role to the crewmate object."""
+        role_options = ["Crewmate", "Sheriff", "Guardian Angel", "Altruist"]
+        if role.title() in role_options:
+            return role
+        return "Crewmate"  # kui mingi muu sodi annab crewmate rolliks
 
     def complete_task(self):
         """Complete crewmate task."""
         if self.tasks > 0:
             self.tasks -= 1
 
+    def __repr__(self):
+        """return in this format"""
+        return f"{self.colour}, role: {self.role}, tasks left: {self.tasks}."
 
 class Impostor:
     """Impostor class."""
 
     def __init__(self, colour, kills: int = 0):
         """Initialize impostor object."""
-        self.colour = colour
+        self.colour = colour.title()
         self.kills = kills
 
 
@@ -34,7 +45,7 @@ class Spaceship:
         self.impostors = []
         self.dead_players = []
 
-    def add_crewmate(self, crewmate):
+    def add_crewmate(self, crewmate):  # lisab tehtud crewmate laeva
         """Lisa crewmate unique to colour."""
         if isinstance(crewmate, Crewmate):
             used_colours = [col.colour.lower() for col in self.crewmates + self.impostors]  # col.colour.lower col for loop jaoks colour on crewmate objekt omadus teeb selle loweriks
@@ -42,7 +53,7 @@ class Spaceship:
             if crewmate.colour.lower() not in used_colours:
                 self.crewmates.append(crewmate)
 
-    def add_impostor(self, impostor):
+    def add_impostor(self, impostor):  # lisab tehtud impostori laeva
         """Lisa impostor colour sensitive."""
         if isinstance(impostor, Impostor):
             used_colours = [col.colour.lower() for col in self.crewmates + self.impostors]
@@ -59,21 +70,39 @@ class Spaceship:
                     impostor.kills += 1  # lisa selle impostori killile uks
                     return  # lopeta check
 
-    def revive_crewmate(self):
+    def revive_crewmate(self, saviour, the_dead_one):
         """Revive a crewmate."""
-        pass
+        if isinstance(saviour, Crewmate):  # kui see kes revab on crewmate
+            if saviour.role == "Alturist":
+                if the_dead_one in self.dead_players:
+                    self.dead_players.remove(the_dead_one)
+                    self.crewmates.append(the_dead_one)
+                    self.crewmates.remove(saviour)  # kui savib saab ise surma
+                    self.dead_players.append(saviour)
 
-    def get_role_of_player(self):
-        """Get player role."""
-        pass
+    def get_role_of_player(self, player_colour):
+        """Get player role for both roles."""
+        for crewmate in self.crewmates:  # algul otsime crewmate seast
+            if crewmate.colour.lower() == player_colour.lower():  # case insensitive
+                return crewmate.role  # returni selle varviga seotud objekti roll
 
-    def protect_crewmate(self):
-        """Protect a crewmate."""
-        pass
+        for impostor in self.impostors:  # impostor seast
+            if impostor.colour.lower() == player_colour.lower():
+                return "Impostor"
+
+    def protect_crewmate(self, protector, protected_colour):
+        """Protect a crewmate ainult uks saab olla korraga."""
+        if isinstance(protector, Crewmate) and isinstance(protected_colour, Crewmate):
+            if protector.role == "Guardian Angel" and protector.colour.lower() in self.dead_players:  # protector peab olema surnud ja guardian angel et kaitsta
+                for crewmate in self.crewmates:  # otsib kas keegi juba on protected
+                    if crewmate.protected == True:
+                        return
+                protected_colour.protected = True  # kui ei siis protectib teda
+
 
     def sort_crewmates_by_tasks(self):
         """Sort crewmates by tasks."""
-        pass
+
 
     def sort_impostors_by_kills(self):
         """Sort impostors by kills."""
@@ -81,7 +110,11 @@ class Spaceship:
 
     def get_regular_crewmates(self):
         """Get regular crewmates."""
-        pass
+        regular_crewmates = []  # as a list kuna ma muidu sai koguaeg 1 tagasi aint
+        for crewmate in self.crewmates:
+            if crewmate.role == "Crewmate":
+                regular_crewmates.append(crewmate)
+        return regular_crewmates
 
     def get_dead_players(self):
         """Get dead players."""
@@ -94,6 +127,14 @@ class Spaceship:
     def get_impostor_list(self):
         """Get all impostors."""
         return self.impostors
+
+    def get_crewmate_with_most_tasks_done(self):
+        """Get crewmate with most tasks done."""
+        pass
+
+    def get_impostor_with_most_kills(self):
+        """Get impostor with most kills."""
+        pass
 
 
 if __name__ == "__main__":
