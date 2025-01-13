@@ -36,6 +36,10 @@ class Impostor:
         self.colour = colour.title()
         self.kills = kills
 
+    def __repr__(self):
+        """Return in this format."""
+        return f"Impostor {self.colour}, kills: {self.kills}."
+
 
 class Spaceship:
     """Spaceship class."""
