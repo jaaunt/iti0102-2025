@@ -7,7 +7,7 @@ class Crewmate:
     def __init__(self, colour: str, role: str, tasks: int = 10, protected: bool = False):
         """Initialize crewmate object."""
         self.colour = colour.title()
-        self.role = self._add_role(role)
+        self.role = self._add_role(role).title()
         self.tasks = tasks
         self.protected = protected
 
