@@ -34,14 +34,20 @@ class Spaceship:
         self.impostors = []
         self.dead_players = []
 
-    def add_crewmate(self, colour: str, role, tasks: int = 10):
-        """Lisa crewmate."""
-        self.crewmates.append(Crewmate(colour, role, tasks))
+    def add_crewmate(self, crewmate):
+        """Lisa crewmate unique to colour."""
+        if isinstance(crewmate, Crewmate):
+            used_colours = [col.colour.lower() for col in self.crewmates + self.impostors]  # col.colour.lower col for loop jaoks colour on crewmate objekt omadus teeb selle loweriks
+            # vaatab labi nii impostorid kui crewmateid
+            if crewmate.colour.lower() not in used_colours:
+                self.crewmates.append(crewmate)
 
-    def add_impostor(self, colour):
-        """Lisa impostor."""
-        if len(self.impostors) <= 3 and colour not in self.crewmates:
-            self.impostors.append(Impostor(colour))
+    def add_impostor(self, impostor):
+        """Lisa impostor colour sensitive."""
+        if isinstance(impostor, Impostor):
+            used_colours = [col.colour.lower() for col in self.crewmates + self.impostors]
+            if impostor.colour.lower() not in used_colours and len(self.impostors) < 3:
+                self.impostors.append(impostor)
 
     def kill_crewmate(self):
         """Kill a crewmate."""
