@@ -24,8 +24,9 @@ class Crewmate:
             self.tasks -= 1
 
     def __repr__(self):
-        """return in this format"""
+        """Return in this format."""
         return f"{self.colour}, role: {self.role}, tasks left: {self.tasks}."
+
 
 class Impostor:
     """Impostor class."""
@@ -95,14 +96,13 @@ class Spaceship:
         if isinstance(protector, Crewmate) and isinstance(protected_colour, Crewmate):
             if protector.role == "Guardian Angel" and protector.colour.lower() in self.dead_players:  # protector peab olema surnud ja guardian angel et kaitsta
                 for crewmate in self.crewmates:  # otsib kas keegi juba on protected
-                    if crewmate.protected == True:
+                    if crewmate.protected is True:
                         return
                 protected_colour.protected = True  # kui ei siis protectib teda
 
-
     def sort_crewmates_by_tasks(self):
         """Sort crewmates by tasks."""
-
+        pass
 
     def sort_impostors_by_kills(self):
         """Sort impostors by kills."""
