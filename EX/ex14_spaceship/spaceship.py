@@ -77,13 +77,12 @@ class Spaceship:
 
     def revive_crewmate(self, saviour, the_dead_one):
         """Revive a crewmate."""
-        if isinstance(saviour, Crewmate):  # kui see kes revab on crewmate
-            if saviour.role == "Alturist":
-                if the_dead_one in self.dead_players:
-                    self.dead_players.remove(the_dead_one)
-                    self.crewmates.append(the_dead_one)
-                    self.crewmates.remove(saviour)  # kui savib saab ise surma
-                    self.dead_players.append(saviour)
+        if isinstance(saviour, Crewmate) and isinstance(the_dead_one, Crewmate):  # molemad on crew
+            if saviour.role == "Altruist" and saviour in self.crewmates and the_dead_one in self.dead_players:  # paastja on alturist on elus ja teine on surnud
+                self.dead_players.remove(the_dead_one)
+                self.crewmates.append(the_dead_one)
+                self.crewmates.remove(saviour)  # kui savib saab ise surma
+                self.dead_players.append(saviour)
 
     def get_role_of_player(self, player_colour):
         """Get player role for both roles."""
