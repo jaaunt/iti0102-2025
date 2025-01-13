@@ -1,61 +1,79 @@
 """Amongus."""
 class Crewmate:
+    """Crewmate class."""
     def __init__(self, colour: str, role: str, tasks: int = 10):
+        """Initialize crewmate object."""
         self.colour = colour
         self.role = role
         self.tasks = tasks
 
     def complete_task(self):
+        """Complete crewmate task."""
         if self.tasks > 0:
             self.tasks -= 1
 
 class Impostor:
+    """Impostor class."""
     def __init__(self, colour, kills = 0):
         self.colour = colour
         self.kills = kills
 
 class Spaceship:
+    """Spaceship class."""
     def __init__(self):
         self.crewmates = []
         self.impostors = []
         self.dead_players = []
 
     def add_crewmate(self, colour: str, role: "Crewmate", tasks: int = 10):
+        """Lisa crewmate."""
         self.crewmates.append(Crewmate(colour, role, tasks))
 
     def add_impostor(self, colour):
+        """Lisa impostor."""
         if len(self.impostors) <= 3 and colour not in self.crewmates:
             self.impostors.append(Impostor(colour))
 
     def kill_crewmate(self):
+        """Kill a crewmate."""
         pass
 
     def revive_crewmate(self):
+        """Revive a crewmate."""
         pass
 
     def get_role_of_player(self):
+        """Get player role."""
         pass
 
     def protect_crewmate(self):
+        """Protect a crewmate."""
         pass
 
     def sort_crewmates_by_tasks(self):
+        """Sort crewmates by tasks."""
         pass
 
     def sort_impostors_by_kills(self):
+        """Sort impostors by kills."""
         pass
 
     def get_regular_crewmates(self):
+        """Get regular crewmates."""
         pass
 
     def get_dead_players(self):
+        """Get dead players."""
         return self.dead_players
 
     def get_crewmate_list(self):
+        """Get all crewmates."""
         return self.crewmates
 
     def get_impostor_list(self):
+        """Get all impostors."""
         return self.impostors
+
 
 if __name__ == "__main__":
     print("Spaceship.")
