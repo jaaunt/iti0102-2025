@@ -100,6 +100,10 @@ class Spaceship:
                         return
                 protected_colour.protected = True  # kui ei siis protectib teda
 
+    def kill_impostor(self):
+        """Sheriff saab impostor tappa"""
+        pass
+
     def sort_crewmates_by_tasks(self):
         """Sort crewmates by tasks."""
         pass
