@@ -70,8 +70,8 @@ class Spaceship:
         if isinstance(impostor, Impostor) and isinstance(crewmate_colour, Crewmate):  # kas sisend on impostor
             for crewmate in self.crewmates:  # checki labi koik crewmateid otsi oige
                 if crewmate.colour.lower() == crewmate_colour.lower():  # kui leiab crewmate objektidest matchiva varviga crewmate (case insensitive)
-                    self.crewmates.remove(crewmate_colour)  # remove the dead one
-                    self.dead_players.append(crewmate_colour)  # lisa ta dead listi
+                    self.crewmates.remove(crewmate)  # remove the dead one
+                    self.dead_players.append(crewmate)  # lisa ta dead listi
                     impostor.kills += 1  # lisa selle impostori killile uks
                     return  # lopeta check
 
