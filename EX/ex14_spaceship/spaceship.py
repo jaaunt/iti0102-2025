@@ -19,7 +19,7 @@ class Crewmate:
 class Impostor:
     """Impostor class."""
 
-    def __init__(self, colour, kills = 0):
+    def __init__(self, colour, kills: int = 0):
         """Initialize impostor object."""
         self.colour = colour
         self.kills = kills
