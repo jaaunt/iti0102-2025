@@ -1,6 +1,9 @@
 """Amongus."""
+
+
 class Crewmate:
     """Crewmate class."""
+
     def __init__(self, colour: str, role: str, tasks: int = 10):
         """Initialize crewmate object."""
         self.colour = colour
@@ -15,6 +18,7 @@ class Crewmate:
 
 class Impostor:
     """Impostor class."""
+
     def __init__(self, colour, kills = 0):
         """Initialize impostor object."""
         self.colour = colour
@@ -23,6 +27,7 @@ class Impostor:
 
 class Spaceship:
     """Spaceship class."""
+
     def __init__(self):
         """Initialize spaceship."""
         self.crewmates = []
