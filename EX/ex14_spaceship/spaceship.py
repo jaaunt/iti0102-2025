@@ -12,15 +12,19 @@ class Crewmate:
         if self.tasks > 0:
             self.tasks -= 1
 
+
 class Impostor:
     """Impostor class."""
     def __init__(self, colour, kills = 0):
+        """Initialize impostor object."""
         self.colour = colour
         self.kills = kills
+
 
 class Spaceship:
     """Spaceship class."""
     def __init__(self):
+        """Initialize spaceship."""
         self.crewmates = []
         self.impostors = []
         self.dead_players = []
