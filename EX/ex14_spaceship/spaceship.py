@@ -67,7 +67,7 @@ class Spaceship:
 
     def kill_crewmate(self, impostor, crewmate_colour):
         """Kill a crewmate increase the kill count and move the dead crewmate to the other list."""
-        if isinstance(impostor, Impostor) and isinstance(crewmate_colour, Crewmate):  # kas sisend on impostor
+        if isinstance(impostor, Impostor):  # kas sisend on impostor
             for crewmate in self.crewmates:  # checki labi koik crewmateid otsi oige
                 if crewmate.colour.lower() == crewmate_colour.lower():  # kui leiab crewmate objektidest matchiva varviga crewmate (case insensitive)
                     self.crewmates.remove(crewmate)  # remove the dead one
