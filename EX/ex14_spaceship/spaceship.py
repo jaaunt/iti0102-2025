@@ -68,10 +68,9 @@ class Spaceship:
     def kill_crewmate(self, impostor, crewmate):
         """Kill a crewmate increase the kill count and move the dead crewmate to the other list."""
         if isinstance(impostor, Impostor) and isinstance(crewmate, Crewmate):  # kas sisend on impostor
-                    self.crewmates.remove(crewmate)  # remove the dead one
-                    self.dead_players.append(crewmate)  # lisa ta dead listi
-                    impostor.kills += 1  # lisa selle impostori killile uks
-                    return  # lopeta check
+            self.crewmates.remove(crewmate)  # remove the dead one
+            self.dead_players.append(crewmate)  # lisa ta dead listi
+            impostor.kills += 1  # lisa selle impostori killile uhe
 
     def revive_crewmate(self, saviour, the_dead_one):
         """Revive a crewmate."""
