@@ -32,7 +32,7 @@ class Impostor:
     """Impostor class."""
 
     def __init__(self, colour, kills: int = 0):
-        """Initialize impostor object."""
+        """Initialize impostor object w kills set to 0 at start."""
         self.colour = colour.title()
         self.kills = kills
 
