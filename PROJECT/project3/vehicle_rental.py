@@ -288,7 +288,6 @@ class VehicleRental:
             return False
         self.money += vehicle.get_price()
         vehicle.booked_dates.append(date)
-        client.budget -= vehicle.get_price()
         client.bookings.append(vehicle)
         self.clients.append(client)
         return True
