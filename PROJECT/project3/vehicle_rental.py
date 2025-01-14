@@ -146,16 +146,19 @@ class Client:
         :param vehicle_rental: The rental service from which the vehicle is being booked.
         :return: True if the booking is successful, otherwise False.
         """
-        price = get_price(vehicle)  # leiab soovitud soiduki hinna
-        if self.budget < price:
-            return False  # kui pole piisavalt raha
+        try:
+            day, month, year = map(int, date.split('.'))
+            if not (1 <= day <= 31) or not (1 <= month <= 12) or year >= 1900:
+                return False  # pole voimalik date
+        except ValueError:
+            return False  # pole proper date format
 
-        day, month, year = date.split('.')
-        if not (1 <= int(day) <= 31 and 1 <= int(month) <= 12 and int(year) >= 1900):
-            return False  # kui pole korrektne date
+        price = get_price(vehicle)
+        if self.budget < price:  # kas kliendil on raha
+            return False
 
-        if vehicle in VehicleRental.rentable_vehicles:  # kui see on valikus olevate soidukite listis vehicle_rental classis
-            if VehicleRental.rent_vehicle(vehicle, date, self):
+        if vehicle in vehicle_rental.rentable_vehicles:
+            if vehicle_rental.rent_vehicle(vehicle, date, self):
                 self.vehicle_rented[vehicle] = date
                 self.budget -= price
                 return True
