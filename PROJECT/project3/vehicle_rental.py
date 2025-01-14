@@ -377,6 +377,10 @@ class VehicleRental:
         :return: A list of vehicles manufactured within the specified year range.
         :raises ValueError: If start_year or end_year are not integers or if start_year > end_year.
         """
+        if not isinstance(start_year, int) or not isinstance(end_year, int):
+            raise ValueError('start_year and end_year must be integers.')
+        if start_year > end_year:
+            raise ValueError('start_year cannot be greater than end_year.')
         matching_vehicles = []
         for vehicle in self.vehicles:
             if isinstance(vehicle, (Car, Motorcycle)) and start_year <= vehicle.year <= end_year:
