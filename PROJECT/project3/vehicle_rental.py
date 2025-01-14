@@ -361,6 +361,7 @@ class VehicleRental:
                     best_clients.append(client)
 
         best_client = max(best_clients, key=lambda x: x.spent)
+
         return best_client
 
     def get_sorted_vehicles_list(self) -> list[Car | Motorcycle]:
