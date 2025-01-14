@@ -57,12 +57,13 @@ class Car:
         :param type_of_car: Type of the car (an instance of Type enum).
         :raises ValueError: If type_of_car is not an instance of Type enum.
         """
-        if type_of_car is None:
-            raise ValueError
         self.make = make
         self.model = model
         self.year = year
-        self.type_of_car = type_of_car
+        if not isinstance(type_of_car, Type):  # kui pole antud tuupi
+            raise ValueError
+        else:
+            self.type_of_car = type_of_car
 
     def __repr__(self) -> str:
         """
