@@ -295,7 +295,7 @@ class VehicleRental:
          rented the same number of times, all of those are returned. If no vehicle have been rented, return an empty
          list.
         """
-        max_rentals = 0  # koige rohkem renditud
+        max_rentals = 1  # koige rohkem renditud
         most_rented_vehicles = []  # mis olid most
 
         for vehicle in self.vehicles:
