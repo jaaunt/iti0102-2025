@@ -123,11 +123,11 @@ class Spaceship:
 
     def sort_crewmates_by_tasks(self):
         """Sort crewmates by tasks."""
-        return sorted(self.crewmates, key=lambda x: x.tasks)
+        return sorted(self.crewmates, key=lambda x: x.tasks)  # kasvavas jarjekorras (vaiksem enne)
 
     def sort_impostors_by_kills(self):
         """Sort impostors by kills."""
-        return sorted(self.impostors, key=lambda x: x.kills)
+        return sorted(self.impostors, key=lambda x: x.kills, reverse=True)  # kahanevas jarjekorras (suurem enne)
 
     def get_regular_crewmates(self):
         """Get regular crewmates."""
