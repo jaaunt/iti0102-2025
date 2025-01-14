@@ -350,14 +350,13 @@ class VehicleRental:
             if isinstance(client, Client):
                 if len(client.bookings) > most_bookings:
                     most_bookings = len(client.bookings)
-                    best_clients.append(client)
+                    best_clients = [client]
                 elif len(client.bookings) == most_bookings:
                     best_clients.append(client)
 
         if best_clients:  # kui uldse on uks
             best_client = max(best_clients, key=lambda x: x.total_spent())
             return best_client
-        return None
 
     def get_sorted_vehicles_list(self) -> list[Car | Motorcycle]:
         """
