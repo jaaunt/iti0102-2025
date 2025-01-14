@@ -148,7 +148,7 @@ class Client:
         """
         try:  # proovi
             day, month, year = map(int, date.split('.'))
-            if not (1 <= day <= 31) or not (1 <= month <= 12) or year >= 1900:
+            if not (1 <= day <= 31) or not (1 <= month <= 12) or year < 1900:
                 return False  # pole voimalik date
         except ValueError:
             return False  # pole proper date format
@@ -260,7 +260,7 @@ class VehicleRental:
         """
         try:
             day, month, year = map(int, date.split('.'))
-            if not (1 <= day <= 31) or not (1 <= month <= 12) or year >= 1900:
+            if not (1 <= day <= 31) or not (1 <= month <= 12) or year > 1900:
                 return False  # pole valid date
         except ValueError:
             return False  # vale format
