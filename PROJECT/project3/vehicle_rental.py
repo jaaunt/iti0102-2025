@@ -295,7 +295,17 @@ class VehicleRental:
          rented the same number of times, all of those are returned. If no vehicle have been rented, return an empty
          list.
         """
-        return []
+        max_rentals = 0  # koige rohkem renditud
+        most_rented_vehicles = []  # mis olid most
+
+        for vehicle in self.vehicles:
+            if len(vehicle.booked_dates) > max_rentals:  # kui on suurem updatib molemad value
+                max_rentals = len(vehicle.booked_dates)
+                most_rented_vehicles = [vehicle]
+            elif len(vehicle.booked_dates) == max_rentals:  # kui saama suur paneb juurde uhe
+                most_rented_vehicles.append(vehicle)
+
+        return most_rented_vehicles
 
     def find_vehicle_by_make(self, make: str) -> list[Car | Motorcycle]:
         """
