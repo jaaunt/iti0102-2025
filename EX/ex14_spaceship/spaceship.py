@@ -127,7 +127,7 @@ class Spaceship:
 
     def sort_impostors_by_kills(self):
         """Sort impostors by kills."""
-        pass
+        return sorted(self.impostors, key=lambda x: x.kills)
 
     def get_regular_crewmates(self):
         """Get regular crewmates."""
