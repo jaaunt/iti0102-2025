@@ -157,7 +157,6 @@ class Client:
 
         vehicle_rental.rent_vehicle(vehicle, date, self)
         self.budget -= vehicle.get_price()
-        self.bookings.append(vehicle)
 
         self.spent = self.total_spent()
         return True
@@ -290,10 +289,11 @@ class VehicleRental:
             return False
         if client.budget < vehicle.get_price():
             return False
+        self.money += vehicle.get_price()
+        vehicle.booked_dates.append(date)
+        client.bookings.append(vehicle)
         if client not in self.clients:
             self.clients.append(client)
-            self.money += vehicle.get_price()
-            vehicle.booked_dates.append(date)
         return True
 
     def get_most_rented_vehicle(self) -> list[Motorcycle | Car]:
