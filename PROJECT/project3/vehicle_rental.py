@@ -257,7 +257,9 @@ class VehicleRental:
         :param date: The date to check availability on.
         :return: True if the vehicle is available, otherwise False.
         """
-        pass
+        booked_dates = vehicle.booked_dates
+        if date not in booked_dates:
+            return True
 
     def rent_vehicle(self, vehicle: Car | Motorcycle, date: str, client: Client) -> bool:
         """
