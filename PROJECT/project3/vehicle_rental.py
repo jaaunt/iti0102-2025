@@ -292,7 +292,8 @@ class VehicleRental:
         self.money += vehicle.get_price()
         vehicle.booked_dates.append(date)
         client.bookings.append(vehicle)
-        self.clients.append(client)
+        if client not in self.clients:
+            self.clients.append(client)
         return True
 
     def get_most_rented_vehicle(self) -> list[Motorcycle | Car]:
