@@ -83,7 +83,7 @@ class Car:
 
     def get_price(self) -> int:
         """:return: price of the vehicle."""
-        return 0
+        return get_price(self.type_of_car)
 
 
 class Motorcycle:
@@ -291,4 +291,3 @@ class VehicleRental:
         :raises ValueError: If start_year or end_year are not integers or if start_year > end_year.
         """
         return []
-
