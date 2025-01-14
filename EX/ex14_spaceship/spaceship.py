@@ -112,7 +112,7 @@ class Spaceship:
             if isinstance(the_other_one, Impostor) and the_other_one in self.impostors:  # kui oli impostor impostor sureb
                 self.impostors.remove(the_other_one)
                 self.dead_players.append(the_other_one)
-            elif isinstance(the_other_one, Crewmate) and the_other_one in self.crewmates:  # kontrollib kas teine oli crewmate kui yes tapab temaa
+            else:
                 self.crewmates.remove(sheriff)
                 self.dead_players.append(sheriff)
 
