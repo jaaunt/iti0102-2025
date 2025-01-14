@@ -83,7 +83,7 @@ class Car:
 
     def get_price(self) -> int:
         """:return: price of the vehicle."""
-        return get_price(self.type_of_car)
+        return get_price(self)
 
 
 class Motorcycle:
