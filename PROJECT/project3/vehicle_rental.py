@@ -179,6 +179,7 @@ class VehicleRental:
         """Construct new VehicleRental."""
         self.vehicles = []
         self.money = 0
+        self.clients = []
 
     def get_money(self) -> int:
         """
@@ -232,7 +233,7 @@ class VehicleRental:
 
     def get_clients(self) -> list[Client]:
         """:return: list of all clients who have placed a booking in rental."""
-        return []
+        return self.clients
 
     def add_vehicle(self, vehicle: Car | Motorcycle) -> bool:
         """
@@ -243,7 +244,10 @@ class VehicleRental:
         :param vehicle: Vehicle (Car or Motorcycle) to be added.
         :return: True if the vehicle was successfully added, False if it was already present.
         """
-        pass
+        if vehicle not in self.vehicles:
+            self.vehicles.append(vehicle)
+            return True
+        return False
 
     def is_vehicle_available(self, vehicle: Car | Motorcycle, date: str) -> bool:
         """
