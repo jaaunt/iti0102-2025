@@ -31,13 +31,13 @@ def get_price(vehicle) -> int:
     :return: Price of the vehicle based on its type.
     """
     if isinstance(vehicle, Car):
-        if vehicle.type == Type.SPORTSCAR:
+        if vehicle == Type.SPORTSCAR:
             return 200
-        if vehicle.type == Type.CONVERTIBLE:
+        if vehicle == Type.CONVERTIBLE:
             return 150
-        if vehicle.type == Type.VAN:
+        if vehicle== Type.VAN:
             return 100
-        if vehicle.type == Type.OTHER:
+        if vehicle == Type.OTHER:
             return 50
 
     if isinstance(vehicle, Motorcycle):
@@ -97,6 +97,9 @@ class Motorcycle:
         :param model: Model of the motorcycle.
         :param year: Year the motorcycle was manufactured.
         """
+        self.make = make
+        self.model = model
+        self.year = year
 
     def __repr__(self) -> str:
         """
@@ -104,7 +107,7 @@ class Motorcycle:
 
         return: 'Motorcycle(make, model, year)'
         """
-        return ""
+        return f"Motorcycle({self.make}, {self.model}, {self.year})"
 
     def __hash__(self) -> int:
         """
@@ -112,11 +115,11 @@ class Motorcycle:
 
         return: hash(make, model, year)
         """
-        return
+        return hash((self.make, self.model, self.year))
 
     def get_price(self) -> int:
         """:return: price of the vehicle."""
-        return 0
+        return get_price(self)
 
 
 class Client:
@@ -130,6 +133,9 @@ class Client:
         :param budget: The initial budget for the client.
         bookings: A list of vehicles that the client has booked.
         """
+        self.name = name
+        self.budget = budget
+        self.vehicle_rented = {}  # dictionary kus votmeks oleks prob soiduks ja value date soiduk:aeg
 
     def book_vehicle(self, vehicle: Car | Motorcycle, date: str, vehicle_rental) -> bool:
         """
@@ -140,7 +146,21 @@ class Client:
         :param vehicle_rental: The rental service from which the vehicle is being booked.
         :return: True if the booking is successful, otherwise False.
         """
+        price = get_price(vehicle)  # leiab soovitud soiduki hinna
+        if self.budget < price:
+            return False  # kui pole piisavalt raha
+
+        day, month, year = date.split('.')
+        if not (1<= int(day) <= 31 and 1 <= int(month) <= 12 and int(year) >= 1900):
+            return False  # kui pole korrektne date
+
+        if vehicle in VehicleRental.rentable_vehicles:  # kui see on valikus olevate soidukite listis vehicle_rental classis
+            if VehicleRental.rent_vehicle(vehicle, date, self):
+                self.vehicle_rented[vehicle] = date
+                self.budget -= price
+                return True
         return False
+
 
     def total_spent(self) -> int:
         """
@@ -148,11 +168,12 @@ class Client:
 
         :return: The total amount of money the client has spent on successful bookings.
         """
-        return 0
+        total_spent = sum(get_price(vehicle) for vehicle in self.vehicle_rented)
+        return total_spent
 
     def get_bookings(self) -> list[Car | Motorcycle]:
         """:return: List of all the vehicles client has booked."""
-        return []
+        return list(self.vehicle_rented.keys())  # tagastab ainult votmed ehk soidukid
 
 
 class VehicleRental:
@@ -160,7 +181,9 @@ class VehicleRental:
 
     def __init__(self) -> None:
         """Construct new VehicleRental."""
-        return
+        self.rentable_vehicles = []
+        self.balance = 0
+
 
     def get_money(self) -> int:
         """
@@ -168,7 +191,7 @@ class VehicleRental:
 
         :return: amount money that rental system has.
         """
-        return 0
+        return self.balance
 
     def get_motorcycles(self) -> list[Motorcycle]:
         """:return: list of motorcycles in rental system."""
@@ -193,7 +216,11 @@ class VehicleRental:
 
         :return: dictionary with vehicles as keys and lists of booked dates as values.
         """
-        return {}
+        bookings_dict = {}
+        for vehicle in self.rentable_vehicles:
+            booked_dates = vehicle.booked_dates
+            bookings_dict[vehicle] = booked_dates
+        return bookings_dict
 
     def get_clients(self) -> list[Client]:
         """:return: list of all clients who have placed a booking in rental."""
@@ -208,6 +235,10 @@ class VehicleRental:
         :param vehicle: Vehicle (Car or Motorcycle) to be added.
         :return: True if the vehicle was successfully added, False if it was already present.
         """
+        vehicle_hash = hash(vehicle)
+        if vehicle_hash not in self.rentable_vehicles:  # kui sama hashiga on juba auto ei lisa juurde seda
+            self.rentable_vehicles[vehicle_hash] = vehicle
+            return True
         return False
 
     def is_vehicle_available(self, vehicle: Car | Motorcycle, date: str) -> bool:
