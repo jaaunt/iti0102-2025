@@ -65,14 +65,13 @@ class Car:
         else:
             self.type_of_car = type_of_car
 
-
     def __repr__(self) -> str:
         """
         Return string representation of car.
 
         return: 'Car(make, model, year, type_of_car)'
         """
-        return f"Car({self.make}, {self.model}, {self.year}, {self.type_of_car})"
+        return f"Car({self.make}, {self.model}, {self.year}, {self.type_of_car})"  # returnib stringina
 
     def __hash__(self) -> int:
         """
@@ -80,7 +79,7 @@ class Car:
 
         return: hash(make, model, year, type_of_car)
         """
-        return 0
+        return hash((self.make, self.model, self.year, self.type_of_car))  # returnib hashina
 
     def get_price(self) -> int:
         """:return: price of the vehicle."""
