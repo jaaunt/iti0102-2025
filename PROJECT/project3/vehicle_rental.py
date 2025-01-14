@@ -247,7 +247,7 @@ class VehicleRental:
         :param vehicle: Vehicle (Car or Motorcycle) to be added.
         :return: True if the vehicle was successfully added, False if it was already present.
         """
-        vehicle_hash = hash(vehicle)
+        vehicle_hash = hash(vehicle)  # saa katte ta hash mis klassis tehtud
 
         if vehicle_hash not in self.hashes:
             self.vehicles.append(vehicle)
