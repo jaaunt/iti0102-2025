@@ -366,7 +366,7 @@ class VehicleRental:
         In case of a tie, vehicles are sorted by price from highest to lowest.
         :return: A list of vehicles sorted by popularity and price.
         """
-        return []
+        return sorted(self.vehicles, key=lambda vehicle: (len(vehicle.booked_dates), vehicle.get_price()), reverse=True)
 
     def get_vehicles_by_year_range(self, start_year: int, end_year: int) -> list[Car | Motorcycle] | ValueError:
         """
