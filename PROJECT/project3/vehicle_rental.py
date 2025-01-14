@@ -357,6 +357,7 @@ class VehicleRental:
                     best_clients = [client]
                 elif client_booking_amount == most_bookings:
                     best_clients.append(client)
+
         return max(best_clients, key=lambda client: client.total_spent())
 
     def get_sorted_vehicles_list(self) -> list[Car | Motorcycle]:
