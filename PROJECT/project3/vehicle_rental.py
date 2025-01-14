@@ -331,7 +331,11 @@ class VehicleRental:
         :param type_of_car: The type of car to search for (an instance of Type enum).
         :return: A list of cars matching the given type.
         """
-        return []
+        matching_vehicles = []
+        for vehicle in self.vehicles:
+            if isinstance(vehicle, Car) and vehicle.type_of_car == type_of_car:
+                matching_vehicles.append(vehicle)
+        return matching_vehicles
 
     def get_best_client(self) -> Client:
         """
