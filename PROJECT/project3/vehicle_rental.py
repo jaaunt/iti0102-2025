@@ -360,7 +360,7 @@ class VehicleRental:
                 elif client_booking_amount == most_bookings:
                     best_clients.append(client)
 
-        best_client = max(best_clients, key=lambda x: x.spent)
+        best_client = max(best_clients, key=lambda x: x.spent)  # leia neist suurim
 
         return best_client
 
