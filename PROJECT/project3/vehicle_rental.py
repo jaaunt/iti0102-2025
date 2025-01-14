@@ -265,7 +265,6 @@ class VehicleRental:
         if not (1 <= int(day) <= 31 and 1 <= int(month) <= 12 and int(year) >= 1900):
             return False  # kui pole korrektne date
 
-
     def rent_vehicle(self, vehicle: Car | Motorcycle, date: str, client: Client) -> bool:
         """
         Rent a vehicle to a client for a specified date if it is available and the client has sufficient funds.
