@@ -346,8 +346,9 @@ class VehicleRental:
         If multiple clients have rented the same number of vehicles, return the client who spent the most money.
         :return: The best client object.
         """
+
         best_clients = []
-        most_bookings = 1
+        most_bookings = 0
         for client in self.clients:
             if isinstance(client, Client):
                 client_booking_amount = len(client.bookings)
@@ -356,8 +357,7 @@ class VehicleRental:
                     best_clients = [client]
                 elif client_booking_amount == most_bookings:
                     best_clients.append(client)
-
-        return max(best_clients, key=lambda x: x.total_spent())
+        return max(best_clients, key=lambda client: client.total_spent())
 
     def get_sorted_vehicles_list(self) -> list[Car | Motorcycle]:
         """
