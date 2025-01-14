@@ -275,7 +275,7 @@ class VehicleRental:
         :param client: Client who is renting the vehicle.
         :return: True if the rental was successful, otherwise False.
         """
-        if vehicle is None or date is None or client is None:
+        if not vehicle or not date or not client:
             return False
         if not self.is_vehicle_available(vehicle, date):
             return False
