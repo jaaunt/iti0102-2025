@@ -75,7 +75,7 @@ class Spaceship:
                         self.dead_players.append(crewmate)  # lisa ta dead listi
                         impostor.kills += 1  # lisa selle impostori killile uks
                     else:
-                        crewmate.protected = False
+                        crewmate.protected = False  # kui oli protected remove the status
                     return  # lopeta check
 
     def revive_crewmate(self, saviour, the_dead_one):
@@ -106,9 +106,15 @@ class Spaceship:
                         return
                 protected_colour.protected = True  # kui ei siis protectib teda
 
-    def kill_impostor(self):
-        """Sheriff saab impostor tappa."""
-        pass
+    def kill_impostor(self, sheriff, the_other_one):
+        """Sheriff saab impostor tappa kui pakub oigesti kui pakub valesti saab ise surma."""
+        if isinstance(sheriff, Crewmate) and sheriff.role == "Sheriff" and sheriff in self.crewmates:  # kontrolli rolli ja et oleks laevas
+            if isinstance(the_other_one, Impostor) and the_other_one in self.impostors:  # kui oli impostor impostor sureb
+                self.impostors.remove(the_other_one)
+                self.dead_players.append(the_other_one)
+            elif isinstance(the_other_one, Crewmate) and the_other_one in self.crewmates:  # kontrollib kas teine oli crewmate kui yes tapab temaa
+                self.crewmates.remove(sheriff)
+                self.dead_players.append(sheriff)
 
     def sort_crewmates_by_tasks(self):
         """Sort crewmates by tasks."""
