@@ -346,7 +346,6 @@ class VehicleRental:
         If multiple clients have rented the same number of vehicles, return the client who spent the most money.
         :return: The best client object.
         """
-
         best_clients = []
         most_bookings = 0
         for client in self.clients:
