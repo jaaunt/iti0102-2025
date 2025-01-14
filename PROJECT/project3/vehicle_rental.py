@@ -360,6 +360,7 @@ class VehicleRental:
         if best_clients:  # kui uldse on uks
             best_client = max(best_clients, key=lambda x: x.total_spent())
             return best_client
+        return None
 
     def get_sorted_vehicles_list(self) -> list[Car | Motorcycle]:
         """
