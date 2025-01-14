@@ -138,6 +138,7 @@ class Client:
         self.name = name
         self.budget = budget
         self.bookings = []
+        self.spent = 0
 
     def book_vehicle(self, vehicle: Car | Motorcycle, date: str, vehicle_rental) -> bool:
         """
@@ -157,6 +158,8 @@ class Client:
         vehicle_rental.rent_vehicle(vehicle, date, self)
         self.budget -= vehicle.get_price()
         self.bookings.append(vehicle)
+
+        self.spent = self.total_spent()
         return True
 
     def total_spent(self) -> int:
@@ -357,7 +360,8 @@ class VehicleRental:
                 elif client_booking_amount == most_bookings:
                     best_clients.append(client)
 
-        return max(best_clients, key=lambda client: client.total_spent())
+        best_client = max(best_clients, key=lambda x: x.spent)
+        return best_client
 
     def get_sorted_vehicles_list(self) -> list[Car | Motorcycle]:
         """
