@@ -35,7 +35,7 @@ def get_price(vehicle) -> int:
             return 200
         if vehicle == Type.CONVERTIBLE:
             return 150
-        if vehicle== Type.VAN:
+        if vehicle == Type.VAN:
             return 100
         if vehicle == Type.OTHER:
             return 50
@@ -151,7 +151,7 @@ class Client:
             return False  # kui pole piisavalt raha
 
         day, month, year = date.split('.')
-        if not (1<= int(day) <= 31 and 1 <= int(month) <= 12 and int(year) >= 1900):
+        if not (1 <= int(day) <= 31 and 1 <= int(month) <= 12 and int(year) >= 1900):
             return False  # kui pole korrektne date
 
         if vehicle in VehicleRental.rentable_vehicles:  # kui see on valikus olevate soidukite listis vehicle_rental classis
@@ -160,7 +160,6 @@ class Client:
                 self.budget -= price
                 return True
         return False
-
 
     def total_spent(self) -> int:
         """
@@ -183,7 +182,6 @@ class VehicleRental:
         """Construct new VehicleRental."""
         self.rentable_vehicles = []
         self.balance = 0
-
 
     def get_money(self) -> int:
         """
