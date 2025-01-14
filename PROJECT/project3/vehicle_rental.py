@@ -257,7 +257,7 @@ class VehicleRental:
         :param date: The date to check availability on.
         :return: True if the vehicle is available, otherwise False.
         """
-        if vehicle is None or date is None:
+        if not vehicle or not date:
             return False
         booked_dates = vehicle.booked_dates
         return date not in booked_dates
