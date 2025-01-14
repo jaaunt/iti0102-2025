@@ -279,7 +279,7 @@ class VehicleRental:
             return False
         if not self.is_vehicle_available(vehicle, date):
             return False
-        if client.budget < int(vehicle.get_price()):
+        if client.budget < vehicle.get_price():
             return False
         self.money += vehicle.get_price()
         vehicle.booked_dates.append(date)
