@@ -255,7 +255,13 @@ class VehicleRental:
         :param date: The date to check availability on.
         :return: True if the vehicle is available, otherwise False.
         """
-        return False
+        if vehicle not in self.rentable_vehicles:
+            return False
+
+        day, month, year = date.split('.')
+        if not (1 <= int(day) <= 31 and 1 <= int(month) <= 12 and int(year) >= 1900):
+            return False  # kui pole korrektne date
+
 
     def rent_vehicle(self, vehicle: Car | Motorcycle, date: str, client: Client) -> bool:
         """
@@ -270,6 +276,19 @@ class VehicleRental:
         :param client: Client who is renting the vehicle.
         :return: True if the rental was successful, otherwise False.
         """
+        if not self.is_vehicle_available(vehicle, date):
+            return False
+
+        price = get_price(vehicle)
+        if client.budget < price:
+            return False
+
+        if vehicle in self.rentable_vehicles:
+            self.rentable_vehicles[vehicle].append[date]
+            return True
+        else:
+            self.rentable_vehicles[vehicle] = [date]
+            return True
         return False
 
     def get_most_rented_vehicle(self) -> list[Motorcycle | Car]:
