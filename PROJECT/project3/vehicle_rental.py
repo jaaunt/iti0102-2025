@@ -277,6 +277,8 @@ class VehicleRental:
         """
         if not vehicle or not date or not client:
             return False
+        if vehicle not in self.vehicles:
+            return False
         if not self.is_vehicle_available(vehicle, date):
             return False
         if client.budget < vehicle.get_price():
