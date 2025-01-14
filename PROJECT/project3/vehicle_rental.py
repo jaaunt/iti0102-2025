@@ -274,7 +274,15 @@ class VehicleRental:
         :param client: Client who is renting the vehicle.
         :return: True if the rental was successful, otherwise False.
         """
-        pass
+        if not self.is_vehicle_available(vehicle, date):
+            return False
+        if client.budget < vehicle.get_price():
+            return False
+        self.money += vehicle.get_price()
+        vehicle.booked_dates.append(date)
+        client.budget -= vehicle.get_price()
+        client.bookings.append(vehicle)
+        return True
 
     def get_most_rented_vehicle(self) -> list[Motorcycle | Car]:
         """
