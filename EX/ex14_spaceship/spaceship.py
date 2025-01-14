@@ -108,8 +108,8 @@ class Spaceship:
 
     def kill_impostor(self, sheriff, the_other_one):
         """Sheriff saab impostor tappa kui pakub oigesti kui pakub valesti saab ise surma."""
-        if isinstance(sheriff, Crewmate) and sheriff.role == "Sheriff" and sheriff in self.crewmates:  # kontrolli rolli ja et oleks laevas
-            if isinstance(the_other_one, Impostor) and the_other_one in self.impostors:  # kui oli impostor impostor sureb
+        if sheriff.role == "Sheriff" and sheriff in self.crewmates:  # kontrolli rolli ja et oleks laevas
+            if the_other_one in self.impostors:  # kui oli impostor impostor sureb
                 self.impostors.remove(the_other_one)
                 self.dead_players.append(the_other_one)
             else:
