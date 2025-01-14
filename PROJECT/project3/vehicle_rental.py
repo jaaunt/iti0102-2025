@@ -146,9 +146,9 @@ class Client:
         :param vehicle_rental: The rental service from which the vehicle is being booked.
         :return: True if the booking is successful, otherwise False.
         """
-        try:  # proovi
+        try:
             day, month, year = map(int, date.split('.'))
-            if not (1 <= day <= 31) or not (1 <= month <= 12) or year < 1900:
+            if not (1 <= day <= 31) or not (1 <= month <= 12) or year >= 1900:
                 return False  # pole voimalik date
         except ValueError:
             return False  # pole proper date format
@@ -258,13 +258,12 @@ class VehicleRental:
         :param date: The date to check availability on.
         :return: True if the vehicle is available, otherwise False.
         """
-        try:
-            day, month, year = map(int, date.split('.'))
-            if not (1 <= day <= 31) or not (1 <= month <= 12) or year > 1900:
-                return False  # pole valid date
-        except ValueError:
-            return False  # vale format
-        return True
+        if vehicle not in self.rentable_vehicles:
+            return False
+
+        day, month, year = date.split('.')
+        if not (1 <= int(day) <= 31 and 1 <= int(month) <= 12 and int(year) >= 1900):
+            return False  # kui pole korrektne date
 
     def rent_vehicle(self, vehicle: Car | Motorcycle, date: str, client: Client) -> bool:
         """
