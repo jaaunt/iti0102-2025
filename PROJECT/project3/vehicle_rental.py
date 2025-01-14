@@ -72,7 +72,7 @@ class Car:
 
         return: 'Car(make, model, year, type_of_car)'
         """
-        return ""
+        return f"Car({self.make}, {self.model}, {self.year}, {self.type_of_car})"
 
     def __hash__(self) -> int:
         """
@@ -292,3 +292,4 @@ class VehicleRental:
         :raises ValueError: If start_year or end_year are not integers or if start_year > end_year.
         """
         return []
+
