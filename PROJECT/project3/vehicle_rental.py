@@ -171,6 +171,7 @@ class Client:
         """:return: List of all the vehicles client has booked."""
         return self.bookings
 
+
 class VehicleRental:
     """Vehicle rental system managing vehicles, rents and budget."""
 
