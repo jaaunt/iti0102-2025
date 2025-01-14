@@ -183,6 +183,7 @@ class VehicleRental:
         self.vehicles = []
         self.money = 0
         self.clients = []
+        self.hash_list = []
 
     def get_money(self) -> int:
         """
@@ -247,7 +248,10 @@ class VehicleRental:
         :param vehicle: Vehicle (Car or Motorcycle) to be added.
         :return: True if the vehicle was successfully added, False if it was already present.
         """
-        if vehicle not in self.vehicles:
+        vehicle_hash = hash(vehicle)
+
+        if vehicle_hash not in self.hashes_list:
+            self.hash_list.append(vehicle_hash)
             self.vehicles.append(vehicle)
             return True
         return False
@@ -288,7 +292,6 @@ class VehicleRental:
             return False
         self.money += vehicle.get_price()
         vehicle.booked_dates.append(date)
-        client.bookings.append(vehicle)
         self.clients.append(client)
         return True
 
