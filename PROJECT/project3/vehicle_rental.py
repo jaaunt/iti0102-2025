@@ -345,13 +345,14 @@ class VehicleRental:
         :return: The best client object.
         """
         best_clients = []
-        most_bookings = 0
+        most_bookings = 1
         for client in self.clients:
             if isinstance(client, Client):
-                if len(client.bookings) > most_bookings:
-                    most_bookings = len(client.bookings)
+                client_booking_amount = len(client.bookings)
+                if client_booking_amount > most_bookings:
+                    most_bookings = client_booking_amount
                     best_clients = [client]
-                elif len(client.bookings) == most_bookings:
+                elif client_booking_amount == most_bookings:
                     best_clients.append(client)
 
         if best_clients:  # kui uldse on uks
