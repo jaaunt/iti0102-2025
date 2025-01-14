@@ -65,9 +65,9 @@ class Spaceship:
             if impostor.colour.lower() not in used_colours and len(self.impostors) < 3:
                 self.impostors.append(impostor)
 
-    def kill_crewmate(self, impostor, crewmate_colour):
+    def kill_crewmate(self, impostor: Impostor, crewmate_colour):
         """Kill a crewmate increase the kill count and move the dead crewmate to the other list."""
-        if isinstance(impostor, Impostor) and impostor in self.impostors:  # kas sisend on impostor ja ulde on laeval
+        if impostor in self.impostors:  # kas sisend on impostor ja ulde on laeval
             for crewmate in self.crewmates:  # checki labi koik crewmateid otsi oige
                 if crewmate.colour.lower() == crewmate_colour.lower():  # kui leiab crewmate objektidest matchiva varviga crewmate (case insensitive)
                     if not crewmate.protected:
@@ -106,9 +106,9 @@ class Spaceship:
                         return
                 protected_colour.protected = True  # kui ei siis protectib teda
 
-    def kill_impostor(self, sheriff, colour: str):
+    def kill_impostor(self, sheriff: Crewmate, colour: str):
         """Sheriff saab impostor tappa kui pakub oigesti kui pakub valesti saab ise surma."""
-        if isinstance(sheriff, Crewmate) and sheriff.role == "Sheriff" and sheriff in self.crewmates:  # kontrolli rolli ja et oleks laevas
+        if sheriff.role == "Sheriff" and sheriff in self.crewmates:  # kontrolli rolli ja et oleks laevas
             for impostor in self.impostors:  # vaatab kas leiab varviga matchiva impostori
                 if impostor.colour.lower() == colour.lower():
                     self.impostors.remove(impostor)  # tapa impostor
