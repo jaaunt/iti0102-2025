@@ -180,7 +180,7 @@ class VehicleRental:
 
     def __init__(self) -> None:
         """Construct new VehicleRental."""
-        self.rentable_vehicles = []
+        self.rentable_vehicles = {}  # soiduki hash : soiduk
         self.balance = 0
 
     def get_money(self) -> int:
