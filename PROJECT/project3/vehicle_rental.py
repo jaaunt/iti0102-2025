@@ -31,13 +31,13 @@ def get_price(vehicle) -> int:
     :return: Price of the vehicle based on its type.
     """
     if isinstance(vehicle, Car):
-        if vehicle == Type.SPORTSCAR:
+        if vehicle.type_of_car == Type.SPORTSCAR:
             return 200
-        if vehicle == Type.CONVERTIBLE:
+        if vehicle.type_of_car == Type.CONVERTIBLE:
             return 150
-        if vehicle == Type.VAN:
+        if vehicle.type_of_car == Type.VAN:
             return 100
-        if vehicle == Type.OTHER:
+        if vehicle.type_of_car == Type.OTHER:
             return 50
 
     if isinstance(vehicle, Motorcycle):
