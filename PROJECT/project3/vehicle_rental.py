@@ -64,6 +64,7 @@ class Car:
             raise ValueError
         else:
             self.type_of_car = type_of_car
+        self.booked_dates = []
 
     def __repr__(self) -> str:
         """
@@ -100,6 +101,7 @@ class Motorcycle:
         self.make = make
         self.model = model
         self.year = year
+        self.booked_dates = []
 
     def __repr__(self) -> str:
         """
@@ -135,7 +137,7 @@ class Client:
         """
         self.name = name
         self.budget = budget
-        self.vehicle_rented = {}  # dictionary kus votmeks oleks prob soiduks ja value date soiduk:aeg
+        self.bookings = []
 
     def book_vehicle(self, vehicle: Car | Motorcycle, date: str, vehicle_rental) -> bool:
         """
@@ -146,23 +148,16 @@ class Client:
         :param vehicle_rental: The rental service from which the vehicle is being booked.
         :return: True if the booking is successful, otherwise False.
         """
-        try:
-            day, month, year = map(int, date.split('.'))
-            if not (1 <= day <= 31) or not (1 <= month <= 12) or year >= 1900:
-                return False  # pole voimalik date
-        except ValueError:
-            return False  # pole proper date format
-
-        price = get_price(vehicle)
-        if self.budget < price:  # kas kliendil on raha
+        if not vehicle_rental.is_vehicle_available(vehicle, date):
             return False
 
-        if vehicle in vehicle_rental.rentable_vehicles:
-            if vehicle_rental.rent_vehicle(vehicle, date, self):
-                self.vehicle_rented[vehicle] = date
-                self.budget -= price
-                return True
-        return False
+        if self.budget < vehicle.get_price():
+            return False
+
+        vehicle_rental.rent_vehicle(vehicle, date, self)
+        self.budget -= vehicle.get_price()
+        self.bookings.append(vehicle)
+        return True
 
     def total_spent(self) -> int:
         """
@@ -170,21 +165,19 @@ class Client:
 
         :return: The total amount of money the client has spent on successful bookings.
         """
-        total_spent = sum(get_price(vehicle) for vehicle in self.vehicle_rented)
-        return total_spent
+        return sum(vehicle.get_price() for vehicle in self.bookings)
 
     def get_bookings(self) -> list[Car | Motorcycle]:
         """:return: List of all the vehicles client has booked."""
-        return list(self.vehicle_rented.keys())  # tagastab ainult votmed ehk soidukid
-
+        return self.bookings
 
 class VehicleRental:
     """Vehicle rental system managing vehicles, rents and budget."""
 
     def __init__(self) -> None:
         """Construct new VehicleRental."""
-        self.rentable_vehicles = {}  # soiduki hash : soiduk
-        self.balance = 0
+        self.vehicles = []
+        self.money = 0
 
     def get_money(self) -> int:
         """
@@ -192,12 +185,12 @@ class VehicleRental:
 
         :return: amount money that rental system has.
         """
-        return self.balance
+        return self.money
 
     def get_motorcycles(self) -> list[Motorcycle]:
         """:return: list of motorcycles in rental system."""
         motorcycles = []
-        for vehicle in self.rentable_vehicles:
+        for vehicle in self.vehicles:
             if isinstance(vehicle, Motorcycle):
                 motorcycles.append(vehicle)
         return motorcycles
@@ -205,7 +198,7 @@ class VehicleRental:
     def get_cars(self) -> list[Car]:
         """:return: list of cars in rental system."""
         cars = []
-        for vehicle in self.rentable_vehicles:
+        for vehicle in self.vehicles:
             if isinstance(vehicle, Car):
                 cars.append(vehicle)
         return cars
@@ -225,11 +218,16 @@ class VehicleRental:
 
         :return: dictionary with vehicles as keys and lists of booked dates as values.
         """
-        bookings_dict = {}
-        for vehicle in self.rentable_vehicles:
-            booked_dates = vehicle.booked_dates
-            bookings_dict[vehicle] = booked_dates
-        return bookings_dict
+        booking_dict = {}
+        for vehicle in self.vehicles:
+            if isinstance(vehicle, Car):
+                booked_dates = vehicle.booked_dates
+                booking_dict[vehicle] = booked_dates
+            elif isinstance(vehicle, Motorcycle):
+                booked_dates = vehicle.booked_dates
+                booking_dict[vehicle] = booked_dates
+
+        return booking_dict
 
     def get_clients(self) -> list[Client]:
         """:return: list of all clients who have placed a booking in rental."""
@@ -244,11 +242,7 @@ class VehicleRental:
         :param vehicle: Vehicle (Car or Motorcycle) to be added.
         :return: True if the vehicle was successfully added, False if it was already present.
         """
-        vehicle_hash = hash(vehicle)
-        if vehicle_hash not in self.rentable_vehicles:  # kui sama hashiga on juba auto ei lisa juurde seda
-            self.rentable_vehicles[vehicle_hash] = vehicle
-            return True
-        return False
+        pass
 
     def is_vehicle_available(self, vehicle: Car | Motorcycle, date: str) -> bool:
         """
@@ -258,12 +252,7 @@ class VehicleRental:
         :param date: The date to check availability on.
         :return: True if the vehicle is available, otherwise False.
         """
-        if vehicle not in self.rentable_vehicles:
-            return False
-
-        day, month, year = date.split('.')
-        if not (1 <= int(day) <= 31 and 1 <= int(month) <= 12 and int(year) >= 1900):
-            return False  # kui pole korrektne date
+        pass
 
     def rent_vehicle(self, vehicle: Car | Motorcycle, date: str, client: Client) -> bool:
         """
@@ -278,20 +267,7 @@ class VehicleRental:
         :param client: Client who is renting the vehicle.
         :return: True if the rental was successful, otherwise False.
         """
-        if not self.is_vehicle_available(vehicle, date):
-            return False
-
-        price = get_price(vehicle)
-        if client.budget < price:
-            return False
-
-        if vehicle in self.rentable_vehicles:
-            self.rentable_vehicles[vehicle].append[date]
-            return True
-        else:
-            self.rentable_vehicles[vehicle] = [date]
-            return True
-        return False
+        pass
 
     def get_most_rented_vehicle(self) -> list[Motorcycle | Car]:
         """
