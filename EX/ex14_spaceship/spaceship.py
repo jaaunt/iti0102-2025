@@ -67,12 +67,15 @@ class Spaceship:
 
     def kill_crewmate(self, impostor, crewmate_colour):
         """Kill a crewmate increase the kill count and move the dead crewmate to the other list."""
-        if isinstance(impostor, Impostor):  # kas sisend on impostor
+        if isinstance(impostor, Impostor) and impostor in self.impostors:  # kas sisend on impostor
             for crewmate in self.crewmates:  # checki labi koik crewmateid otsi oige
                 if crewmate.colour.lower() == crewmate_colour.lower():  # kui leiab crewmate objektidest matchiva varviga crewmate (case insensitive)
-                    self.crewmates.remove(crewmate)  # remove the dead one
-                    self.dead_players.append(crewmate)  # lisa ta dead listi
-                    impostor.kills += 1  # lisa selle impostori killile uks
+                    if not crewmate.protected:
+                        self.crewmates.remove(crewmate)  # remove the dead one
+                        self.dead_players.append(crewmate)  # lisa ta dead listi
+                        impostor.kills += 1  # lisa selle impostori killile uks
+                    else:
+                        crewmate.protected = False
                     return  # lopeta check
 
     def revive_crewmate(self, saviour, the_dead_one):
