@@ -151,7 +151,7 @@ class Spaceship:
 
     def get_crewmate_with_most_tasks_done(self):
         """Get crewmate with most tasks done."""
-        return max(self.crewmates, key=lambda x: x.tasks)
+        return min(self.crewmates, key=lambda x: x.tasks)
 
     def get_impostor_with_most_kills(self):
         """Get impostor with most kills."""
