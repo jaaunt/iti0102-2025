@@ -314,7 +314,15 @@ class VehicleRental:
         :param make: Manufacturer to search for (case-insensitive).
         :return: A list of vehicles matching the given make.
         """
-        return []
+        matching_vehicles = []
+        for vehicle in self.vehicles:
+            if isinstance(vehicle, Car):
+                if vehicle.make.lower() == make.lower():
+                    matching_vehicles.append(vehicle)
+            elif isinstance(vehicle, Motorcycle):
+                if vehicle.make.lower() == make.lower():
+                    matching_vehicles.append(vehicle)
+        return matching_vehicles
 
     def find_car_by_type(self, type_of_car: Type) -> list[Car]:
         """
