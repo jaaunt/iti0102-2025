@@ -195,11 +195,19 @@ class VehicleRental:
 
     def get_motorcycles(self) -> list[Motorcycle]:
         """:return: list of motorcycles in rental system."""
-        return []
+        motorcycles = []
+        for vehicle in self.rentable_vehicles:
+            if isinstance(vehicle, Motorcycle):
+                motorcycles.append(vehicle)
+        return motorcycles
 
     def get_cars(self) -> list[Car]:
         """:return: list of cars in rental system."""
-        return []
+        cars = []
+        for vehicle in self.rentable_vehicles:
+            if isinstance(vehicle, Car):
+                cars.append(vehicle)
+        return cars
 
     def get_vehicle_bookings_dict(self) -> dict[Car | Motorcycle, list[str]]:
         """
