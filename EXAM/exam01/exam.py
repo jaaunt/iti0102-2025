@@ -102,38 +102,43 @@ def json_fruit(fruit_list: list) -> dict:
     - Weights of fruits can be None or negative, and such entries should be ignored.
     - The lists of countries and cultivars in the result may appear in any order.
 
+    name: A
+    country: B
+    weight: 10
+
+    name: B
+    country: C
+    weight: 20
+
+    name: A
+    country: D
+    weight: 30
+
+    A:
+    country: [B, D]
+    weight: 40  # 10+30
+
+    B:
+    country: [C]
+    weight: 20
+
     :param fruit_list: List of dictionaries containing fruit information.
     :return: Processed dictionary with fruits, their countries, cultivars, and total weight.
     """
     result = {}
-
     for fruit in fruit_list:
-        if fruit['weight'] is None or fruit['weight'] < 0:
+        if fruit["weight"] is None or fruit["weight"] < 0:
             continue
-
-        fruit_name = fruit['fruit']
-        weight = fruit['weight']
-        cultivar = fruit['cultivar']
-        origin = fruit['origin']
-
-        if fruit_name not in result:
-            result[fruit_name] = {
-                'countries': set(),
-                'cultivars': set(),
-                'total_weight': 0
-            }
-
-        result[fruit_name]['countries'].add(origin)
-        result[fruit_name]['cultivars'].add(cultivar)
-        result[fruit_name]['total_weight'] += weight
-
-    # Convert sets to lists
-    for fruit_name in result:
-        result[fruit_name]['countries'] = set(result[fruit_name]['countries'])
-        result[fruit_name]['cultivars'] = set(result[fruit_name]['cultivars'])
+        name = fruit['fruit']
+        if name not in result:
+            result[name] = {"countries": [], "cultivars": [], "total_weight": 0}
+        if fruit["origin"] not in result[name]["countries"]:
+            result[name]["countries"].append(fruit['origin'])
+        if fruit["cultivar"] not in result[name]["cultivars"]:
+            result[name]["cultivars"].append(fruit['cultivar'])
+        result[name]["total_weight"] += fruit['weight']
 
     return result
-
 
 
 def file_system(path: str, name: str = "", lvl: int = -1) -> tuple[int, str]:
