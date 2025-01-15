@@ -105,7 +105,34 @@ def json_fruit(fruit_list: list) -> dict:
     :param fruit_list: List of dictionaries containing fruit information.
     :return: Processed dictionary with fruits, their countries, cultivars, and total weight.
     """
-    pass
+    result = {}
+
+    for fruit in fruit_list:
+        if fruit['weight'] is None or fruit['weight'] < 0:
+            continue
+
+        fruit_name = fruit['fruit']
+        weight = fruit['weight']
+        cultivar = fruit['cultivar']
+        origin = fruit['origin']
+
+        if fruit_name not in result:
+            result[fruit_name] = {
+                'countries': set(),
+                'cultivars': set(),
+                'total_weight': 0
+            }
+
+        result[fruit_name]['countries'].add(origin)
+        result[fruit_name]['cultivars'].add(cultivar)
+        result[fruit_name]['total_weight'] += weight
+
+    for fruit_name in result:
+        result[fruit_name]['countries'] = set(result[fruit_name]['countries'])
+        result[fruit_name]['cultivars'] = set(result[fruit_name]['cultivars'])
+
+    return result
+
 
 
 def file_system(path: str, name: str = "", lvl: int = -1) -> tuple[int, str]:
