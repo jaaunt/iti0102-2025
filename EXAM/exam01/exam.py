@@ -1,4 +1,5 @@
 """Exam 1 (07.01.2025)"""
+import string
 
 
 def find_substring_index(sentence: str, substring: str) -> int:
@@ -46,7 +47,6 @@ def mark_double_symbols(text: str) -> str:
     return fixed_string
 
 
-
 def battleships(battleship_map: list[list[str]]) -> list[tuple[str, int]]:
     """
     Find the coordinates of ships from the given map.
@@ -70,7 +70,14 @@ def battleships(battleship_map: list[list[str]]) -> list[tuple[str, int]]:
     :param battleship_map: Map of battleships where "X" marks a ship and empty string marks water.
     :return: List containing of tuples with the ships' coordinates from the map.
     """
-    pass
+    result = []
+    alphabet = string.ascii_uppercase  # toob ise sisse upperkase tahestiku
+    for rowi, row in enumerate(battleship_map):  # ennumerate lisab counter ette mitmeson
+        alpha = alphabet[rowi]  # saab alphabet listis selle tahe kui koht 0 ss A kui koht 1 ss B jne
+        for coli, col in enumerate(row):
+            if col == "X":
+                result.append((alpha, coli))
+    return result
 
 
 def json_fruit(fruit_list: list) -> dict:
