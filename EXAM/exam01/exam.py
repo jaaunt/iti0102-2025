@@ -76,7 +76,7 @@ def battleships(battleship_map: list[list[str]]) -> list[tuple[str, int]]:
         alpha = alphabet[rowi]  # saab alphabet listis selle tahe kui koht 0 ss A kui koht 1 ss B jne
         for coli, col in enumerate(row):
             if col == "X":
-                result.append((alpha, (coli - 1)))
+                result.append((alpha, (coli + 1)))
     return result
 
 
