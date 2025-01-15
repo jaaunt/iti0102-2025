@@ -141,7 +141,7 @@ def json_fruit(fruit_list: list) -> dict:
     return result
 
 
-def file_system(path: str, name: str = "", lvl: int = -1) -> tuple[int, str]:
+def file_system(path: str, name: str = "", lvl: int = 0) -> tuple[int, str]:
     """
     Find the file name and in which level of subdirectories the file is located in.
 
@@ -166,7 +166,14 @@ def file_system(path: str, name: str = "", lvl: int = -1) -> tuple[int, str]:
     :param lvl: subdirectory level from root
     :return: tuple(lvl, name)
     """
-    pass
+    if path == "":
+        return tuple()
+    if path.count("/") < 2:
+        if "." in path:
+            return (lvl, path[1:path.find(".")])
+        else:
+            return tuple()
+    return file_system(path[path.find("/", 1):], lvl + 1)
 
 
 def compress_dict(nested_dict: dict) -> dict:
