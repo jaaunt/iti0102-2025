@@ -34,7 +34,17 @@ def mark_double_symbols(text: str) -> str:
     :param text: Input text to be checked.
     :return: Result where the double symbols are "marked".
     """
-    pass
+    fixed_string = ""
+    last_letter = ""
+    for letter in text:
+        if letter == last_letter:
+            fixed_string += "2"
+            last_letter = ""
+        else:
+            last_letter = letter
+            fixed_string += letter
+    return fixed_string
+
 
 
 def battleships(battleship_map: list[list[str]]) -> list[tuple[str, int]]:
