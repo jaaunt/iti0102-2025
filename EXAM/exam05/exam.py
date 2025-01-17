@@ -299,15 +299,13 @@ class DonutFactory:
 
         :return: dict
         """
-        # or donut in self.alldonuts:
         result = {}
         for donut in self.alldonuts:
-            if isinstance(donut, Donut):
-                key = ({donut.filling, donut.icing})
-                if key not in result:
-                    result[key] = [donut]
-                else:
-                    result[key].append(donut)
+            key = ({donut.filling, donut.icing})
+            if key not in result:
+                result[key] = [donut]
+            else:
+                result[key].append(donut)
 
         return result
 
