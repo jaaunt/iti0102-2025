@@ -301,7 +301,7 @@ class DonutFactory:
         """
         result = {}
         for donut in self.alldonuts:
-            key = ({donut.filling, donut.icing})
+            key = (donut.filling, donut.icing)
             if key not in result:
                 result[key] = [donut]
             else:
