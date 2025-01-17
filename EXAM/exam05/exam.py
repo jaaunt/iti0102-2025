@@ -439,7 +439,6 @@ class DonutFactory:
         return {"icing" : best_pair[0], "filling" : best_pair[1]}
         # result = min(donut_dict.items(), key=lambda x: (-len(x[1]), x[0][0]))
         # vt mis votme vaartusel on koige pikem list
-        pass
 
     def get_donuts_by_flavour(self, flavour: str) -> list:
         """
