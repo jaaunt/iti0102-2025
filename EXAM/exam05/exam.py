@@ -1,4 +1,7 @@
 """Exam 5 (16.01.2025)."""
+from pygments.lexer import words
+
+from EX.ex01_beginning.operators_task import result
 
 
 def count_digits(text: str) -> int:
@@ -26,32 +29,50 @@ def capitalize_first_last_letters(text: str) -> str:
     capitalize_first_last_letters("") => ""
     capitalize_first_last_letters("hello! 2024") => "Hello! 2024"
 
+    word[-1] annab eraldi viimase tahe
+    last_letter = word[-1].upper() viimane taht eraldi ja suur
     :param text: Input string in which you want to capitalize the first and last letters of each word. If there is a symbol after the letter, the letter is not capitalized.
     :return: Text where the size of the first and last letter of each word is changed.
     """
-    capitalize_first = text.title()
-    words_listed = capitalize_first.split(" ")
-    fixed_words = ""
-    for word in words_listed:
-        str = ""
-        lenght = len(word)
-        counter = 1
-        for letter in word:
-            if lenght == counter:
-                if letter.isalpha():
-                    letter_fix = letter.upper()
-                    str += letter_fix
-                    str += " "
-                    break
-                else:
-                    str += letter
-                    str += " "
-                    break
-            else:
-                counter += 1
-                str += letter
-        fixed_words += str
-    return fixed_words.strip()
+    # TERE => tere
+    # x[0].lower() + x[1:].upper()
+    words = text.split()
+    result = ""
+    # voi
+    # result_list = []
+    for word in words:
+        word = word.capitalize()  #Hello
+        last_letter = word[-1].upper()
+        word = word[:-1] + last_letter  #Loikab viimase tahe maha ja lisab tehtud suure tahe
+        result += word + " "  # tuhikud sonade vahele
+        # result_list.append(word)
+    # return " ".join(result_list)
+    return result.rstrip()  # r strip votab paremalt tuhiku ara lopust
+
+    # minu oma
+    # capitalize_first = text.title()
+    # words_listed = capitalize_first.split(" ")
+    # fixed_words = ""
+    # for word in words_listed:
+    #     str = ""
+    #     lenght = len(word)
+    #     counter = 1
+    #     for letter in word:
+    #         if lenght == counter:
+    #             if letter.isalpha():
+    #                 letter_fix = letter.upper()
+    #                 str += letter_fix
+    #                 str += " "
+    #                 break
+    #             else:
+    #                 str += letter
+    #                 str += " "
+    #                 break
+    #         else:
+    #             counter += 1
+    #             str += letter
+    #     fixed_words += str
+    # return fixed_words.strip()
 
 
 def pairwise_multiplication(data: list, result: int) -> list:
@@ -71,14 +92,23 @@ def pairwise_multiplication(data: list, result: int) -> list:
     :param result: integer, the result of list's elements multiplication.
     return: list of 2-element sublists with the power of 'result'.
     """
-    check_against = 0
-    pairs = []
-    for n in data:
-        if n * check_against == result:
-            pair = [check_against, n]
-            pairs.append(pair)
-        check_against = n
-    return pairs
+    result_list1 = []
+    for i in range(len(data)):  # saab indeksid nii data tuple check jaoks
+        if i == len(data) - 1:  # viimase elemendiga ei kontrolli
+            continue
+        if data[i] * data[i + 1] == result:  # kohal i ja i jargmine element
+            # . append([1, 2]) [data[i], data[i+1]
+            result_list1.append([data[i], data[i + 1]])
+    return result_list1
+    # minu oma
+    # check_against = 0
+    # pairs = []
+    # for n in data:
+    #     if n * check_against == result:
+    #         pair = [check_against, n]
+    #         pairs.append(pair)
+    #     check_against = n
+    # return pairs
 
 
 def word_lengths(text: str) -> dict:
@@ -113,29 +143,48 @@ def word_lengths(text: str) -> dict:
     :param text: given text
     :return: a dictionary of words sorted by their length
     """
+    words = text.split()  # list kus sonad on splititud
+    cleaned_words = []
+    for word in words:
+        word = word.lower()
+        clean_word = ""
+        for letter in word:
+            if letter not in '.,?!"()':
+                clean_word += letter
+        cleaned_words.append(clean_word)
     result = {}
-    words_list = text.split(" ")
-    for word in words_list:
-        word1 = word.lower()
-        if not word1.isalpha():
-            word_fix = ""
-            for letter in word1:
-                if letter.isalpha():
-                    word_fix += letter
-            lenght_key = f"{len(word_fix)} letter words"
-            if lenght_key not in result:
-                result[lenght_key] = [word_fix]
-            else:
-                if word_fix not in result[lenght_key]:
-                    result[lenght_key].append(word_fix)
+    for word in cleaned_words:
+        key = f"{len(word)} letter words"
+        if key not in result:
+            result[key] = [word]
         else:
-            lenght_key = f"{len(word1)} letter words"
-            if lenght_key not in result:
-                result[lenght_key] = [word1]
-            else:
-                if word1 not in result[lenght_key]:
-                    result[lenght_key].append(word1)
+            result[key].append(word)
     return result
+
+    # minu oma
+    # result = {}
+    # words_list = text.split(" ")
+    # for word in words_list:
+    #     word1 = word.lower()
+    #     if not word1.isalpha():
+    #         word_fix = ""
+    #         for letter in word1:
+    #             if letter.isalpha():
+    #                 word_fix += letter
+    #         lenght_key = f"{len(word_fix)} letter words"
+    #         if lenght_key not in result:
+    #             result[lenght_key] = [word_fix]
+    #         else:
+    #             if word_fix not in result[lenght_key]:
+    #                 result[lenght_key].append(word_fix)
+    #     else:
+    #         lenght_key = f"{len(word1)} letter words"
+    #         if lenght_key not in result:
+    #             result[lenght_key] = [word1]
+    #         else:
+    #             if word1 not in result[lenght_key]:
+    #                 result[lenght_key].append(word1)
+    # return result
 
 
 def filter_recursively(nums: tuple[int, ...], num: int, cond: int) -> list[int]:
@@ -159,11 +208,19 @@ def filter_recursively(nums: tuple[int, ...], num: int, cond: int) -> list[int]:
         ValueError: If `cond` is not -1, 0 or 1.
 
     """
-    if num == 0:
+    if nums == ():  # kui tuhi annab tuhja tagasi
         return []
-
+    if cond == -1:
+        if nums[0] < num:
+            return [nums[0]] + filter_recursively(nums[1:], num, cond)  # vaatad alati kohal 0 aka esimest kuna loikab alati selle maha jargmise check jaoks
+    if cond == 1:
+        if nums[0] > num:
+            return [nums[0]] + filter_recursively(nums[1:], num, cond)
     if cond == 0:
-        return filter_recursively(nums, num - 1, cond)
+        if nums[0] == num:
+            return [nums[0]] + filter_recursively(nums[1:], num, cond)
+    return [] + filter_recursively(nums[1:], num, cond)
+    # filter_recursively(nums[1:], num, cond)  # loikab iga korraga uhe tuki algusest maha
 
 
 def generate_uniids(names: tuple[tuple[str, str], ...]) -> list[str]:
@@ -219,33 +276,57 @@ def generate_uniids(names: tuple[tuple[str, str], ...]) -> list[str]:
         A list of unique uni-ids generated from the input names.
 
     """
-    complete_uniids = []
-    for full_name in names:
-        first_name, last_name = full_name
-        uniid = ""
-        first = first_name.lower()
-        last = last_name.lower()
-        letter_count = 0
-        chars = ""
-        for letter in first:
-            if letter_count == 2:
-                uniid += chars
-                chars = ""
-                letter_count = 0
-            else:
-                chars += letter
-                letter_count += 1
+    result = []
+    for name in names:
+        first, last = name  # jagab ara eraldi first ja last name muutujasse
+        first = first.lower()
+        last = last.lower()
 
-        for letter in last:
-            if letter_count == 4:
-                uniid += chars
-                chars = ""
-            else:
-                chars += letter
-                letter_count += 1
-        complete_uniids.append(uniid)
+        uniids = [
+            first[:2] + last[:4],
+            first[:3] + last[:3],
+            first[:4] + last[:2],
+            first[:5] + last[:1],
+        ]
+        for i in range(1, 10):
+            uniids.append(f"{first}.{last}.{i}")
 
-    return complete_uniids
+        for uniid in uniids:
+            if "." not in uniid and len(uniid) != 6:
+                continue
+            if uniid not in result:
+                result.append(uniid)
+                break
+    return result
+
+    # minu lahendus
+    # complete_uniids = []
+    # for full_name in names:
+    #     first_name, last_name = full_name
+    #     uniid = ""
+    #     first = first_name.lower()
+    #     last = last_name.lower()
+    #     letter_count = 0
+    #     chars = ""
+    #     for letter in first:
+    #         if letter_count == 2:
+    #             uniid += chars
+    #             chars = ""
+    #             letter_count = 0
+    #         else:
+    #             chars += letter
+    #             letter_count += 1
+    #
+    #     for letter in last:
+    #         if letter_count == 4:
+    #             uniid += chars
+    #             chars = ""
+    #         else:
+    #             chars += letter
+    #             letter_count += 1
+    #     complete_uniids.append(uniid)
+    #
+    # return complete_uniids
 
 
 class Donut:
@@ -278,7 +359,7 @@ class DonutFactory:
 
     def __init__(self):
         """Donut factory class constructor."""
-        self.alldonuts = []
+        self.donut_list = []
 
     def add_donuts(self, donuts: list):
         """
@@ -287,8 +368,12 @@ class DonutFactory:
         :param donuts: list of donuts to add
         :return:
         """
-        for donut in donuts:
-            self.alldonuts.append(Donut(donut.filling, donut.icing))
+        # minu oma
+        # for donut in donuts:
+        #     self.donut_list.append(Donut(donut.filling, donut.icing))
+
+        self.donut_list.extend(donuts)
+        # self.donu_list += donuts
 
     def get_donuts(self) -> list:
         """
@@ -296,7 +381,7 @@ class DonutFactory:
 
         :return: list of all donuts
         """
-        return self.alldonuts
+        return self.donut_list
 
     def pack_donuts_by_filling_and_icing(self) -> dict:
         """
@@ -311,13 +396,12 @@ class DonutFactory:
         :return: dict
         """
         result = {}
-        for donut in self.alldonuts:
+        for donut in self.donut_list:
             key = (donut.filling, donut.icing)
             if key not in result:
-                result[key] = [donut]
-            else:
-                result[key].append(donut)
-        self.alldonuts = []  # parast seda pidi clear olema
+                result[key] = []
+            result[key].append(donut)
+        self.donut_list = []  # parast seda pidi clear olema
         return result
 
     def sort_donuts_by_icing_and_filling(self) -> list:
@@ -326,7 +410,7 @@ class DonutFactory:
 
         :return: sorted list of donuts
         """
-        return sorted(self.alldonuts, key=lambda donut: (donut.icing, donut.filling))
+        return sorted(self.donut_list, key=lambda donut: (donut.icing, donut.filling))
 
     def get_most_popular_donut(self) -> dict:
         """
@@ -344,6 +428,19 @@ class DonutFactory:
 
         :return: dict with icing and filling of most pop donut
         """
+        donut_dict = self.pack_donuts_by_filling_and_icing()
+        best_count = 1
+        best_pair = None
+        for key, value in donut_dict.items():
+            if len(value) > best_count:
+                best_count = len(value)
+                best_pair = (key, value)
+            if len(value) == best_count:
+                if key[0] < best_pair[0]:  # tahestikus a on vaiksem kui b
+                    best_pair = key  # aint ees pool olev alles jatta
+        return {"icing" : best_pair[0], "filling" : best_pair[1]}
+        # result = min(donut_dict.items(), key=lambda x: (-len(x[1]), x[0][0]))
+        # vt mis votme vaartusel on koige pikem list
         pass
 
     def get_donuts_by_flavour(self, flavour: str) -> list:
@@ -352,7 +449,11 @@ class DonutFactory:
 
         :return: list of donuts with the given flavour.
         """
-        pass
+        result = []
+        for donut in self.donut_list:
+            if donut.icing == flavour or donut.filling == flavour:
+                result.append(donut)
+        return result
 
 
 class Item:
@@ -371,10 +472,13 @@ class Item:
             self.quantity = 0
         else:
             self.quantity = quantity
+
+
         if item_id < 0:
             self.item_id = 0
         else:
             self.item_id = item_id
+
 
     def __repr__(self) -> str:
         """
@@ -740,6 +844,10 @@ if __name__ == "__main__":
         ('cherry', 'marshmallow'): [donut3, donut7],
         ('vanilla', 'cream'): [donut5, donut6]
     }
+
+    packed_donuts = DonutFactory.pack_donuts_by_filling_and_icing()
+    print(packed_donuts)
+
     print()
     print("Warehouses:")
     # Warehouses
