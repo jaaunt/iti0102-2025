@@ -317,7 +317,7 @@ class DonutFactory:
                 result[key] = [donut]
             else:
                 result[key].append(donut)
-        self.alldonuts = []
+        self.alldonuts = []  # parast seda pidi clear olema
         return result
 
     def sort_donuts_by_icing_and_filling(self) -> list:
@@ -326,7 +326,7 @@ class DonutFactory:
 
         :return: sorted list of donuts
         """
-        pass
+        return sorted(self.alldonuts, key=lambda donut: (donut.icing, donut.filling))
 
     def get_most_popular_donut(self) -> dict:
         """
