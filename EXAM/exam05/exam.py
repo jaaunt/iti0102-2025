@@ -842,10 +842,6 @@ if __name__ == "__main__":
         ('cherry', 'marshmallow'): [donut3, donut7],
         ('vanilla', 'cream'): [donut5, donut6]
     }
-
-    packed_donuts = DonutFactory.pack_donuts_by_filling_and_icing()
-    print(packed_donuts)
-
     print()
     print("Warehouses:")
     # Warehouses
