@@ -306,7 +306,7 @@ class DonutFactory:
                 result[key] = [donut]
             else:
                 result[key].append(donut)
-
+        self.alldonuts = []
         return result
 
     def sort_donuts_by_icing_and_filling(self) -> list:
