@@ -160,7 +160,7 @@ def filter_recursively(nums: tuple[int, ...], num: int, cond: int) -> list[int]:
 
     """
     if num == 0:
-        return
+        return []
 
     if cond == 0:
         return filter_recursively(nums, num - 1, cond)
@@ -276,7 +276,7 @@ class DonutFactory:
         :param donuts: list of donuts to add
         :return:
         """
-        return self.alldonuts + donuts
+        return self.alldonuts.append(donuts)
 
     def get_donuts(self) -> list:
         """
