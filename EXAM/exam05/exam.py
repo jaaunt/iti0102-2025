@@ -276,7 +276,8 @@ class DonutFactory:
         :param donuts: list of donuts to add
         :return:
         """
-        return self.alldonuts.append(donuts)
+        for donut in donuts:
+            self.alldonuts.append(Donut(donut.filling, donut.icing))
 
     def get_donuts(self) -> list:
         """
