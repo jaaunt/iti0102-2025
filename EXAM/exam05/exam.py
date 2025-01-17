@@ -264,10 +264,12 @@ class Donut:
     # tee ise juurde et saaks kontrollida kas matchivad for pack donuts by icing and filling
     # vaja sest muidu ei saa dictionarisse sorteerida tuupi jargi kuna muidu compareid lic malu addresse
     def __eq__(self, other):
+        """eq et saaks key jaoks kontrollida kas on samad vaartused"""
         return self.filling == other.filling and self.icing == other.icing
 
     #  kui teed eq pead ka hash tegema sellele
     def __hash__(self):
+        """Kuna kasutad eq on vaja hash teha"""
         return hash((self.filling, self.icing))
 
 
