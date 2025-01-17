@@ -1,7 +1,4 @@
 """Exam 5 (16.01.2025)."""
-from pygments.lexer import words
-
-from EX.ex01_beginning.operators_task import result
 
 
 def count_digits(text: str) -> int:
@@ -100,6 +97,7 @@ def pairwise_multiplication(data: list, result: int) -> list:
             # . append([1, 2]) [data[i], data[i+1]
             result_list1.append([data[i], data[i + 1]])
     return result_list1
+
     # minu oma
     # check_against = 0
     # pairs = []
